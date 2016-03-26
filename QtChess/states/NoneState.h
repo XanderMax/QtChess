@@ -9,7 +9,7 @@ private:
 protected:
 public:
 
-    NoneState():PieceState(PieceType::NONE, PieceParty::BLACK, false) {}
+    NoneState():PieceState(PieceType::NONE, PieceParty::BLACK, 0) {}
     ~NoneState(){}
 
     std::bitset<64> getCellsToAttack(int, int, const BoardBase&) const {return std::bitset<64>();}

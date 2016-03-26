@@ -16,17 +16,18 @@ private:
 
     PieceParty::Enum pieceParty;
 
-    bool moved;
+    int moveCount;
 
 protected:
 
-    PieceState(PieceType::Enum type, PieceParty::Enum party, bool _moved) : pieceType(type), pieceParty(party), moved(_moved){}
-    virtual ~PieceState() {}
+    PieceState(PieceType::Enum type, PieceParty::Enum party, int _moveCount = 0) : pieceType(type), pieceParty(party), moveCount(_moveCount){}
 
     virtual std::bitset<64> getCellsToAttack(int row, int col, const BoardBase&) const = 0;
     virtual std::bitset<64> getCellsToMove(int row, int col, const BoardBase&) const = 0;
 
 public:
+
+    virtual ~PieceState() {}
 
     std::bitset<64> getCells(int index, const BoardBase&, int action = PieceAction::ALL, int policy = CellOccupyPolicy::POSSIBLE) const;
 
@@ -35,6 +36,10 @@ public:
     PieceParty::Enum getPieceParty() const;
 
     bool isMoved() const;
+
+    int getMoveCount() const;
+
+    static PieceState *createPieceState(PieceType::Enum, PieceParty::Enum, int moveCount = 0);
 
 
 

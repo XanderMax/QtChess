@@ -5,6 +5,8 @@
 #include "boards/BoardBase.h"
 #include "Constants.h"
 
+#include "NoneState.h"
+
 std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int action, int occupyPolicy) const
 {
     std::bitset<64> cells;
@@ -60,5 +62,15 @@ PieceParty::Enum PieceState::getPieceParty() const
 
 bool PieceState::isMoved() const
 {
-    return moved;
+    return moveCount > 0;
+}
+
+int PieceState::getMoveCount() const
+{
+    return moveCount;
+}
+
+PieceState *PieceState::createPieceState(PieceType::Enum, PieceParty::Enum, int)
+{
+    return new NoneState();
 }

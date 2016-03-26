@@ -48,7 +48,7 @@ namespace PieceParty
 
 namespace PieceAction
 {
-    enum Enum
+    enum Enum : int
     {
         MOVE = 1 << 0,
         ATTACK = 1 << 1
@@ -59,7 +59,7 @@ namespace PieceAction
 
 namespace CellOccupyPolicy
 {
-    enum Enum
+    enum Enum : int
     {
         EMPTY = 1 << 0,
         HOSTILE = 1 << 1,

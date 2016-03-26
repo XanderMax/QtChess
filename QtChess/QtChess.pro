@@ -16,9 +16,10 @@ SOURCES += main.cpp \
     boards/FreeBoard.cpp \
     game/Game.cpp \
     game/GameState.cpp \
-    models/CellDataObject.cpp
+    models/CellDataObject.cpp \
+    Constants.cpp
 
-RESOURCES += qml.qrc
+#RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

@@ -13,9 +13,12 @@ class CellDataObject : public QObject
 {
     Q_OBJECT
 
+    Q_PROPERTY(QString state READ getState NOTIFY onStateChanged)
+
 private:
 
     std::shared_ptr<PieceState> pieceState;
+
 protected:
 public:
 
@@ -33,7 +36,13 @@ public:
     bool isMoved() const;
     void move();
 
+    int getMoveCount() const;
 
+    QString getState() const;
+
+signals:
+
+    void onStateChanged(QString _state);
 
 };
 
