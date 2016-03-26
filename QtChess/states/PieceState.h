@@ -3,7 +3,6 @@
 
 #include <bitset>
 
-#include "boards/Board.h"
 #include "Enums.h"
 
 class BoardBase;
@@ -44,7 +43,6 @@ public:
 
 
 };
-
 
 
 #endif //PIECE_STATE

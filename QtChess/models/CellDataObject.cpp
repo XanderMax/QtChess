@@ -83,6 +83,11 @@ void CellDataObject::move()
     pieceState.reset(state);
 }
 
+void CellDataObject::reset()
+{
+    setPieceType(PieceType::NONE);
+}
+
 int CellDataObject::getMoveCount() const
 {
     if(pieceState != nullptr)

@@ -5,7 +5,7 @@
 
 #include "states/NoneState.h"
 
-class FreeBoard : BoardBase
+class FreeBoard : public BoardBase
 {
 private:
 

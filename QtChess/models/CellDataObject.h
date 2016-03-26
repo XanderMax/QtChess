@@ -36,6 +36,8 @@ public:
     bool isMoved() const;
     void move();
 
+    void reset();
+
     int getMoveCount() const;
 
     QString getState() const;
