@@ -16,9 +16,11 @@ public:
 
 private slots:
 
-    void test_boardShouldBeInRegularStateInitially();
+    void test_boardShouldBeInRegularStateForWhiteAfterResetToRegular();
+    void test_boardShouldBeInRegularStateForBlackAfterResetToRegular();
 
-    void test_getKingIndexShouldReturnValidIndex();
+    void test_getKingIndexShouldReturnValidIndexForWhiteAfterResetToRegular();
+    void test_getKingIndexShouldReturnValidIndexForBlackAfterResetToRegular();
 
 };
 
