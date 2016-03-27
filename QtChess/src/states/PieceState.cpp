@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "boards/BoardBase.h"
-#include "Constants.h"
+#include "../boards/BoardBase.h"
+#include "../Constants.h"
 
 #include "NoneState.h"
 

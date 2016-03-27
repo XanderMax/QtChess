@@ -3,9 +3,9 @@
 
 #include <iostream>
 
-#include "Enums.h"
+#include "src/Enums.h"
 
-#include "boards/FreeBoard.h"
+#include "src/boards/FreeBoard.h"
 
 int main(int argc, char *argv[])
 {

@@ -3,9 +3,9 @@
 
 #include <memory>
 
-#include <Enums.h>
+#include "../Enums.h"
 
-#include "states/PieceState.h"
+#include "../states/PieceState.h"
 
 class BoardBase
 {

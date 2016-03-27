@@ -3,7 +3,7 @@
 
 #include <bitset>
 
-#include "Enums.h"
+#include "../Enums.h"
 
 class BoardBase;
 

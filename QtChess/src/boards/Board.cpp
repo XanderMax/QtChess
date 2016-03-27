@@ -9,6 +9,20 @@ void Board::init()
     }
 }
 
+void Board::setCell(int index, PieceType::Enum type, PieceParty::Enum party)
+{
+    if(index >= 0 && index < cells.size())
+    {
+        if(cells[index] == nullptr)
+        {
+            cells[index] = std::shared_ptr<CellDataObject>(new CellDataObject());
+        }
+
+        cells[index]->setPieceType(type);
+        cells[index]->setPieceParty(party);
+    }
+}
+
 Board::Board()
 {
     init();
@@ -20,7 +34,10 @@ Board::~Board()
 
 void Board::resetToRegular()
 {
-    //TODO: implement this function to populate board with regular pieces
+    for(int i = 0; i < cells.size(); i++)
+    {
+        //TODO: implement this method to populate board correctly
+    }
 }
 
 void Board::resetToEmpty()

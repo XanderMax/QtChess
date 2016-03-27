@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "Enums.h"
+#include "../Enums.h"
 
 class GameState : QObject
 {
@@ -23,7 +23,7 @@ public:
 
     GameState(BoardState::Enum _boardState = BoardState::REGULAR, PieceParty::Enum _party = PieceParty::WHITE);
 
-    ~GameState();
+    ~GameState() {}
 
     BoardState::Enum getBoardState() const;
     void setBoardState(BoardState::Enum);
@@ -33,9 +33,9 @@ public:
 
 signals:
 
-    void onStateChanged();
+    void onStateChanged(BoardState::Enum);
 
-    void onPartyChanged();
+    void onPartyChanged(PieceParty::Enum);
 
 
 };

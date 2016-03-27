@@ -3,7 +3,7 @@
 
 #include "BoardBase.h"
 
-#include "states/NoneState.h"
+#include "../states/NoneState.h"
 
 class FreeBoard : public BoardBase
 {

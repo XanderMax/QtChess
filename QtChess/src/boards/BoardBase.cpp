@@ -1,6 +1,6 @@
 #include "BoardBase.h"
 
-#include "Constants.h"
+#include "../Constants.h"
 
 
 int BoardBase::getKingIndex(PieceParty::Enum party) const

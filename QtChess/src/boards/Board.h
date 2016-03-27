@@ -4,9 +4,9 @@
 #include <array>
 
 #include "BoardBase.h"
-#include "Constants.h"
+#include "../Constants.h"
 
-#include "models/CellDataObject.h"
+#include "../models/CellDataObject.h"
 
 class PieceState;
 
@@ -17,6 +17,8 @@ private:
     std::array<std::shared_ptr<CellDataObject>, CELLS> cells;
 
     void init();
+
+    void setCell(int, PieceType::Enum, PieceParty::Enum);
 protected:
 public:
 

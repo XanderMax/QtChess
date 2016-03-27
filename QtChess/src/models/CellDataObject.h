@@ -5,9 +5,9 @@
 
 #include <memory>
 
-#include "states/PieceState.h"
-#include "states/NoneState.h"
-#include "Enums.h"
+#include "../states/PieceState.h"
+#include "../states/NoneState.h"
+#include "../Enums.h"
 
 class CellDataObject : public QObject
 {

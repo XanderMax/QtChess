@@ -1,6 +1,6 @@
 #include "CellDataObject.h"
 
-#include "Constants.h"
+#include "../Constants.h"
 
 std::shared_ptr<PieceState> CellDataObject::getPieceState() const
 {
