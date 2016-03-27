@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick testlib
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 

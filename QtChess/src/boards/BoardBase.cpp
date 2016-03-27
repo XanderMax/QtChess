@@ -66,7 +66,8 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
         }
     }
 
-    if(enemyMoves[partyKingIndex])
+    //
+    if(partyKingIndex >= 0 && partyKingIndex < enemyMoves.size() && enemyMoves[partyKingIndex])
     {
         //Party king is under attack
 
