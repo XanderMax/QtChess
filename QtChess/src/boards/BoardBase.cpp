@@ -66,7 +66,6 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
         }
     }
 
-    //
     if(partyKingIndex >= 0 && partyKingIndex < enemyMoves.size() && enemyMoves[partyKingIndex])
     {
         //Party king is under attack
@@ -84,4 +83,64 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
     }
 
     return PartyState::REGULAR;
+}
+
+std::bitset<CELLS> BoardBase::getAvailableCells(int index, int action, int policy) const
+{
+    std::shared_ptr<PieceState> state = getPieceStateAt(index);
+
+    if(state != nullptr)
+    {
+        return state->getCells(index, *this, action, policy);
+    }
+
+    return std::bitset<CELLS>();
+}
+
+PieceType::Enum BoardBase::getPieceTypeAt(int index) const
+{
+    std::shared_ptr<PieceState> piece = getPieceStateAt(index);
+
+    if(piece != nullptr)
+    {
+        return piece->getPieceType();
+    }
+
+    return PieceType::NONE;
+}
+
+PieceParty::Enum BoardBase::getPiecePartyAt(int index) const
+{
+    std::shared_ptr<PieceState> piece = getPieceStateAt(index);
+
+    if(piece != nullptr)
+    {
+        return piece->getPieceParty();
+    }
+
+    return PieceParty::WHITE;
+}
+
+int BoardBase::getMoveCountAt(int index) const
+{
+    std::shared_ptr<PieceState> piece = getPieceStateAt(index);
+
+    if(piece != nullptr)
+    {
+        return piece->getMoveCount();
+    }
+
+    return 0;
+}
+
+bool BoardBase::getIsMovedAt(int index) const
+{
+    std::shared_ptr<PieceState> piece = getPieceStateAt(index);
+
+    if(piece != nullptr)
+    {
+        return piece->isMoved();
+    }
+
+    return false;
 }

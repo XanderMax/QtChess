@@ -44,5 +44,14 @@ public:
 
 };
 
+template <size_t number>
+void setBit(int index, std::bitset<number> &set)
+{
+    if(index >= 0 && index < set.size())
+    {
+        set.set(index);
+    }
+}
+
 
 #endif //PIECE_STATE

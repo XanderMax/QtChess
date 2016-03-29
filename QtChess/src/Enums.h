@@ -1,6 +1,8 @@
 #ifndef ENUMS_H
 #define ENUMS_H
 
+#include <QMetaType>
+
 
 namespace BoardState
 {
@@ -12,6 +14,8 @@ namespace BoardState
         PATED
     };
 }
+
+Q_DECLARE_METATYPE(BoardState::Enum)
 
 namespace PieceType
 {
@@ -27,6 +31,8 @@ namespace PieceType
     };
 }
 
+Q_DECLARE_METATYPE(PieceType::Enum)
+
 namespace PartyState
 {
     enum Enum : int
@@ -37,6 +43,8 @@ namespace PartyState
     };
 }
 
+Q_DECLARE_METATYPE(PartyState::Enum)
+
 namespace PieceParty
 {
     enum Enum : int
@@ -45,6 +53,8 @@ namespace PieceParty
         WHITE
     };
 }
+
+Q_DECLARE_METATYPE(PieceParty::Enum)
 
 namespace PieceAction
 {
@@ -56,6 +66,8 @@ namespace PieceAction
 
     static const int ALL = MOVE | ATTACK;
 }
+
+Q_DECLARE_METATYPE(PieceAction::Enum)
 
 namespace CellOccupyPolicy
 {
@@ -69,6 +81,8 @@ namespace CellOccupyPolicy
     static const int ALL = EMPTY | HOSTILE | FRIENDLY;
     static const int POSSIBLE = EMPTY | HOSTILE;
 }
+
+Q_DECLARE_METATYPE(CellOccupyPolicy::Enum)
 
 
 #endif //ENUMS_H

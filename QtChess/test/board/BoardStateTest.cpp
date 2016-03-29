@@ -10,7 +10,12 @@ void BoardStateTest::test_boardShouldBeInRegularStateForWhiteAfterResetToRegular
 
     board.resetToRegular();
 
-    QCOMPARE(board.getPartyState(PieceParty::WHITE), PartyState::REGULAR);
+    PartyState::Enum partyState = board.getPartyState(PieceParty::WHITE);
+
+    QVERIFY2(partyState == PartyState::REGULAR, QString::number(partyState)
+             .append(" != PartyState::REGULAR = ")
+             .append(QString::number(PartyState::REGULAR))
+             .toStdString().c_str());
 }
 
 void BoardStateTest::test_boardShouldBeInRegularStateForBlackAfterResetToRegular()
@@ -19,7 +24,12 @@ void BoardStateTest::test_boardShouldBeInRegularStateForBlackAfterResetToRegular
 
     board.resetToRegular();
 
-    QCOMPARE(board.getPartyState(PieceParty::BLACK), PartyState::REGULAR);
+    PartyState::Enum partyState = board.getPartyState(PieceParty::BLACK);
+
+    QVERIFY2(partyState == PartyState::REGULAR, QString::number(partyState)
+             .append(" != PartyState::REGULAR = ")
+             .append(QString::number(PartyState::REGULAR))
+             .toStdString().c_str());
 }
 
 void BoardStateTest::test_getKingIndexShouldReturnValidIndexForWhiteAfterResetToRegular()

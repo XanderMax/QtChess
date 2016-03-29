@@ -9,6 +9,8 @@
 #define ROW(index) index / 8
 #define COL(index) index % 8
 
+#define INDEX(row, col) (8 * (row)) + (col)
+
 #include "_BoardCellIndicies_.h"
 
 

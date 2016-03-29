@@ -6,6 +6,8 @@
 #include "../Constants.h"
 
 #include "NoneState.h"
+#include "KingState.h"
+#include "KnightState.h"
 
 std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int action, int occupyPolicy) const
 {
@@ -70,7 +72,46 @@ int PieceState::getMoveCount() const
     return moveCount;
 }
 
-PieceState *PieceState::createPieceState(PieceType::Enum, PieceParty::Enum, int)
+PieceState *PieceState::createPieceState(PieceType::Enum type, PieceParty::Enum party, int moveCount)
 {
+    switch(type)
+    {
+        case PieceType::NONE:
+        {
+            return new NoneState();
+        }
+
+        case PieceType::PAWN:
+        {
+            break;
+        }
+
+        case PieceType::KNIGHT:
+        {
+            return new KnightState(party, moveCount);
+        }
+
+        case PieceType::BISHOP:
+        {
+            break;
+        }
+
+        case PieceType::ROOK:
+        {
+            break;
+        }
+
+        case PieceType::QUEEN:
+        {
+            break;
+        }
+
+        case PieceType::KING:
+        {
+            return new KingState(party, moveCount);
+        }
+
+    }
+
     return new NoneState();
 }

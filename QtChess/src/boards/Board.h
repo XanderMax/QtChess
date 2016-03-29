@@ -20,6 +20,8 @@ private:
 
     void setCell(int, PieceType::Enum, PieceParty::Enum);
 protected:
+
+        std::shared_ptr<PieceState> _getPieceStateAt(int) const;
 public:
 
     Board();
@@ -29,7 +31,7 @@ public:
 
     void resetToEmpty();
 
-    std::shared_ptr<PieceState> _getPieceStateAt(int) const;
+
 };
 
 #endif //BOARD_H

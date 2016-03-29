@@ -7,6 +7,8 @@
 
 #include "../states/PieceState.h"
 
+#include "../Constants.h"
+
 class BoardBase
 {
 private:
@@ -23,6 +25,16 @@ public:
     std::shared_ptr<PieceState> getPieceStateAt(int) const;
 
     PartyState::Enum getPartyState(PieceParty::Enum) const;
+
+    std::bitset<CELLS> getAvailableCells(int index, int action = PieceAction::ALL, int policy = CellOccupyPolicy::POSSIBLE) const;
+
+    PieceType::Enum getPieceTypeAt(int) const;
+
+    PieceParty::Enum getPiecePartyAt(int) const;
+
+    int getMoveCountAt(int) const;
+
+    bool getIsMovedAt(int) const;
 
 };
 
