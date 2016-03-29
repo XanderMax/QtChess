@@ -49,7 +49,7 @@ std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int acti
     }
 
 
-    return cells & mask.flip();
+    return cells & mask;
 }
 
 PieceType::Enum PieceState::getPieceType() const
