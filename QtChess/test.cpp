@@ -13,9 +13,9 @@
 int test(int argc, char *argv[])
 {
     return 0
-            | QTest::qExec(new BoardStateTest(), 0, argv)
-            | QTest::qExec(new NoneStateTest(), 0, argv)
-            | QTest::qExec(new OnePieceBoardTest(), 0, argv)
+            | QTest::qExec(new BoardStateTest(), argc, argv)
+            | QTest::qExec(new NoneStateTest(), argc, argv)
+            | QTest::qExec(new OnePieceBoardTest(), argc, argv)
             | 1;
 }
 
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 {
     std::cout << "[TESTING]" << std::endl;
 
-    test(argc, argv);
+    test(0, argv);
 
     std::cout << "[/TESTING]" << std::endl;
 

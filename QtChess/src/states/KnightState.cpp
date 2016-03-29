@@ -29,8 +29,6 @@ std::bitset<CELLS> KnightState::getCellsToMove(int row, int col, const BoardBase
     setBit(INDEX(row - 1, col + 2), moves);
     setBit(INDEX(row + 1, col + 2), moves);
 
-    std::cout << row << " " << col << " " << moves << std::endl;
-
 
     return moves;
 }

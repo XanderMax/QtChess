@@ -22,6 +22,9 @@ private slots:
     void test_getKingIndexShouldReturnValidIndexForWhiteAfterResetToRegular();
     void test_getKingIndexShouldReturnValidIndexForBlackAfterResetToRegular();
 
+    void test_indexShouldBeCalculatedCorrectly();
+    void test_indexShouldBeCalculatedCorrectly_data();
+
 };
 
 
