@@ -34,10 +34,11 @@ Board::~Board()
 
 void Board::resetToRegular()
 {
-    for(int i = 0; i < cells.size(); i++)
-    {
-        //TODO: implement this method to populate board correctly
-    }
+    setCell(_A1_, PieceType::ROOK, PieceParty::BLACK);
+    setCell(_A8_, PieceType::ROOK, PieceParty::BLACK);
+
+    setCell(_H1_, PieceType::ROOK, PieceParty::WHITE);
+    setCell(_H8_, PieceType::ROOK, PieceParty::WHITE);
 }
 
 void Board::resetToEmpty()

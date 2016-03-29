@@ -30,4 +30,5 @@ HEADERS += $$PWD/boards/Board.h \
     $$PWD/states/QueenState.h \
     $$PWD/states/RookState.h \
     $$PWD/Constants.h \
-    $$PWD/Enums.h
+    $$PWD/Enums.h \
+    $$PWD/_BoardCellIndicies_.h

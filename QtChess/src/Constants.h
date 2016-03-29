@@ -9,6 +9,8 @@
 #define ROW(index) index / 8
 #define COL(index) index % 8
 
+#include "_BoardCellIndicies_.h"
+
 
 //Piece states
 
