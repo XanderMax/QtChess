@@ -68,6 +68,9 @@ void BoardStateTest::test_indexShouldBeCalculatedCorrectly()
 
     QVERIFY2(calculatedIndex == index, QString("Calculated index = ")
              .append(QString::number(calculatedIndex))
+             .append(QString::number(row))
+             .append(" ")
+             .append(QString::number(col))
              .toStdString()
              .c_str());
 }
@@ -85,4 +88,8 @@ void BoardStateTest::test_indexShouldBeCalculatedCorrectly_data()
     QTest::newRow("index _H8_") << 7 << 7 << _H8_;
     QTest::newRow("index 8 7") << 8 << 7 << -1;
     QTest::newRow("index 7 8") << 7 << 8 << -1;
+
+    QTest::newRow("index _D3_") << ROW(_D3_) << COL(_D3_) << _D3_;
+    QTest::newRow("index _F3_") << ROW(_F3_) << COL(_F3_) << _F3_;
+    QTest::newRow("index _E5_") << ROW(_E5_) << COL(_E5_) << _E5_;
 }

@@ -8,17 +8,18 @@
 #include "NoneState.h"
 #include "KingState.h"
 #include "KnightState.h"
+#include "PawnState.h"
 
 std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int action, int occupyPolicy) const
 {
     std::bitset<64> cells;
 
-    if(action | PieceAction::ATTACK)
+    if(action & PieceAction::ATTACK)
     {
         cells |= getCellsToAttack(ROW(index), COL(index), board);
     }
 
-    if(action | PieceAction::MOVE)
+    if(action & PieceAction::MOVE)
     {
         cells |= getCellsToMove(ROW(index), COL(index), board);
     }
@@ -31,17 +32,17 @@ std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int acti
 
         if(pieceState != nullptr)
         {
-            if((occupyPolicy | CellOccupyPolicy::EMPTY) && pieceState->getPieceType() == PieceType::NONE)
+            if((occupyPolicy & CellOccupyPolicy::EMPTY) && pieceState->getPieceType() == PieceType::NONE)
             {
                 mask.set(i);
             }
 
-            if((occupyPolicy | CellOccupyPolicy::FRIENDLY) && pieceState->getPieceParty() == getPieceParty())
+            if((occupyPolicy & CellOccupyPolicy::FRIENDLY) && pieceState->getPieceParty() == getPieceParty())
             {
                 mask.set(i);
             }
 
-            if((occupyPolicy | CellOccupyPolicy::HOSTILE) && pieceState->getPieceParty() != getPieceParty())
+            if((occupyPolicy & CellOccupyPolicy::HOSTILE) && pieceState->getPieceParty() != getPieceParty())
             {
                 mask.set(i);
             }
@@ -83,7 +84,7 @@ PieceState *PieceState::createPieceState(PieceType::Enum type, PieceParty::Enum 
 
         case PieceType::PAWN:
         {
-            break;
+            return new PawnState(party, moveCount);
         }
 
         case PieceType::KNIGHT:

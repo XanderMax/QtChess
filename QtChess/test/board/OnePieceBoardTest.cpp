@@ -61,26 +61,26 @@ void OnePieceBoardTest::prepareDataForNumberOfMovesTest()
                                             << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 8;
 
     QTest::newRow("black knight !moved move friendly") << PieceType::KNIGHT << PieceParty::BLACK << 0 << _D4_
-                                            << PieceAction::MOVE << CellOccupyPolicy::FRIENDLY << 0;
+                                            << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::FRIENDLY) << 0;
 
     QTest::newRow("black knight !moved move hostile") << PieceType::KNIGHT << PieceParty::BLACK << 0 << _D4_
-                                            << PieceAction::MOVE << CellOccupyPolicy::HOSTILE << 0;
+                                            << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::HOSTILE) << 0;
 
     QTest::newRow("black knight !moved move empty") << PieceType::KNIGHT << PieceParty::BLACK << 0 << _D4_
-                                            << PieceAction::MOVE << CellOccupyPolicy::EMPTY << 0;
+                                            << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << 8;
 
 
     QTest::newRow("black knight moved D4") << PieceType::KNIGHT << PieceParty::BLACK << 1 << _D4_
                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 8;
 
     QTest::newRow("black knight moved move friendly") << PieceType::KNIGHT << PieceParty::BLACK << 1 << _D4_
-                                            << PieceAction::MOVE << CellOccupyPolicy::FRIENDLY << 0;
+                                            << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::FRIENDLY) << 0;
 
     QTest::newRow("black knight moved move hostile") << PieceType::KNIGHT << PieceParty::BLACK << 1 << _D4_
-                                            << PieceAction::MOVE << CellOccupyPolicy::HOSTILE << 0;
+                                            << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::HOSTILE) << 0;
 
     QTest::newRow("black knight moved move empty") << PieceType::KNIGHT << PieceParty::BLACK << 1 << _D4_
-                                            << PieceAction::MOVE << CellOccupyPolicy::EMPTY << 0;
+                                            << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << 8;
 
 
     QTest::newRow("black knight !moved A1") << PieceType::KNIGHT << PieceParty::BLACK << 0 << _A1_
@@ -122,11 +122,29 @@ void OnePieceBoardTest::prepareDataForNumberOfMovesTest()
     QTest::newRow("black king moved D4") << PieceType::KING << PieceParty::BLACK << 1 << _D4_
                                          << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 8;
 
+    QTest::newRow("white king moved D4") << PieceType::KING << PieceParty::BLACK << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << 8;
+
+    QTest::newRow("white king moved D4") << PieceType::KING << PieceParty::BLACK << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::FRIENDLY) << 0;
+
+    QTest::newRow("white king moved D4") << PieceType::KING << PieceParty::BLACK << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::HOSTILE) << 0;
+
     QTest::newRow("white king !moved D4") << PieceType::KING << PieceParty::WHITE << 0 << _D4_
                                           << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 8;
 
     QTest::newRow("white king moved D4") << PieceType::KING << PieceParty::WHITE << 1 << _D4_
                                          << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 8;
+
+    QTest::newRow("white king moved D4") << PieceType::KING << PieceParty::WHITE << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << 8;
+
+    QTest::newRow("white king moved D4") << PieceType::KING << PieceParty::WHITE << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::FRIENDLY) << 0;
+
+    QTest::newRow("white king moved D4") << PieceType::KING << PieceParty::WHITE << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::HOSTILE) << 0;
 
 
 
@@ -137,11 +155,29 @@ void OnePieceBoardTest::prepareDataForNumberOfMovesTest()
     QTest::newRow("black pawn moved D4") << PieceType::PAWN << PieceParty::BLACK << 1 << _D4_
                                          << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 3;
 
+    QTest::newRow("white pawn moved D4") << PieceType::PAWN << PieceParty::BLACK << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << 3;
+
+    QTest::newRow("white pawn moved D4") << PieceType::PAWN << PieceParty::BLACK << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::FRIENDLY) << 0;
+
+    QTest::newRow("white pawn moved D4") << PieceType::PAWN << PieceParty::BLACK << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::HOSTILE) << 0;
+
     QTest::newRow("white pawn !moved D4") << PieceType::PAWN << PieceParty::WHITE << 0 << _D4_
                                           << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 4;
 
     QTest::newRow("white pawn moved D4") << PieceType::PAWN << PieceParty::WHITE << 1 << _D4_
                                          << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 3;
+
+    QTest::newRow("white pawn moved D4") << PieceType::PAWN << PieceParty::WHITE << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << 3;
+
+    QTest::newRow("white pawn moved D4") << PieceType::PAWN << PieceParty::WHITE << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::FRIENDLY) << 0;
+
+    QTest::newRow("white pawn moved D4") << PieceType::PAWN << PieceParty::WHITE << 1 << _D4_
+                                         << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::HOSTILE) << 0;
 
 
 
@@ -208,6 +244,10 @@ void OnePieceBoardTest::test_pieceShouldHaveParticularNumberOfMoves()
              .append(QString::number(result))
              .append(". Actual = ")
              .append(QString::number(numberOfMoves))
+             .append(" action = ")
+             .append(QString::number(action))
+             .append(" policy = ")
+             .append(QString::number(policy))
              .toStdString().c_str());
 }
 

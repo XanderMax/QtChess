@@ -60,11 +60,11 @@ namespace PieceAction
 {
     enum Enum : int
     {
-        MOVE = 1 << 0,
-        ATTACK = 1 << 1
+        MOVE = 1 << 0, //1
+        ATTACK = 1 << 1 //2
     };
 
-    static const int ALL = MOVE | ATTACK;
+    static const int ALL = MOVE | ATTACK; //3
 }
 
 Q_DECLARE_METATYPE(PieceAction::Enum)
@@ -73,13 +73,13 @@ namespace CellOccupyPolicy
 {
     enum Enum : int
     {
-        EMPTY = 1 << 0,
-        HOSTILE = 1 << 1,
-        FRIENDLY = 1 << 2
+        EMPTY = 1 << 0, //1
+        HOSTILE = 1 << 1, //2
+        FRIENDLY = 1 << 2 //4
     };
 
-    static const int ALL = EMPTY | HOSTILE | FRIENDLY;
-    static const int POSSIBLE = EMPTY | HOSTILE;
+    static const int ALL = EMPTY | HOSTILE | FRIENDLY; //7
+    static const int POSSIBLE = EMPTY | HOSTILE; //3
 }
 
 Q_DECLARE_METATYPE(CellOccupyPolicy::Enum)
