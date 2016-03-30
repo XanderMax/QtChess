@@ -18,16 +18,16 @@ std::bitset<CELLS> KnightState::getCellsToMove(int row, int col, const BoardBase
 
     //TODO: change it. this is incorrect. For position (0, 0) it will produce incorrect result
     setBit(INDEX(row - 2, col - 1), moves);
-    setBit(INDEX(row + 2, col - 1), moves);
+    setBit(INDEX(row - 2, col + 1), moves);
 
-    setBit(INDEX(row - 1, col - 2), moves);
-    setBit(INDEX(row + 1, col - 2), moves);
-
-    setBit(INDEX(row + 2, col - 1), moves);
-    setBit(INDEX(row + 2, col + 1), moves);
-
-    setBit(INDEX(row - 1, col + 2), moves);
     setBit(INDEX(row + 1, col + 2), moves);
+    setBit(INDEX(row - 1, col + 2), moves);
+
+    setBit(INDEX(row + 2, col + 1), moves);
+    setBit(INDEX(row + 2, col - 1), moves);
+
+    setBit(INDEX(row + 1, col - 2), moves);
+    setBit(INDEX(row - 1, col - 2), moves);
 
 
     return moves;
