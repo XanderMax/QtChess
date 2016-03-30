@@ -9,6 +9,7 @@
 #include "KingState.h"
 #include "KnightState.h"
 #include "PawnState.h"
+#include "RookState.h"
 
 std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int action, int occupyPolicy) const
 {
@@ -26,28 +27,40 @@ std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int acti
 
     std::bitset<64> mask;
 
+    bool empty = ((occupyPolicy & CellOccupyPolicy::EMPTY) != 0);
+
+    bool friendly = ((occupyPolicy & CellOccupyPolicy::FRIENDLY) != 0);
+
+    bool hostile = ((occupyPolicy & CellOccupyPolicy::HOSTILE) != 0);
+
     for(int i = 0; i < CELLS; i++)
     {
         std::shared_ptr<PieceState> pieceState = board.getPieceStateAt(i);
 
         if(pieceState != nullptr)
         {
-            if((occupyPolicy & CellOccupyPolicy::EMPTY) && pieceState->getPieceType() == PieceType::NONE)
+            if(empty && pieceState->getPieceType() == PieceType::NONE)
             {
                 mask.set(i);
             }
 
-            if((occupyPolicy & CellOccupyPolicy::FRIENDLY) && pieceState->getPieceParty() == getPieceParty())
+            if(friendly && pieceState->getPieceParty() == getPieceParty()
+                    && pieceState->getPieceType() != PieceType::NONE)
             {
                 mask.set(i);
             }
 
-            if((occupyPolicy & CellOccupyPolicy::HOSTILE) && pieceState->getPieceParty() != getPieceParty())
+            if(hostile && pieceState->getPieceParty() != getPieceParty()
+                    && pieceState->getPieceType() != PieceType::NONE)
             {
                 mask.set(i);
             }
         }
     }
+
+    std::string str = (cells & mask).to_string();
+    std::string str_mask = (mask).to_string();
+    std::string str_cells = (cells).to_string();
 
 
     return cells & mask;
@@ -99,7 +112,7 @@ PieceState *PieceState::createPieceState(PieceType::Enum type, PieceParty::Enum 
 
         case PieceType::ROOK:
         {
-            break;
+            return new RookState(party, moveCount);
         }
 
         case PieceType::QUEEN:
