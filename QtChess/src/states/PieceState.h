@@ -5,6 +5,8 @@
 
 #include "../Enums.h"
 
+#include "../Constants.h"
+
 class BoardBase;
 
 class PieceState
@@ -21,8 +23,8 @@ protected:
 
     PieceState(PieceType::Enum type, PieceParty::Enum party, int _moveCount = 0) : pieceType(type), pieceParty(party), moveCount(_moveCount){}
 
-    virtual std::bitset<64> getCellsToAttack(int row, int col, const BoardBase&) const = 0;
-    virtual std::bitset<64> getCellsToMove(int row, int col, const BoardBase&) const = 0;
+    virtual std::bitset<CELLS> getCellsToAttack(int row, int col, const BoardBase&) const = 0;
+    virtual std::bitset<CELLS> getCellsToMove(int row, int col, const BoardBase&) const = 0;
 
 public:
 
@@ -51,6 +53,17 @@ void setBit(int index, std::bitset<number> &set)
     {
         set.set(index);
     }
+}
+
+template <size_t number>
+bool getBit(int index, const std::bitset<number> &set)
+{
+    if(index >= 0 && index < set.size())
+    {
+        return set[index];
+    }
+
+    return false;
 }
 
 

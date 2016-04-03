@@ -69,7 +69,7 @@ void Board::resetToRegular()
 
     for(int i = _A7_; i <= _H7_; i++)
     {
-        setCell(_H4_, PieceType::PAWN, PieceParty::WHITE);
+        setCell(i, PieceType::PAWN, PieceParty::WHITE);
     }
 }
 

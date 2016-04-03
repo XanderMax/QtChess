@@ -10,6 +10,7 @@
 #include "KnightState.h"
 #include "PawnState.h"
 #include "RookState.h"
+#include "BishopState.h"
 
 std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int action, int occupyPolicy) const
 {
@@ -58,11 +59,6 @@ std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int acti
         }
     }
 
-    std::string str = (cells & mask).to_string();
-    std::string str_mask = (mask).to_string();
-    std::string str_cells = (cells).to_string();
-
-
     return cells & mask;
 }
 
@@ -107,7 +103,7 @@ PieceState *PieceState::createPieceState(PieceType::Enum type, PieceParty::Enum 
 
         case PieceType::BISHOP:
         {
-            break;
+            return new BishopState(party, moveCount);
         }
 
         case PieceType::ROOK:
