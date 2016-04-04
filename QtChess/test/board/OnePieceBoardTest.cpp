@@ -194,11 +194,61 @@ void OnePieceBoardTest::prepareDataForNumberOfMovesTest()
     QTest::newRow("black bishop moved D4") << PieceType::BISHOP << PieceParty::BLACK << 1 << _D4_
                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 13;
 
+    QTest::newRow("black bishop !moved A1") << PieceType::BISHOP << PieceParty::BLACK << 0 << _A1_
+                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 7;
+
+    QTest::newRow("black bishop moved A1") << PieceType::BISHOP << PieceParty::BLACK << 1 << _A1_
+                                           << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 7;
+
+    QTest::newRow("black bishop !moved B2") << PieceType::BISHOP << PieceParty::BLACK << 0 << _B2_
+                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 9;
+
+    QTest::newRow("black bishop moved B2") << PieceType::BISHOP << PieceParty::BLACK << 1 << _B2_
+                                           << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 9;
+
+    QTest::newRow("black bishop !moved C3") << PieceType::BISHOP << PieceParty::BLACK << 0 << _C3_
+                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 11;
+
+    QTest::newRow("black bishop moved C3") << PieceType::BISHOP << PieceParty::BLACK << 1 << _C3_
+                                           << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 11;
+
+    QTest::newRow("black bishop !moved H6") << PieceType::BISHOP << PieceParty::BLACK << 0 << _H6_
+                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 7;
+
+    QTest::newRow("black bishop moved H6") << PieceType::BISHOP << PieceParty::BLACK << 1 << _H6_
+                                           << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 7;
+
+
     QTest::newRow("white bishop !moved D4") << PieceType::BISHOP << PieceParty::WHITE << 0 << _D4_
                                             << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 13;
 
     QTest::newRow("white bishop moved D4") << PieceType::BISHOP << PieceParty::WHITE << 1 << _D4_
                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 13;
+
+    QTest::newRow("white bishop !moved A1") << PieceType::BISHOP << PieceParty::WHITE << 0 << _A1_
+                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 7;
+
+    QTest::newRow("white bishop moved A1") << PieceType::BISHOP << PieceParty::WHITE << 1 << _A1_
+                                           << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 7;
+
+    QTest::newRow("white bishop !moved B2") << PieceType::BISHOP << PieceParty::WHITE << 0 << _B2_
+                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 9;
+
+    QTest::newRow("white bishop moved B2") << PieceType::BISHOP << PieceParty::WHITE << 1 << _B2_
+                                           << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 9;
+
+    QTest::newRow("white bishop !moved C3") << PieceType::BISHOP << PieceParty::WHITE << 0 << _C3_
+                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 11;
+
+    QTest::newRow("white bishop moved C3") << PieceType::BISHOP << PieceParty::WHITE << 1 << _C3_
+                                           << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 11;
+
+    QTest::newRow("white bishop !moved H6") << PieceType::BISHOP << PieceParty::WHITE << 0 << _H6_
+                                            << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 7;
+
+    QTest::newRow("white bishop moved H6") << PieceType::BISHOP << PieceParty::WHITE << 1 << _H6_
+                                           << PieceAction::ALL << CellOccupyPolicy::POSSIBLE << 7;
+
 
     //BISHOP
 
