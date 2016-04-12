@@ -16,13 +16,4 @@ include(deployment.pri)
 
 include(src/source.pri)
 
-SOURCES += main.cpp \
-    test/board/BoardStateTest.cpp \
-    test/board/OnePieceBoardTest.cpp \
-    test/states/NoneStateTest.cpp \
-    test.cpp
-
-HEADERS += \
-    test/board/BoardStateTest.h \
-    test/board/OnePieceBoardTest.h \
-    test/states/NoneStateTest.h
+SOURCES += main.cpp
