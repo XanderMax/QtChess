@@ -14,7 +14,8 @@ SOURCES += $$PWD/boards/Board.cpp \
     $$PWD/states/QueenState.cpp \
     $$PWD/states/RookState.cpp \
     $$PWD/Constants.cpp \
-    $$PWD/boards/OnePieceBoard.cpp
+    $$PWD/boards/OnePieceBoard.cpp \
+    $$PWD/controllers/BoardController.h
 
 HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/BoardBase.h \
@@ -33,4 +34,5 @@ HEADERS += $$PWD/boards/Board.h \
     $$PWD/Constants.h \
     $$PWD/Enums.h \
     $$PWD/_BoardCellIndicies_.h \
-    $$PWD/boards/OnePieceBoard.h
+    $$PWD/boards/OnePieceBoard.h \
+    $$PWD/controllers/BoardController.cpp
