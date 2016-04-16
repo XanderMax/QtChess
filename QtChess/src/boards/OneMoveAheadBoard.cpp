@@ -1,13 +1,13 @@
-#include "FreeBoard.h"
+#include "OneMoveAheadBoard.h"
 
 
-FreeBoard::FreeBoard(const BoardBase &board, int _fromIndex, int _toIndex)
-    : originalBoard(board), fromIndex(_fromIndex), toIndex(_toIndex)
+OneMoveAheadBoard::OneMoveAheadBoard(const BoardBase &board, const Move &move)
+    : BoardBase(new FreeMovePolicy()), originalBoard(board), fromIndex(move.getFrom()), toIndex(move.getTo())
 {
     emptyCell = std::shared_ptr<PieceState>(new NoneState());
 }
 
-std::shared_ptr<PieceState> FreeBoard::_getPieceStateAt(int index) const
+std::shared_ptr<PieceState> OneMoveAheadBoard::_getPieceStateAt(int index) const
 {
     if(index == fromIndex)
     {

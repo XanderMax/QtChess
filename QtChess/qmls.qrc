@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qmls/Board.qml</file>
+        <file>qmls/Cell.qml</file>
+        <file>qmls/Main.qml</file>
+    </qresource>
+</RCC>

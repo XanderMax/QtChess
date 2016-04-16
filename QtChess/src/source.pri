@@ -1,7 +1,6 @@
 
 SOURCES += $$PWD/boards/Board.cpp \
     $$PWD/boards/BoardBase.cpp \
-    $$PWD/boards/FreeBoard.cpp \
     $$PWD/game/Game.cpp \
     $$PWD/game/GameState.cpp \
     $$PWD/models/CellDataObject.cpp \
@@ -15,11 +14,16 @@ SOURCES += $$PWD/boards/Board.cpp \
     $$PWD/states/RookState.cpp \
     $$PWD/Constants.cpp \
     $$PWD/boards/OnePieceBoard.cpp \
-    $$PWD/controllers/BoardController.cpp
+    $$PWD/controllers/BoardController.cpp \
+    $$PWD/boards/FreeMovePolicy.cpp \
+    $$PWD/boards/MovePolicy.cpp \
+    $$PWD/boards/RegularChessMovePolicy.cpp \
+    $$PWD/boards/Move.cpp \
+    $$PWD/boards/OneMoveAheadBoard.cpp \
+    $$PWD/Utils.cpp
 
 HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/BoardBase.h \
-    $$PWD/boards/FreeBoard.h \
     $$PWD/game/Game.h \
     $$PWD/game/GameState.h \
     $$PWD/models/CellDataObject.h \
@@ -35,4 +39,10 @@ HEADERS += $$PWD/boards/Board.h \
     $$PWD/Enums.h \
     $$PWD/_BoardCellIndicies_.h \
     $$PWD/boards/OnePieceBoard.h \
-    $$PWD/controllers/BoardController.h
+    $$PWD/controllers/BoardController.h \
+    $$PWD/boards/FreeMovePolicy.h \
+    $$PWD/boards/MovePolicy.h \
+    $$PWD/boards/RegularChessMovePolicy.h \
+    $$PWD/boards/Move.h \
+    $$PWD/boards/OneMoveAheadBoard.h \
+    $$PWD/Utils.h

@@ -23,6 +23,8 @@ protected:
 public:
 
     CellDataObject() : pieceState(new NoneState()) {}
+    CellDataObject(PieceType::Enum type, PieceParty::Enum party, int moves = 0);
+
     ~CellDataObject() {}
 
     std::shared_ptr<PieceState> getPieceState() const;
@@ -32,6 +34,8 @@ public:
 
     PieceParty::Enum getPieceParty() const;
     void setPieceParty(PieceParty::Enum);
+
+    void setPiece(PieceType::Enum type, PieceParty::Enum party, int moves = 0);
 
     bool isMoved() const;
     void move();

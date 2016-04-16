@@ -21,7 +21,7 @@ public:
     BoardController(const QList<CellDataObject>& _cells) : cells(_cells){}
     ~BoardController() {}
 
-    Q_INVOKABLE QList<int> getAttackedCells(int index) const;
+    Q_INVOKABLE QList<int> getDangerousCells(int index) const;
     Q_INVOKABLE QList<int> getAvailableCells(int index) const;
 };
 

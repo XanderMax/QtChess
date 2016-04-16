@@ -3,6 +3,13 @@
 #include "../Constants.h"
 
 
+BoardBase::~BoardBase()
+{
+    delete policy;
+
+    policy = nullptr;
+}
+
 int BoardBase::getKingIndex(PieceParty::Enum party) const
 {
     for(int i = 0; i < CELLS; i++)
@@ -143,4 +150,14 @@ bool BoardBase::getIsMovedAt(int index) const
     }
 
     return false;
+}
+
+bool BoardBase::isMovePossible(const Move &move) const
+{
+    if(policy != nullptr)
+    {
+        return policy->isMovePossible(*this, move);
+    }
+
+    return true;
 }

@@ -5,7 +5,7 @@
 
 #include "src/Enums.h"
 
-#include "src/boards/FreeBoard.h"
+#include "src/boards/OneMoveAheadBoard.h"
 
 int main(int argc, char *argv[])
 {

@@ -17,3 +17,7 @@ include(deployment.pri)
 include(src/source.pri)
 
 SOURCES += main.cpp
+
+RESOURCES += \
+    imgs.qrc \
+    qmls.qrc

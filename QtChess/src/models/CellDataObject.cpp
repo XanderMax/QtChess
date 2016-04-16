@@ -2,6 +2,12 @@
 
 #include "../Constants.h"
 
+CellDataObject::CellDataObject(PieceType::Enum type, PieceParty::Enum party, int moves)
+    : pieceState(PieceState::createPieceState(type, party, moves))
+{
+
+}
+
 std::shared_ptr<PieceState> CellDataObject::getPieceState() const
 {
     return pieceState;
@@ -55,6 +61,11 @@ void CellDataObject::setPieceParty(PieceParty::Enum pieceParty)
     }
 
     pieceState.reset(state);
+}
+
+void CellDataObject::setPiece(PieceType::Enum type, PieceParty::Enum party, int moves)
+{
+    pieceState.reset(PieceState::createPieceState(type, party, moves));
 }
 
 bool CellDataObject::isMoved() const

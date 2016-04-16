@@ -4,6 +4,7 @@
 
 #include "BoardBase.h"
 
+//THIS BOARD IS USED FOR TESTING PURPOSES ONLY
 
 class OnePieceBoard : public BoardBase
 {
@@ -19,7 +20,7 @@ protected:
 public:
 
     OnePieceBoard(int index, PieceType::Enum type, PieceParty::Enum party, int moves)
-        :position(index), state(PieceState::createPieceState(type, party, moves))
+        :BoardBase(new FreeMovePolicy()), position(index), state(PieceState::createPieceState(type, party, moves))
         ,none(PieceState::createPieceState(PieceType::NONE, PieceParty::WHITE)) {}
 
     ~OnePieceBoard() {state = nullptr; none = nullptr;}

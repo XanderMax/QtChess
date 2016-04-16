@@ -3,9 +3,11 @@
 
 #include "BoardBase.h"
 
+#include "Move.h"
+
 #include "../states/NoneState.h"
 
-class FreeBoard : public BoardBase
+class OneMoveAheadBoard : public BoardBase
 {
 private:
 
@@ -19,8 +21,8 @@ private:
 protected:
 public:
 
-    FreeBoard(const BoardBase& board, int fromIndex, int toIndex);
-    ~FreeBoard() {}
+    OneMoveAheadBoard(const BoardBase& board, const Move& move);
+    ~OneMoveAheadBoard() {}
 
     std::shared_ptr<PieceState> _getPieceStateAt(int) const;
 

@@ -1,7 +1,7 @@
 #include "BoardController.h"
 
 
-QList<int> BoardController::getAttackedCells(int index) const
+QList<int> BoardController::getDangerousCells(int index) const
 {
     return QList<int>();
 }

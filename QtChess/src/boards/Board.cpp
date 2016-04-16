@@ -1,31 +1,20 @@
 #include "Board.h"
 
-
-void Board::init()
-{
-    for(int i = 0; i < CELLS; i++)
-    {
-        cells[i] = std::shared_ptr<CellDataObject>(new CellDataObject());
-    }
-}
-
 void Board::setCell(int index, PieceType::Enum type, PieceParty::Enum party)
 {
-    if(index >= 0 && index < cells.size())
+    if(index >= 0 && index << CELLS)
     {
-        if(cells[index] == nullptr)
-        {
-            cells[index] = std::shared_ptr<CellDataObject>(new CellDataObject());
-        }
+        CellDataObject* cell = cells[index];
 
-        cells[index]->setPieceType(type);
-        cells[index]->setPieceParty(party);
+        if(cell != nullptr)
+        {
+            cell->setPiece(type, party, 0);
+        }
     }
 }
 
-Board::Board()
+Board::Board(const QList<CellDataObject*>& _cells, const MovePolicy *policy) : BoardBase(policy), cells(_cells)
 {
-    init();
 }
 
 Board::~Board()
@@ -75,15 +64,11 @@ void Board::resetToRegular()
 
 void Board::resetToEmpty()
 {
-    for(std::shared_ptr<CellDataObject> cell : cells)
+    for(CellDataObject* cell : cells)
     {
         if(cell != nullptr)
         {
             cell->reset();
-        }
-        else
-        {
-            cell.reset(new CellDataObject());
         }
     }
 }

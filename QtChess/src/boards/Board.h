@@ -8,15 +8,15 @@
 
 #include "../models/CellDataObject.h"
 
+#include "RegularChessMovePolicy.h"
+
 class PieceState;
 
 class Board : public BoardBase
 {
 private:
 
-    std::array<std::shared_ptr<CellDataObject>, CELLS> cells;
-
-    void init();
+    const QList<CellDataObject*>& cells;
 
     void setCell(int, PieceType::Enum, PieceParty::Enum);
 protected:
@@ -24,7 +24,7 @@ protected:
         std::shared_ptr<PieceState> _getPieceStateAt(int) const;
 public:
 
-    Board();
+    Board(const QList<CellDataObject*>& _cells, const MovePolicy* policy = new RegularChessMovePolicy());
     ~Board();
 
     void resetToRegular();
