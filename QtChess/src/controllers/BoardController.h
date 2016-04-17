@@ -6,19 +6,20 @@
 
 #include "../boards/Board.h"
 #include "../models/CellDataObject.h"
+#include "../game/GameState.h"
+#include "Controller.h"
 
-class BoardController : public QObject
+class BoardController : public QObject, public Controller
 {
     Q_OBJECT
 
 private:
 
-    const QList<CellDataObject>& cells;
-
 protected:
+
 public:
 
-    BoardController(const QList<CellDataObject>& _cells) : cells(_cells){}
+    BoardController(const Game& game) : Controller(game){}
     ~BoardController() {}
 
     Q_INVOKABLE QList<int> getDangerousCells(int index) const;

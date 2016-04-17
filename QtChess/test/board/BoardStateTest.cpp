@@ -244,6 +244,8 @@ void BoardStateTest::shouldHaveCorrespondingPieceInParticularIndexData()
 
     QTest::newRow("D1 white queen") << BoardConfigurationsString::REGULAR_BOARD() << _D8_ << PieceType::QUEEN << PieceParty::WHITE;
     QTest::newRow("E1 white king") << BoardConfigurationsString::REGULAR_BOARD() << _E8_ << PieceType::KING << PieceParty::WHITE;
+
+    QTest::newRow("D3 white king") << "nnPnnnnnnnnRnnnnnnpcnnnnR" << _D3_ << PieceType::KING << PieceParty::WHITE;
 }
 
 void BoardStateTest::test_boardShouldEvaluatePartyStateCorrectlyForParticularConfiguration()
@@ -277,15 +279,97 @@ void BoardStateTest::test_boardShouldEvaluatePartyStateCorrectlyForParticularCon
     QTest::addColumn<PieceParty::Enum>("party");
     QTest::addColumn<PartyState::Enum>("state");
 
-    QTest::newRow("") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::BLACK << PartyState::REGULAR;
-    QTest::newRow("") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::WHITE << PartyState::REGULAR;
+    QTest::newRow("1") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::BLACK << PartyState::REGULAR;
+    QTest::newRow("2") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::WHITE << PartyState::REGULAR;
 
 
-    QTest::newRow("") << "Cnrnnnnnnnnnrnnnnnnnnnnnnnnnnnnnc" << PieceParty::BLACK << PartyState::CHECKED;
-    QTest::newRow("") << "cnRnnnnnnnnnRnnnnnnnnnnnnnnnnnnnC" << PieceParty::WHITE << PartyState::CHECKED;
+    QTest::newRow("3") << "Cnrnnnnnnnnnrnnnnnnnnnnnnnnnnnnnc" << PieceParty::BLACK << PartyState::CHECKED;
+    QTest::newRow("4") << "cnRnnnnnnnnnRnnnnnnnnnnnnnnnnnnnC" << PieceParty::WHITE << PartyState::CHECKED;
 
-    QTest::newRow("") << "Cnrnnnnnnnnnrnnnnnnnnnnnnnnnnnnnc" << PieceParty::WHITE << PartyState::REGULAR;
-    QTest::newRow("") << "cnRnnnnnnnnnRnnnnnnnnnnnnnnnnnnnC" << PieceParty::BLACK << PartyState::REGULAR;
+    QTest::newRow("5") << "Cnrnnnnnnnnnrnnnnnnnnnnnnnnnnnnnc" << PieceParty::WHITE << PartyState::REGULAR;
+    QTest::newRow("6") << "cnRnnnnnnnnnRnnnnnnnnnnnnnnnnnnnC" << PieceParty::BLACK << PartyState::REGULAR;
+
+
+    QTest::newRow("7") << "nnnnnnnCNnQnnnnnNnncnnKnNnnnRnnnn" << PieceParty::BLACK << PartyState::REGULAR;
+    QTest::newRow("8") << "nnnnnnncNnqnnnnnNnnCnnknNnnnrnnnn" << PieceParty::WHITE << PartyState::REGULAR;
+
+    QTest::newRow("9") << "nnnnnnncNnqnnnnnNnnCnnknNnnnrnnnn" << PieceParty::BLACK << PartyState::CHECKED;
+    QTest::newRow("10") << "nnnnnnnCNnQnnnnnNnncnnKnNnnnRnnnn" << PieceParty::WHITE << PartyState::CHECKED;
+
+
+    QTest::newRow("11") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::BLACK << PartyState::REGULAR;
+    QTest::newRow("12") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::WHITE << PartyState::REGULAR;
+
+    QTest::newRow("13") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::BLACK << PartyState::CHECKED;
+    QTest::newRow("14") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::WHITE << PartyState::CHECKED;
+
+    QTest::newRow("15") << "nnPnnnnnnnnRnnnnnnpcnnnnR" << PieceParty::WHITE << PartyState::CHECKED;
+
+
+
+}
+
+void BoardStateTest::test_boardShouldEvaluateBoardStateCorrectlyForParticularConfiguration()
+{
+    QFETCH(QString, string);
+    QFETCH(PieceParty::Enum, party);
+    QFETCH(BoardState::Enum, state);
+
+    QList<CellDataObject*> _cells = getCellsFromString(string);
+
+    Board board(_cells);
+
+    BoardState::Enum actualState = board.getBoardState(party);
+
+    QVERIFY2(actualState == state, QString("Expected board state is not equal to actual: expected = ")
+             .append(QString::number(state))
+             .append(QString("; actual = "))
+             .append(QString::number(actualState))
+             .append("; board = ")
+             .append(string)
+             .toStdString()
+             .c_str());
+
+    qDeleteAll(_cells);
+    _cells.clear();
+}
+
+void BoardStateTest::test_boardShouldEvaluateBoardStateCorrectlyForParticularConfiguration_data()
+{
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<PieceParty::Enum>("party");
+    QTest::addColumn<BoardState::Enum>("state");
+
+    QTest::newRow("1") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::BLACK << BoardState::REGULAR;
+    QTest::newRow("2") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::WHITE << BoardState::REGULAR;
+
+
+    QTest::newRow("3") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::BLACK << BoardState::REGULAR;
+    QTest::newRow("4") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::WHITE << BoardState::REGULAR;
+
+    QTest::newRow("5") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::BLACK << BoardState::MATED;
+    QTest::newRow("6") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::WHITE << BoardState::MATED;
+
+
+    QTest::newRow("7") << "nnnnnnnCnnRnnnnnnnncnnKnnKnnRnnn" << PieceParty::BLACK << BoardState::REGULAR;
+    QTest::newRow("8") << "nnnnnnncnnrnnnnnnnnCnnknnknnrnnn" << PieceParty::WHITE << BoardState::REGULAR;
+
+    QTest::newRow("9") << "nnnnnnncnnrnnnnnnnnCnnknnknnrnnn" << PieceParty::BLACK << BoardState::MATED;
+    QTest::newRow("10") << "nnnnnnnCnnRnnnnnnnncnnKnnKnnRnnn" << PieceParty::WHITE << BoardState::MATED;
+
+
+    QTest::newRow("11") << "nnnnnnnCnnRnnnnnnnncnnKnnnnnRnnnnnK" << PieceParty::BLACK << BoardState::REGULAR;
+    QTest::newRow("12") << "nnnnnnncnnrnnnnnnnnCnnknnnnnrnnnnnk" << PieceParty::WHITE << BoardState::REGULAR;
+
+    QTest::newRow("13") << "nnnnnnncnnrnnnnnnnnCnnknnnnnrnnnnnk" << PieceParty::BLACK << BoardState::CHECKED;
+    QTest::newRow("14") << "nnnnnnnCnnRnnnnnnnncnnKnnnnnRnnnnnK" << PieceParty::WHITE << BoardState::CHECKED;
+
+
+    QTest::newRow("15") << "nnPnnnnnnnnRnnnnnnpcnnnnR" << PieceParty::WHITE << BoardState::CHECKED;
+
+    //nnPnnnncnnnRnPQnnnpcnnnnR CHECKEd
+
+    //nnPnnnncnnnRnPnnnnpcnQnnR mated
 
 
 }

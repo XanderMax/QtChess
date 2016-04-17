@@ -38,7 +38,7 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
     //TODO: implement this method
 
     int partyKingIndex = getKingIndex(party);
-    std::shared_ptr<PieceState> partyKing = getPieceStateAt(partyKingIndex);
+    //std::shared_ptr<PieceState> partyKing = getPieceStateAt(partyKingIndex);
 
     std::bitset<64> kingMoves;
 
@@ -46,9 +46,9 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
 
     std::bitset<64> enemyMoves;
 
-    if(partyKing != nullptr)
+    if(policy != nullptr)
     {
-        kingMoves = partyKing->getCells(partyKingIndex, *this);
+        kingMoves = policy->getPossibleBitsFor(partyKingIndex, *this);
     }
 
     for(int i = 0; i < CELLS; i++)
@@ -64,7 +64,10 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
                     continue;
                 }
 
-                partyMoves |= state->getCells(i, *this);
+                if(policy != nullptr)
+                {
+                    partyMoves |= (policy->getPossibleBitsFor(i, *this));
+                }
             }
             else
             {
@@ -90,6 +93,43 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
     }
 
     return PartyState::REGULAR;
+}
+
+BoardState::Enum BoardBase::getBoardState(PieceParty::Enum party) const
+{
+    PartyState::Enum partyState = getPartyState(party);
+
+    if(partyState == PartyState::CHECKED)
+    {
+        QList<int> unchekingMoves;
+        if(policy != nullptr)
+        {
+            for(int i = 0; i < CELLS; i++)
+            {
+                if(getPiecePartyAt(i) == party && getPieceTypeAt(i) != PieceType::NONE)
+                {
+                    unchekingMoves << (policy->getPossibleMovesFor(i, *this));
+                }
+            }
+        }
+
+        if(unchekingMoves.size() > 0)
+        {
+            return BoardState::CHECKED;
+        }
+        else
+        {
+            return BoardState::MATED;
+        }
+    }
+    else if(partyState == PartyState::REGULAR)
+    {
+        return BoardState::REGULAR;
+    }
+    else if(partyState == PartyState::PATED)
+    {
+        return BoardState::PATED;
+    }
 }
 
 std::bitset<CELLS> BoardBase::getAvailableCells(int index, int action, int policy) const
@@ -156,7 +196,7 @@ bool BoardBase::isMovePossible(const Move &move) const
 {
     if(policy != nullptr)
     {
-        return policy->isMovePossible(*this, move);
+        return (policy->getPossibleMovesFor(move.getFrom(), *this)).contains(move.getTo());
     }
 
     return true;

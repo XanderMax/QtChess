@@ -34,6 +34,8 @@ public:
 
     PartyState::Enum getPartyState(PieceParty::Enum) const;
 
+    BoardState::Enum getBoardState(PieceParty::Enum) const;
+
     std::bitset<CELLS> getAvailableCells(int index, int action = PieceAction::ALL, int policy = CellOccupyPolicy::POSSIBLE) const;
 
     PieceType::Enum getPieceTypeAt(int) const;

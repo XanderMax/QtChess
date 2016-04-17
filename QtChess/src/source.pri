@@ -20,7 +20,8 @@ SOURCES += $$PWD/boards/Board.cpp \
     $$PWD/boards/RegularChessMovePolicy.cpp \
     $$PWD/boards/Move.cpp \
     $$PWD/boards/OneMoveAheadBoard.cpp \
-    $$PWD/Utils.cpp
+    $$PWD/Utils.cpp \
+    $$PWD/controllers/Controller.cpp
 
 HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/BoardBase.h \
@@ -45,4 +46,5 @@ HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/RegularChessMovePolicy.h \
     $$PWD/boards/Move.h \
     $$PWD/boards/OneMoveAheadBoard.h \
-    $$PWD/Utils.h
+    $$PWD/Utils.h \
+    $$PWD/controllers/Controller.h

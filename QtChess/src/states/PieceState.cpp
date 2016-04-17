@@ -11,6 +11,7 @@
 #include "PawnState.h"
 #include "RookState.h"
 #include "BishopState.h"
+#include "QueenState.h"
 
 std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int action, int occupyPolicy) const
 {
@@ -113,7 +114,7 @@ PieceState *PieceState::createPieceState(PieceType::Enum type, PieceParty::Enum 
 
         case PieceType::QUEEN:
         {
-            break;
+            return new QueenState(party, moveCount);
         }
 
         case PieceType::KING:

@@ -4,14 +4,32 @@
 
 #include "BoardBase.h"
 
-bool RegularChessMovePolicy::isMovePossible(const BoardBase &board, const Move &move) const
-{
-    std::shared_ptr<PieceState> state = board.getPieceStateAt(move.getFrom());
+#include "OneMoveAheadBoard.h"
 
-    if(state != nullptr && state->getPieceType() != PieceType::NONE)
+QList<int> RegularChessMovePolicy::_getPossibleMovesFor(int index, const BoardBase &board, int pieceAction, int occupyPolicy) const
+{
+    QList<int> list;
+
+    if(board.getPieceTypeAt(index) != PieceType::NONE)
     {
-        //TODO: implement this further
+        QList<int> allPossibleMoves = getCellsFromBits(board.getAvailableCells(index, pieceAction, occupyPolicy));
+
+        for(int i = allPossibleMoves.size() - 1; i >= 0; i--)
+        {
+            //Using implicit constructor in second argument. The actual constructor is Move(int, int)
+            OneMoveAheadBoard tempBoard(board, {index, allPossibleMoves[i]});
+
+            PartyState::Enum partyState = tempBoard.getPartyState(board.getPiecePartyAt(index));
+
+            //Commiting the move shouldn't expose king to an attack
+            if(partyState == PartyState::CHECKED)
+            {
+                allPossibleMoves.removeAt(i);
+            }
+        }
+
+        list << allPossibleMoves;
     }
 
-    return false;
+    return list;
 }

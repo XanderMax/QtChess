@@ -3,6 +3,8 @@
 
 #include <bitset>
 
+#include <QList>
+
 #include "../Enums.h"
 
 #include "../Constants.h"
@@ -64,6 +66,22 @@ bool getBit(int index, const std::bitset<number> &set)
     }
 
     return false;
+}
+
+template<size_t number>
+QList<int> getCellsFromBits(const std::bitset<number> &set)
+{
+    QList<int> list;
+
+    for(int i = 0; i < set.size(); i++)
+    {
+        if(set[i])
+        {
+            list << i;
+        }
+    }
+
+    return list;
 }
 
 

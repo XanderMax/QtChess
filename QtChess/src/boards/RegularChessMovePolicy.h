@@ -7,6 +7,8 @@ class RegularChessMovePolicy : public MovePolicy
 {
 private:
 protected:
+    QList<int> _getPossibleMovesFor(int index, const BoardBase& board,  int pieceAction, int occupyPolicy) const;
+
 public:
 
     RegularChessMovePolicy() : MovePolicy() {}
@@ -14,7 +16,7 @@ public:
     ~RegularChessMovePolicy() {}
 
 
-    bool isMovePossible(const BoardBase& board, const Move&) const;
+
 };
 
 

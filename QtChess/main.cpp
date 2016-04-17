@@ -1,13 +1,15 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include <iostream>
-
-#include "src/Enums.h"
-
-#include "src/boards/OneMoveAheadBoard.h"
+#include "src/game/Game.h"
 
 int main(int argc, char *argv[])
 {
-    std::cout << "HELLO " << PieceType::BISHOP;
+    QGuiApplication app(argc, argv);
+
+    QQmlApplicationEngine engine;
+
+    new Game(engine);
+
+    return app.exec();
 }

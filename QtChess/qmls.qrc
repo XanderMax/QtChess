@@ -3,5 +3,6 @@
         <file>qmls/Board.qml</file>
         <file>qmls/Cell.qml</file>
         <file>qmls/Main.qml</file>
+        <file>qmls/Piece.qml</file>
     </qresource>
 </RCC>

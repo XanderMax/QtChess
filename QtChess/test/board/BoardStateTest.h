@@ -52,6 +52,10 @@ private slots:
     void test_boardShouldEvaluatePartyStateCorrectlyForParticularConfiguration();
     void test_boardShouldEvaluatePartyStateCorrectlyForParticularConfiguration_data();
 
+
+    void test_boardShouldEvaluateBoardStateCorrectlyForParticularConfiguration();
+    void test_boardShouldEvaluateBoardStateCorrectlyForParticularConfiguration_data();
+
 };
 
 

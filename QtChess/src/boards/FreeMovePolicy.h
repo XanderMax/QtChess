@@ -7,13 +7,15 @@ class FreeMovePolicy : public MovePolicy
 {
 private:
 protected:
+    QList<int> _getPossibleMovesFor(int index, const BoardBase&,  int pieceAction, int occupyPolicy) const;
+
 public:
 
     FreeMovePolicy() : MovePolicy() {}
 
     ~FreeMovePolicy(){}
 
-    bool isMovePossible(const BoardBase&, const Move &) const {return true;}
+
 };
 
 
