@@ -38,8 +38,7 @@ namespace PartyState
     enum Enum : int
     {
         CHECKED = 0,
-        REGULAR,
-        PATED
+        REGULAR
     };
 }
 

@@ -14,7 +14,7 @@ QList<int> MovePolicy::getPossibleMovesFor(int index, const BoardBase &board,  i
 
         for(int i = list.length() - 1; i >= 0; i--)
         {
-            if(list[i] < 0 || list[i] >= CELLS || i == index)
+            if(list[i] < 0 || list[i] >= CELLS || list[i] == index)
             {
                 list.removeAt(i);
             }

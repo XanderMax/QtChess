@@ -36,6 +36,8 @@ void CellDataObject::setPieceType(PieceType::Enum pieceType)
     }
 
     pieceState.reset(state);
+
+    emit onStateChanged(getState());
 }
 
 PieceParty::Enum CellDataObject::getPieceParty() const
@@ -61,11 +63,15 @@ void CellDataObject::setPieceParty(PieceParty::Enum pieceParty)
     }
 
     pieceState.reset(state);
+
+    emit onStateChanged(getState());
 }
 
 void CellDataObject::setPiece(PieceType::Enum type, PieceParty::Enum party, int moves)
 {
     pieceState.reset(PieceState::createPieceState(type, party, moves));
+
+    emit onStateChanged(getState());
 }
 
 bool CellDataObject::isMoved() const
@@ -92,6 +98,8 @@ void CellDataObject::move()
     }
 
     pieceState.reset(state);
+
+    emit onStateChanged(getState());
 }
 
 void CellDataObject::reset()

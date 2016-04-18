@@ -1,19 +1,25 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
+#include <QObject>
+
 
 class Game;
 
-class Controller
+class Controller : public QObject
 {
 private:
 protected:
 
-    const Game& game;
+    Game& game;
+
+    virtual void _start() = 0;
 public:
 
-    Controller(const Game& _game) : game(_game){}
+    Controller(Game& _game) : game(_game){}
     ~Controller() {}
+
+    void start();
 };
 
 

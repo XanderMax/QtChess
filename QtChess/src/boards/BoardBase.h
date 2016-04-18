@@ -17,10 +17,10 @@
 class BoardBase
 {
 private:
+protected:
 
     const MovePolicy* policy;
 
-protected:
     BoardBase(const MovePolicy* _policy) : policy(_policy) {}
     virtual ~BoardBase();
 
@@ -38,6 +38,10 @@ public:
 
     std::bitset<CELLS> getAvailableCells(int index, int action = PieceAction::ALL, int policy = CellOccupyPolicy::POSSIBLE) const;
 
+    std::bitset<CELLS> getAvailableMoves(int index, int action = PieceAction::ALL, int policy = CellOccupyPolicy::POSSIBLE) const;
+
+    std::bitset<CELLS> getCellsToMove(int index) const;
+
     PieceType::Enum getPieceTypeAt(int) const;
 
     PieceParty::Enum getPiecePartyAt(int) const;
@@ -47,6 +51,8 @@ public:
     bool getIsMovedAt(int) const;
 
     bool isMovePossible(const Move& move) const;
+
+    QString getBoardString() const;
 
 };
 

@@ -13,6 +13,16 @@ void Board::setCell(int index, PieceType::Enum type, PieceParty::Enum party)
     }
 }
 
+CellDataObject *Board::getCellDataObject(int index)
+{
+    if(index >= 0 && index < cells.size())
+    {
+        return cells[index];
+    }
+
+    return nullptr;
+}
+
 Board::Board(const QList<CellDataObject*>& _cells, const MovePolicy *policy) : BoardBase(policy), cells(_cells)
 {
 }
@@ -71,6 +81,27 @@ void Board::resetToEmpty()
             cell->reset();
         }
     }
+}
+
+bool Board::movePiece(const Move &move)
+{
+    bool movePosible = isMovePossible(move);
+
+    if(movePosible)
+    {
+        CellDataObject* fromCell = getCellDataObject(move.getFrom());
+        CellDataObject* toCell = getCellDataObject(move.getTo());
+
+        if(fromCell != nullptr && toCell != nullptr)
+        {
+            toCell->setPiece(fromCell->getPieceType(), fromCell->getPieceParty(), fromCell->getMoveCount() + 1);
+            fromCell->setPieceType(PieceType::NONE);
+
+            return true;
+        }
+    }
+
+    return false;
 }
 
 std::shared_ptr<PieceState> Board::_getPieceStateAt(int index) const

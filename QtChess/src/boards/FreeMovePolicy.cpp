@@ -6,7 +6,7 @@ QList<int> FreeMovePolicy::_getPossibleMovesFor(int, const BoardBase &, int, int
 {
     QList<int> list;
 
-    for(int i = _A1_; i < _H8_; i++)
+    for(int i = 0; i < CELLS; i++)
     {
         list << i;
     }

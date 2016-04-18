@@ -9,21 +9,28 @@
 #include "../game/GameState.h"
 #include "Controller.h"
 
-class BoardController : public QObject, public Controller
+class BoardController : public Controller
 {
     Q_OBJECT
 
 private:
 
+    Board* board;
+
 protected:
+
+    void _start();
 
 public:
 
-    BoardController(const Game& game) : Controller(game){}
+    BoardController(Game& game) : Controller(game){}
     ~BoardController() {}
 
     Q_INVOKABLE QList<int> getDangerousCells(int index) const;
     Q_INVOKABLE QList<int> getAvailableCells(int index) const;
+    Q_INVOKABLE void move(int from, int to);
+
+    Q_INVOKABLE void setBoardString(const QString& str);
 };
 
 

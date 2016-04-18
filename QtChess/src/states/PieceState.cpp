@@ -13,6 +13,8 @@
 #include "BishopState.h"
 #include "QueenState.h"
 
+#include "../Utils.h"
+
 std::bitset<64> PieceState::getCells(int index, const BoardBase &board, int action, int occupyPolicy) const
 {
     std::bitset<64> cells;
@@ -81,6 +83,63 @@ bool PieceState::isMoved() const
 int PieceState::getMoveCount() const
 {
     return moveCount;
+}
+
+QChar PieceState::getChar() const
+{
+    QChar ch = _getChar();
+
+    if(getPieceParty() == PieceParty::BLACK)
+    {
+        return ch.toUpper();
+    }
+    else
+    {
+        return ch.toLower();
+    }
+}
+
+QChar PieceState::_getChar() const
+{
+    switch(getPieceType())
+    {
+        case PieceType::NONE:
+        {
+            return _NONE;
+        }
+
+        case PieceType::PAWN:
+        {
+            return _PAWN;
+        }
+
+        case PieceType::KNIGHT:
+        {
+            return _KNIGHT;
+        }
+
+        case PieceType::BISHOP:
+        {
+            return _BISHOP;
+        }
+
+        case PieceType::ROOK:
+        {
+            return _ROOK;
+        }
+
+        case PieceType::QUEEN:
+        {
+            return _QUEEN;
+        }
+
+        case PieceType::KING:
+        {
+            return _QUEEN;
+        }
+    }
+
+    return _NONE;
 }
 
 PieceState *PieceState::createPieceState(PieceType::Enum type, PieceParty::Enum party, int moveCount)

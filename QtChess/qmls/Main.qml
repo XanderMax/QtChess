@@ -19,7 +19,27 @@ Window {
 
     Board
     {
-        objectName: "boardWidget"
+        id: board
         boardModel: myBoardModel
+    }
+
+    Rectangle
+    {
+        visible: true
+        color: "yellow"
+        x: 1000
+        y: 0
+        height: 200
+        width: 200
+
+        Column
+        {
+            Repeater
+            {
+                model: Moves
+
+                Text {height: 20; width: 20; text: "HELLO"}
+            }
+        }
     }
 }

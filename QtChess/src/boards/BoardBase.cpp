@@ -2,6 +2,8 @@
 
 #include "../Constants.h"
 
+#include "../Utils.h"
+
 
 BoardBase::~BoardBase()
 {
@@ -38,18 +40,8 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
     //TODO: implement this method
 
     int partyKingIndex = getKingIndex(party);
-    //std::shared_ptr<PieceState> partyKing = getPieceStateAt(partyKingIndex);
 
-    std::bitset<64> kingMoves;
-
-    std::bitset<64> partyMoves;
-
-    std::bitset<64> enemyMoves;
-
-    if(policy != nullptr)
-    {
-        kingMoves = policy->getPossibleBitsFor(partyKingIndex, *this);
-    }
+    std::bitset<CELLS> enemyMoves;
 
     for(int i = 0; i < CELLS; i++)
     {
@@ -57,21 +49,13 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
 
         if(state != nullptr)
         {
-            if(state->getPieceParty() == party)
+            if(state->getPieceParty() != party && state->getPieceType() != PieceType::NONE)
             {
-                if(i == partyKingIndex)
-                {
-                    continue;
-                }
+                std::bitset<CELLS> cells = state->getCells(i, *this, PieceAction::ALL, CellOccupyPolicy::ALL);
 
-                if(policy != nullptr)
-                {
-                    partyMoves |= (policy->getPossibleBitsFor(i, *this));
-                }
-            }
-            else
-            {
-                enemyMoves |= state->getCells(i, *this, PieceAction::ALL, CellOccupyPolicy::ALL);
+                QList<int> tempList = getCellsFromBits(cells);
+
+                enemyMoves |= cells;
             }
         }
     }
@@ -82,15 +66,6 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
 
         return PartyState::CHECKED;
     }
-    else
-    {
-        //Party king is not under attack
-
-        if((partyMoves | kingMoves).none())
-        {
-            return PartyState::PATED;
-        }
-    }
 
     return PartyState::REGULAR;
 }
@@ -99,21 +74,25 @@ BoardState::Enum BoardBase::getBoardState(PieceParty::Enum party) const
 {
     PartyState::Enum partyState = getPartyState(party);
 
-    if(partyState == PartyState::CHECKED)
+    QList<int> possibleMovesForParty;
+    if(policy != nullptr)
     {
-        QList<int> unchekingMoves;
-        if(policy != nullptr)
+        for(int i = 0; i < CELLS; i++)
         {
-            for(int i = 0; i < CELLS; i++)
+            if(getPiecePartyAt(i) == party && getPieceTypeAt(i) != PieceType::NONE)
             {
-                if(getPiecePartyAt(i) == party && getPieceTypeAt(i) != PieceType::NONE)
-                {
-                    unchekingMoves << (policy->getPossibleMovesFor(i, *this));
-                }
+                possibleMovesForParty
+                        << (policy->getPossibleMovesFor(i, *this, (0 | PieceAction::MOVE), (0 | CellOccupyPolicy::EMPTY)))
+                        << (policy->getPossibleMovesFor(i, *this, (0 | PieceAction::ATTACK), (0 | CellOccupyPolicy::HOSTILE)));
             }
         }
+    }
 
-        if(unchekingMoves.size() > 0)
+    if(partyState == PartyState::CHECKED)
+    {
+        //King is under attack
+
+        if(possibleMovesForParty.size() > 0)
         {
             return BoardState::CHECKED;
         }
@@ -124,24 +103,46 @@ BoardState::Enum BoardBase::getBoardState(PieceParty::Enum party) const
     }
     else if(partyState == PartyState::REGULAR)
     {
-        return BoardState::REGULAR;
+        //King is not under attack
+
+        if(possibleMovesForParty.size() > 0)
+        {
+            return BoardState::REGULAR;
+        }
+        else
+        {
+            return BoardState::PATED;
+        }
     }
-    else if(partyState == PartyState::PATED)
-    {
-        return BoardState::PATED;
-    }
+
+    return BoardState::REGULAR;
 }
 
-std::bitset<CELLS> BoardBase::getAvailableCells(int index, int action, int policy) const
+std::bitset<CELLS> BoardBase::getAvailableCells(int index, int action, int occupyPolicy) const
 {
     std::shared_ptr<PieceState> state = getPieceStateAt(index);
-
     if(state != nullptr)
     {
-        return state->getCells(index, *this, action, policy);
+        return state->getCells(index, *this, action, occupyPolicy);
     }
 
     return std::bitset<CELLS>();
+}
+
+std::bitset<CELLS> BoardBase::getAvailableMoves(int index, int action, int occupyPolicy) const
+{
+    if(policy != nullptr)
+    {
+        return policy->getPossibleBitsFor(index, *this, action, occupyPolicy);
+    }
+
+    return std::bitset<CELLS>();
+}
+
+std::bitset<CELLS> BoardBase::getCellsToMove(int index) const
+{
+    return getAvailableCells(index, PieceAction::MOVE, CellOccupyPolicy::EMPTY)
+            | getAvailableCells(index, PieceAction::ATTACK, CellOccupyPolicy::HOSTILE);
 }
 
 PieceType::Enum BoardBase::getPieceTypeAt(int index) const
@@ -200,4 +201,24 @@ bool BoardBase::isMovePossible(const Move &move) const
     }
 
     return true;
+}
+
+QString BoardBase::getBoardString() const
+{
+    QString string;
+    for(int i = 0; i < CELLS; i++)
+    {
+        std::shared_ptr<PieceState> state = getPieceStateAt(i);
+
+        if(state != nullptr)
+        {
+            string.append(state->getChar());
+        }
+        else
+        {
+            string.append(_NONE);
+        }
+    }
+
+    return string;
 }

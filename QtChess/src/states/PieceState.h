@@ -21,6 +21,8 @@ private:
 
     int moveCount;
 
+    QChar _getChar() const;
+
 protected:
 
     PieceState(PieceType::Enum type, PieceParty::Enum party, int _moveCount = 0) : pieceType(type), pieceParty(party), moveCount(_moveCount){}
@@ -42,9 +44,9 @@ public:
 
     int getMoveCount() const;
 
+    QChar getChar() const;
+
     static PieceState *createPieceState(PieceType::Enum, PieceParty::Enum, int moveCount = 0);
-
-
 
 };
 

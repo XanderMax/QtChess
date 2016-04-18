@@ -72,7 +72,7 @@ std::bitset<CELLS> KingState::getCellsToMove(int row, int col, const BoardBase &
                     && board.getPieceTypeAt(_G8_) == PieceType::NONE
                     && board.getPieceTypeAt(_H8_) == PieceType::ROOK
                     && board.getPiecePartyAt(_H8_) == PieceParty::WHITE
-                    && board.getIsMovedAt(_H8_))
+                    && !board.getIsMovedAt(_H8_))
             {
                 moves.set(_G8_);
             }
@@ -83,7 +83,7 @@ std::bitset<CELLS> KingState::getCellsToMove(int row, int col, const BoardBase &
                     && board.getPieceTypeAt(_D8_) == PieceType::NONE
                     && board.getPieceTypeAt(_A8_) == PieceType::ROOK
                     && board.getPiecePartyAt(_A8_) == PieceParty::WHITE
-                    && board.getIsMovedAt(_A8_))
+                    && !board.getIsMovedAt(_A8_))
             {
                 moves.set(_C8_);
             }
@@ -99,8 +99,8 @@ std::bitset<CELLS> KingState::getCellsToMove(int row, int col, const BoardBase &
                 if(board.getPieceTypeAt(_F1_) == PieceType::NONE
                         && board.getPieceTypeAt(_G1_) == PieceType::NONE
                         && board.getPieceTypeAt(_H1_) == PieceType::ROOK
-                        && board.getPiecePartyAt(_H1_) == PieceParty::WHITE
-                        && board.getIsMovedAt(_H1_))
+                        && board.getPiecePartyAt(_H1_) == PieceParty::BLACK
+                        && !board.getIsMovedAt(_H1_))
                 {
                     moves.set(_G1_);
                 }
@@ -110,10 +110,10 @@ std::bitset<CELLS> KingState::getCellsToMove(int row, int col, const BoardBase &
                         && board.getPieceTypeAt(_C1_) == PieceType::NONE
                         && board.getPieceTypeAt(_D1_) == PieceType::NONE
                         && board.getPieceTypeAt(_A1_) == PieceType::ROOK
-                        && board.getPiecePartyAt(_A1_) == PieceParty::WHITE
-                        && board.getIsMovedAt(_A1_))
+                        && board.getPiecePartyAt(_A1_) == PieceParty::BLACK
+                        && !board.getIsMovedAt(_A1_))
                 {
-                    moves.set(_G1_);
+                    moves.set(_C1_);
                 }
             }
         }

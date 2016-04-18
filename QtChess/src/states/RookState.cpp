@@ -15,9 +15,11 @@ std::bitset<CELLS> RookState::getCellsToMove(int row, int col, const BoardBase &
 
     for(int i = row - 1; i >= 0; i--)
     {
-        setBit(INDEX(i, col), moves);
+        int index = INDEX(i, col);
 
-        if(board.getPieceTypeAt(i) != PieceType::NONE)
+        setBit(index, moves);
+
+        if(board.getPieceTypeAt(index) != PieceType::NONE)
         {
             break;
         }
@@ -25,9 +27,11 @@ std::bitset<CELLS> RookState::getCellsToMove(int row, int col, const BoardBase &
 
     for(int i = row + 1; i < ROWS; i++)
     {
-        setBit(INDEX(i, col), moves);
+        int index = INDEX(i, col);
 
-        if(board.getPieceTypeAt(i) != PieceType::NONE)
+        setBit(index, moves);
+
+        if(board.getPieceTypeAt(index) != PieceType::NONE)
         {
             break;
         }
@@ -35,9 +39,11 @@ std::bitset<CELLS> RookState::getCellsToMove(int row, int col, const BoardBase &
 
     for(int i = col - 1; i >= 0; i--)
     {
-        setBit(INDEX(row, i), moves);
+        int index = INDEX(row, i);
 
-        if(board.getPieceTypeAt(i) != PieceType::NONE)
+        setBit(index, moves);
+
+        if(board.getPieceTypeAt(index) != PieceType::NONE)
         {
             break;
         }
@@ -45,9 +51,11 @@ std::bitset<CELLS> RookState::getCellsToMove(int row, int col, const BoardBase &
 
     for(int i = col + 1; i < COLS; i++)
     {
-        setBit(INDEX(row, i), moves);
+        int index = INDEX(row, i);
 
-        if(board.getPieceTypeAt(i) != PieceType::NONE)
+        setBit(index, moves);
+
+        if(board.getPieceTypeAt(index) != PieceType::NONE)
         {
             break;
         }

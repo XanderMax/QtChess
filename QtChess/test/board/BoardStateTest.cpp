@@ -246,6 +246,14 @@ void BoardStateTest::shouldHaveCorrespondingPieceInParticularIndexData()
     QTest::newRow("E1 white king") << BoardConfigurationsString::REGULAR_BOARD() << _E8_ << PieceType::KING << PieceParty::WHITE;
 
     QTest::newRow("D3 white king") << "nnPnnnnnnnnRnnnnnnpcnnnnR" << _D3_ << PieceType::KING << PieceParty::WHITE;
+
+    QTest::newRow("D3 white king") << "nnPnn|nnnn|nnRnnnnn|np||c|nnnnR" << _D3_ << PieceType::KING << PieceParty::WHITE;
+
+    QTest::newRow("C3 black pawn") << "nnPnn|nnnn|nnRnnnnn|np||c|nnnnR" << _C1_ << PieceType::PAWN << PieceParty::BLACK;
+
+    QTest::newRow("D3 black king") << "nnnn|knnc|nnrn|nnnn|nnnC|nnkn|nnnn|rnnn" << _D3_ << PieceType::KING << PieceParty::BLACK;
+
+
 }
 
 void BoardStateTest::test_boardShouldEvaluatePartyStateCorrectlyForParticularConfiguration()
@@ -300,7 +308,7 @@ void BoardStateTest::test_boardShouldEvaluatePartyStateCorrectlyForParticularCon
     QTest::newRow("11") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::BLACK << PartyState::REGULAR;
     QTest::newRow("12") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::WHITE << PartyState::REGULAR;
 
-    QTest::newRow("13") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::BLACK << PartyState::CHECKED;
+    QTest::newRow("13") << "nnnn|knnc|nnrn|nnnn|nnnC|nnkn|nnnn|rnnn" << PieceParty::BLACK << PartyState::CHECKED;
     QTest::newRow("14") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::WHITE << PartyState::CHECKED;
 
     QTest::newRow("15") << "nnPnnnnnnnnRnnnnnnpcnnnnR" << PieceParty::WHITE << PartyState::CHECKED;
@@ -340,37 +348,38 @@ void BoardStateTest::test_boardShouldEvaluateBoardStateCorrectlyForParticularCon
     QTest::addColumn<PieceParty::Enum>("party");
     QTest::addColumn<BoardState::Enum>("state");
 
-    QTest::newRow("1") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::BLACK << BoardState::REGULAR;
-    QTest::newRow("2") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::WHITE << BoardState::REGULAR;
+//    QTest::newRow("1") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::BLACK << BoardState::REGULAR;
+//    QTest::newRow("2") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::WHITE << BoardState::REGULAR;
 
 
-    QTest::newRow("3") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::BLACK << BoardState::REGULAR;
-    QTest::newRow("4") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::WHITE << BoardState::REGULAR;
+//    QTest::newRow("3") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::BLACK << BoardState::REGULAR;
+//    QTest::newRow("4") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::WHITE << BoardState::REGULAR;
 
-    QTest::newRow("5") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::BLACK << BoardState::MATED;
-    QTest::newRow("6") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::WHITE << BoardState::MATED;
-
-
-    QTest::newRow("7") << "nnnnnnnCnnRnnnnnnnncnnKnnKnnRnnn" << PieceParty::BLACK << BoardState::REGULAR;
-    QTest::newRow("8") << "nnnnnnncnnrnnnnnnnnCnnknnknnrnnn" << PieceParty::WHITE << BoardState::REGULAR;
-
-    QTest::newRow("9") << "nnnnnnncnnrnnnnnnnnCnnknnknnrnnn" << PieceParty::BLACK << BoardState::MATED;
-    QTest::newRow("10") << "nnnnnnnCnnRnnnnnnnncnnKnnKnnRnnn" << PieceParty::WHITE << BoardState::MATED;
+//    QTest::newRow("5") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::BLACK << BoardState::MATED;
+//    QTest::newRow("6") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::WHITE << BoardState::MATED;
 
 
-    QTest::newRow("11") << "nnnnnnnCnnRnnnnnnnncnnKnnnnnRnnnnnK" << PieceParty::BLACK << BoardState::REGULAR;
-    QTest::newRow("12") << "nnnnnnncnnrnnnnnnnnCnnknnnnnrnnnnnk" << PieceParty::WHITE << BoardState::REGULAR;
+//    QTest::newRow("7") << "nnnnnnnCnnRnnnnnnnncnnKnnKnnRnnn" << PieceParty::BLACK << BoardState::REGULAR;
+//    QTest::newRow("8") << "nnnnnnncnnrnnnnnnnnCnnknnknnrnnn" << PieceParty::WHITE << BoardState::REGULAR;
 
-    QTest::newRow("13") << "nnnnnnncnnrnnnnnnnnCnnknnnnnrnnnnnk" << PieceParty::BLACK << BoardState::CHECKED;
-    QTest::newRow("14") << "nnnnnnnCnnRnnnnnnnncnnKnnnnnRnnnnnK" << PieceParty::WHITE << BoardState::CHECKED;
+//    QTest::newRow("9") << "nnnnnnncnnrnnnnnnnnCnnknnknnrnnn" << PieceParty::BLACK << BoardState::MATED;
+//    QTest::newRow("10") << "nnnnnnnCnnRnnnnnnnncnnKnnKnnRnnn" << PieceParty::WHITE << BoardState::MATED;
 
 
-    QTest::newRow("15") << "nnPnnnnnnnnRnnnnnnpcnnnnR" << PieceParty::WHITE << BoardState::CHECKED;
+//    QTest::newRow("11") << "nnnnnnnCnnRnnnnnnnncnnKnnnnnRnnnnnK" << PieceParty::BLACK << BoardState::REGULAR;
+//    QTest::newRow("12") << "nnnnnnncnnrnnnnnnnnCnnknnnnnrnnnnnk" << PieceParty::WHITE << BoardState::REGULAR;
 
-    //nnPnnnncnnnRnPQnnnpcnnnnR CHECKEd
+//    QTest::newRow("13") << "nnnnnnncnnrnnnnnnnnCnnknnnnnrnnnnnk" << PieceParty::BLACK << BoardState::CHECKED;
+//    QTest::newRow("14") << "nnnnnnnCnnRnnnnnnnncnnKnnnnnRnnnnnK" << PieceParty::WHITE << BoardState::CHECKED;
 
-    //nnPnnnncnnnRnPnnnnpcnQnnR mated
 
+//    QTest::newRow("15") << "nnPnnnnnnnnRnnnnnnpcnnnnR" << PieceParty::WHITE << BoardState::CHECKED;
+
+//    QTest::newRow("16") << "Cnnnnnnnnnnnrnncnrn" << PieceParty::BLACK << BoardState::PATED;
+
+    QTest::newRow("17") << "Cnnn|Pnnn|nnnn|rnnc|nrnn|nnnn" << PieceParty::BLACK << BoardState::PATED;
+
+//    QTest::newRow("18") << "CnnnPnnnnnnnrnncnrnnnnnnnnnq" << PieceParty::BLACK << BoardState::MATED;
 
 }
 

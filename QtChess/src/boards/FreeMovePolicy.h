@@ -1,5 +1,5 @@
 #ifndef FREE_MOVE_POLICY_H
-#define FREE_MOVE_PILICY_H
+#define FREE_MOVE_POLICY_H
 
 #include "MovePolicy.h"
 

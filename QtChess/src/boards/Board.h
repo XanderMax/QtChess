@@ -19,6 +19,8 @@ private:
     const QList<CellDataObject*>& cells;
 
     void setCell(int, PieceType::Enum, PieceParty::Enum);
+
+    CellDataObject* getCellDataObject(int index);
 protected:
 
         std::shared_ptr<PieceState> _getPieceStateAt(int) const;
@@ -30,6 +32,8 @@ public:
     void resetToRegular();
 
     void resetToEmpty();
+
+    bool movePiece(const Move& move);
 
 
 };

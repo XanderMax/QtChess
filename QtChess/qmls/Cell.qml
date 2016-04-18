@@ -3,6 +3,7 @@ import QtQuick 2.0
 Rectangle
 {
     property alias pieceState: piece.state
+    property bool selected: false
 
     width: 100
     height: 100
@@ -12,8 +13,8 @@ Rectangle
     state: "dangerous"
 
 
-    border.width: 1
-    border.color: "black"
+    border.width: selected ? 2 : 1;
+    border.color: selected ? "red" : "black"
 
     Piece
     {
