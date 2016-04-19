@@ -135,7 +135,7 @@ QChar PieceState::_getChar() const
 
         case PieceType::KING:
         {
-            return _QUEEN;
+            return _KING;
         }
     }
 

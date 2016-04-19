@@ -197,7 +197,12 @@ bool BoardBase::isMovePossible(const Move &move) const
 {
     if(policy != nullptr)
     {
-        return (policy->getPossibleMovesFor(move.getFrom(), *this)).contains(move.getTo());
+        QList<int> moves;
+
+        moves << (policy->getPossibleMovesFor(move.getFrom(), *this, PieceAction::MOVE, CellOccupyPolicy::EMPTY));
+        moves << (policy->getPossibleMovesFor(move.getFrom(), *this, PieceAction::ATTACK, CellOccupyPolicy::HOSTILE));
+
+        return moves.contains(move.getTo());
     }
 
     return true;

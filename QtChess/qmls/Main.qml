@@ -26,7 +26,7 @@ Window {
     Rectangle
     {
         visible: true
-        color: "yellow"
+        color: GameState.state == 3 ? "yellow" : "green"
         x: 1000
         y: 0
         height: 200

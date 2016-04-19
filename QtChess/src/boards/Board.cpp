@@ -113,17 +113,42 @@ bool Board::movePiece(const Move &move)
                             rookH1->reset();
                         }
                     }
+
+                    if(move.getTo() == _C1_)
+                    {
+                        CellDataObject* rookC1 = getCellDataObject(_A1_);
+                        CellDataObject* cellForRook = getCellDataObject(_D1_);
+
+                        if(rookC1->getPieceType() == PieceType::ROOK && cellForRook->getPieceType() == PieceType::NONE)
+                        {
+                            cellForRook->setPiece(PieceType::ROOK, party, 1);
+                            rookC1->reset();
+                        }
+                    }
                 }
                 else if(party == PieceParty::WHITE)
                 {
-                    if(move.getTo() == _A1_)
+                    if(move.getTo() == _G8_)
                     {
-                        CellDataObject* rookH1 = getCellDataObject(_H1_);
-                        CellDataObject* cellForRook = getCellDataObject(_F1_);
+                        CellDataObject* rookH8 = getCellDataObject(_H8_);
+                        CellDataObject* cellForRook = getCellDataObject(_F8_);
 
-                        if(rookH1->getPieceType() == PieceType::ROOK && cellForRook->getPieceType() == PieceType::NONE)
+                        if(rookH8->getPieceType() == PieceType::ROOK && cellForRook->getPieceType() == PieceType::NONE)
                         {
                             cellForRook->setPiece(PieceType::ROOK, party, 1);
+                            rookH8->reset();
+                        }
+                    }
+
+                    if(move.getTo() == _C8_)
+                    {
+                        CellDataObject* rookC8 = getCellDataObject(_A8_);
+                        CellDataObject* cellForRook = getCellDataObject(_D8_);
+
+                        if(rookC8->getPieceType() == PieceType::ROOK && cellForRook->getPieceType() == PieceType::NONE)
+                        {
+                            cellForRook->setPiece(PieceType::ROOK, party, 1);
+                            rookC8->reset();
                         }
                     }
                 }

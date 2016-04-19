@@ -8,6 +8,8 @@
 
 Game::Game(QQmlApplicationEngine &_engine) : engine(_engine)
 {
+    qmlRegisterType<Move>();
+
     initGameState();
 
     initBoard();
@@ -112,6 +114,9 @@ void Game::emptyMoves()
 void Game::updateMoves()
 {
     QQmlContext* cntx = engine.rootContext();
+
+    Move move(0, 0);
+    QVariant var = QVariant::fromValue(move);
 
     if(cntx != nullptr)
     {

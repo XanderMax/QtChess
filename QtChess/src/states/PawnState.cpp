@@ -2,13 +2,13 @@
 
 #include "../boards/BoardBase.h"
 
-std::bitset<CELLS> PawnState::getCellsToMove(int row, int col, const BoardBase &) const
+std::bitset<CELLS> PawnState::getCellsToMove(int row, int col, const BoardBase &board) const
 {
     std::bitset<CELLS> moves;
 
     if(getPieceParty() == PieceParty::BLACK)
     {
-        if(!isMoved())
+        if(!isMoved() && board.getPieceTypeAt(INDEX(row + 1, col)) == PieceType::NONE)
         {
             setBit(INDEX(row + 2, col), moves);
         }
@@ -17,7 +17,7 @@ std::bitset<CELLS> PawnState::getCellsToMove(int row, int col, const BoardBase &
     }
     else if(getPieceParty() == PieceParty::WHITE)
     {
-        if(!isMoved())
+        if(!isMoved() && board.getPieceTypeAt(INDEX(row - 1, col)) == PieceType::NONE)
         {
             setBit(INDEX(row - 2, col), moves);
         }

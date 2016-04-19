@@ -68,8 +68,8 @@ void BoardController::move(int from, int to)
         {
             if(board->movePiece(move))
             {
-                game.setBoardState(board->getBoardState(game.getActiveParty()));
                 game.switchActiveParty();
+                game.setBoardState(board->getBoardState(game.getActiveParty()));
 
                 const QObject* root = game.getRootView();
 
@@ -96,5 +96,11 @@ void BoardController::setBoardString(const QString &str)
     else
     {
         game.updateBoardCells(str);
+    }
+
+    if(board != nullptr)
+    {
+        game.setActiveParty(PieceParty::WHITE);
+        game.setBoardState(board->getBoardState(game.getActiveParty()));
     }
 }

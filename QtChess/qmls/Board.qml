@@ -53,9 +53,43 @@ Rectangle
         selectByMouse: true
     }
 
+    Column
+    {
+        id: numbers
+        anchors.top: boardInput.bottom
+        visible: true
+
+        width:20
+        height: 800
+
+        Repeater
+        {
+            model: 8
+            Rectangle
+            {
+                border.width: 1
+                border.color: "black"
+                height: 100
+                width: 20
+                color: "white"
+                visible: true
+
+                Text
+                {
+                    anchors.fill: parent
+                    text: "" + (8 - index)
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    color: "black"
+                }
+            }
+        }
+    }
+
     Grid
     {
-        anchors.top: boardInput.bottom
+        anchors.top: numbers.top
+        anchors.left: numbers.right
 
         id: boardGrid
 
@@ -134,6 +168,36 @@ Rectangle
             }
 
 
+        }
+    }
+
+    Row
+    {
+        anchors.top: boardGrid.bottom
+        anchors.left: numbers.right
+        Repeater
+        {
+            model: 8
+
+            Rectangle
+            {
+                border.color: "black"
+                border.width: 1
+
+                width: 100
+                height: 20
+
+                color: "white"
+
+                Text
+                {
+                    anchors.fill: parent
+                    text: String("abcdefgh").charAt(index)
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    color: "black"
+                }
+            }
         }
     }
 }
