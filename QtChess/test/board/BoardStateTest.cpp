@@ -348,39 +348,84 @@ void BoardStateTest::test_boardShouldEvaluateBoardStateCorrectlyForParticularCon
     QTest::addColumn<PieceParty::Enum>("party");
     QTest::addColumn<BoardState::Enum>("state");
 
-//    QTest::newRow("1") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::BLACK << BoardState::REGULAR;
-//    QTest::newRow("2") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::WHITE << BoardState::REGULAR;
+    QTest::newRow("1") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::BLACK << BoardState::REGULAR;
+    QTest::newRow("2") << BoardConfigurationsString::REGULAR_BOARD() << PieceParty::WHITE << BoardState::REGULAR;
 
 
-//    QTest::newRow("3") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::BLACK << BoardState::REGULAR;
-//    QTest::newRow("4") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::WHITE << BoardState::REGULAR;
+    QTest::newRow("3") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::BLACK << BoardState::REGULAR;
+    QTest::newRow("4") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::WHITE << BoardState::REGULAR;
 
-//    QTest::newRow("5") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::BLACK << BoardState::MATED;
-//    QTest::newRow("6") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::WHITE << BoardState::MATED;
-
-
-//    QTest::newRow("7") << "nnnnnnnCnnRnnnnnnnncnnKnnKnnRnnn" << PieceParty::BLACK << BoardState::REGULAR;
-//    QTest::newRow("8") << "nnnnnnncnnrnnnnnnnnCnnknnknnrnnn" << PieceParty::WHITE << BoardState::REGULAR;
-
-//    QTest::newRow("9") << "nnnnnnncnnrnnnnnnnnCnnknnknnrnnn" << PieceParty::BLACK << BoardState::MATED;
-//    QTest::newRow("10") << "nnnnnnnCnnRnnnnnnnncnnKnnKnnRnnn" << PieceParty::WHITE << BoardState::MATED;
+    QTest::newRow("5") << "nnnnknncnnrnnnnnnnnCnnknnnnnrnnn" << PieceParty::BLACK << BoardState::MATED;
+    QTest::newRow("6") << "nnnnKnnCnnRnnnnnnnncnnKnnnnnRnnn" << PieceParty::WHITE << BoardState::MATED;
 
 
-//    QTest::newRow("11") << "nnnnnnnCnnRnnnnnnnncnnKnnnnnRnnnnnK" << PieceParty::BLACK << BoardState::REGULAR;
-//    QTest::newRow("12") << "nnnnnnncnnrnnnnnnnnCnnknnnnnrnnnnnk" << PieceParty::WHITE << BoardState::REGULAR;
+    QTest::newRow("7") << "nnnnnnnCnnRnnnnnnnncnnKnnKnnRnnn" << PieceParty::BLACK << BoardState::REGULAR;
+    QTest::newRow("8") << "nnnnnnncnnrnnnnnnnnCnnknnknnrnnn" << PieceParty::WHITE << BoardState::REGULAR;
 
-//    QTest::newRow("13") << "nnnnnnncnnrnnnnnnnnCnnknnnnnrnnnnnk" << PieceParty::BLACK << BoardState::CHECKED;
-//    QTest::newRow("14") << "nnnnnnnCnnRnnnnnnnncnnKnnnnnRnnnnnK" << PieceParty::WHITE << BoardState::CHECKED;
+    QTest::newRow("9") << "nnnnnnncnnrnnnnnnnnCnnknnknnrnnn" << PieceParty::BLACK << BoardState::MATED;
+    QTest::newRow("10") << "nnnnnnnCnnRnnnnnnnncnnKnnKnnRnnn" << PieceParty::WHITE << BoardState::MATED;
 
 
-//    QTest::newRow("15") << "nnPnnnnnnnnRnnnnnnpcnnnnR" << PieceParty::WHITE << BoardState::CHECKED;
+    QTest::newRow("11") << "nnnnnnnCnnRnnnnnnnncnnKnnnnnRnnnnnK" << PieceParty::BLACK << BoardState::REGULAR;
+    QTest::newRow("12") << "nnnnnnncnnrnnnnnnnnCnnknnnnnrnnnnnk" << PieceParty::WHITE << BoardState::REGULAR;
 
-//    QTest::newRow("16") << "Cnnnnnnnnnnnrnncnrn" << PieceParty::BLACK << BoardState::PATED;
+    QTest::newRow("13") << "nnnnnnncnnrnnnnnnnnCnnknnnnnrnnnnnk" << PieceParty::BLACK << BoardState::CHECKED;
+    QTest::newRow("14") << "nnnnnnnCnnRnnnnnnnncnnKnnnnnRnnnnnK" << PieceParty::WHITE << BoardState::CHECKED;
+
+
+    QTest::newRow("15") << "nnPnnnnnnnnRnnnnnnpcnnnnR" << PieceParty::WHITE << BoardState::CHECKED;
+
+    QTest::newRow("16") << "Cnnnnnnnnnnnrnncnrn" << PieceParty::BLACK << BoardState::PATED;
 
     QTest::newRow("17") << "Cnnn|Pnnn|nnnn|rnnc|nrnn|nnnn" << PieceParty::BLACK << BoardState::PATED;
 
-//    QTest::newRow("18") << "CnnnPnnnnnnnrnncnrnnnnnnnnnq" << PieceParty::BLACK << BoardState::MATED;
+    QTest::newRow("18") << "CnnnPnnnnnnnrnncnrnnnnnnnnnq" << PieceParty::BLACK << BoardState::MATED;
 
+}
+
+void BoardStateTest::test_availableMovesShouldContainParticularIndiciesForMove()
+{
+    QFETCH(QString, string);
+    QFETCH(int, action);
+    QFETCH(int, policy);
+    QFETCH(int, index);
+    QFETCH(int, possibleMove);
+
+    QList<CellDataObject*> _cells = getCellsFromString(string);
+
+    Board board(_cells);
+
+    std::bitset<CELLS> cells = board.getAvailableMoves(index, action, policy);
+    QVERIFY2(getBit(possibleMove, cells), QString("Available moves doesn't contain expected move: expected = ")
+             .append(QString::number(possibleMove))
+             .append(QString("; at = "))
+             .append(QString::number(index))
+             .append("; board = ")
+             .append(string)
+             .append("; moves = ")
+             .append(cells.to_string<char,std::string::traits_type,std::string::allocator_type>().c_str())
+             .toStdString()
+             .c_str());
+
+    qDeleteAll(_cells);
+    _cells.clear();
+}
+
+void BoardStateTest::test_availableMovesShouldContainParticularIndiciesForMove_data()
+{
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<int>("action");
+    QTest::addColumn<int>("policy");
+    QTest::addColumn<int>("index");
+    QTest::addColumn<int>("possibleMove");
+
+    QTest::newRow("1") << BoardConfigurationsString::REGULAR_BOARD() << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << _A7_ << _A6_;
+    QTest::newRow("2") << BoardConfigurationsString::REGULAR_BOARD() << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << _A7_ << _A5_;
+    QTest::newRow("3") << BoardConfigurationsString::REGULAR_BOARD() << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << _B8_ << _A6_;
+    QTest::newRow("4") << BoardConfigurationsString::REGULAR_BOARD() << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << _B8_ << _C6_;
+
+    QTest::newRow("5") << "nnnnCnnR|nnnnnp" << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << _E1_ << _F1_;
+    QTest::newRow("6") << "nnnnCnnR|nnnnnp" << (0 | PieceAction::MOVE) << (0 | CellOccupyPolicy::EMPTY) << _E1_ << _D1_;
 }
 
 

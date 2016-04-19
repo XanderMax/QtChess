@@ -11,37 +11,48 @@ std::bitset<CELLS> BishopState::getCellsToMove(int row, int col, const BoardBase
 {
     std::bitset<CELLS> moves;
 
-    int begin = (row - col >= 0 ? row - col : 0);
-    int end = (col - row >= 0 ? col - row : 0);
+    int r = row;
+    int c = col;
 
-    for(int r = begin, c = end; r < ROWS && c < COLS; r++,c++)
+    for(int index = INDEX(r - 1, c - 1); index != -1; --r,--c,index = INDEX(r, c))
     {
-        if(r == row && c == col)
-        {
-            continue;
-        }
-
-        int index = INDEX(r, c);
-
         setBit(index, moves);
-
         if(board.getPieceTypeAt(index) != PieceType::NONE)
         {
             break;
         }
     }
 
-    for(int r = end, c = begin; r < ROWS && c < COLS; r++,c++)
+    r = row;
+    c = col;
+
+    for(int index = INDEX(r + 1, c + 1); index != -1; ++r,++c,index = INDEX(r, c))
     {
-        if(r == row && c == col)
-        {
-            continue;
-        }
-
-        int index = INDEX(r, c);
-
         setBit(index, moves);
+        if(board.getPieceTypeAt(index) != PieceType::NONE)
+        {
+            break;
+        }
+    }
 
+    r = row;
+    c = col;
+
+    for(int index = INDEX(r + 1, c - 1); index != -1; ++r,--c,index = INDEX(r, c))
+    {
+        setBit(index, moves);
+        if(board.getPieceTypeAt(index) != PieceType::NONE)
+        {
+            break;
+        }
+    }
+
+    r = row;
+    c = col;
+
+    for(int index = INDEX(r - 1, c + 1); index != -1; --r,++c,index = INDEX(r, c))
+    {
+        setBit(index, moves);
         if(board.getPieceTypeAt(index) != PieceType::NONE)
         {
             break;

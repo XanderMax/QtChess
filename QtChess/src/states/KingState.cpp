@@ -65,7 +65,7 @@ std::bitset<CELLS> KingState::getCellsToMove(int row, int col, const BoardBase &
     //For castling
     if(getPieceParty() == PieceParty::WHITE)
     {
-        if(!isMoved())
+        if(!isMoved() && board.getPartyState(getPieceParty()) != PartyState::CHECKED)
         {
             //Castling for white to right rook
             if(board.getPieceTypeAt(_F8_) == PieceType::NONE
@@ -91,30 +91,27 @@ std::bitset<CELLS> KingState::getCellsToMove(int row, int col, const BoardBase &
     }
     else if(getPieceParty() == PieceParty::BLACK)
     {
-        if(!isMoved())
+        if(!isMoved() && board.getPartyState(getPieceParty()) != PartyState::CHECKED)
         {
-            if(!isMoved())
+            //Castling for black to right rook
+            if(board.getPieceTypeAt(_F1_) == PieceType::NONE
+                    && board.getPieceTypeAt(_G1_) == PieceType::NONE
+                    && board.getPieceTypeAt(_H1_) == PieceType::ROOK
+                    && board.getPiecePartyAt(_H1_) == PieceParty::BLACK
+                    && !board.getIsMovedAt(_H1_))
             {
-                //Castling for black to right rook
-                if(board.getPieceTypeAt(_F1_) == PieceType::NONE
-                        && board.getPieceTypeAt(_G1_) == PieceType::NONE
-                        && board.getPieceTypeAt(_H1_) == PieceType::ROOK
-                        && board.getPiecePartyAt(_H1_) == PieceParty::BLACK
-                        && !board.getIsMovedAt(_H1_))
-                {
-                    moves.set(_G1_);
-                }
+                moves.set(_G1_);
+            }
 
-                //Castling for black to left rook
-                if(board.getPieceTypeAt(_B8_) == PieceType::NONE
-                        && board.getPieceTypeAt(_C1_) == PieceType::NONE
-                        && board.getPieceTypeAt(_D1_) == PieceType::NONE
-                        && board.getPieceTypeAt(_A1_) == PieceType::ROOK
-                        && board.getPiecePartyAt(_A1_) == PieceParty::BLACK
-                        && !board.getIsMovedAt(_A1_))
-                {
-                    moves.set(_C1_);
-                }
+            //Castling for black to left rook
+            if(board.getPieceTypeAt(_B8_) == PieceType::NONE
+                    && board.getPieceTypeAt(_C1_) == PieceType::NONE
+                    && board.getPieceTypeAt(_D1_) == PieceType::NONE
+                    && board.getPieceTypeAt(_A1_) == PieceType::ROOK
+                    && board.getPiecePartyAt(_A1_) == PieceParty::BLACK
+                    && !board.getIsMovedAt(_A1_))
+            {
+                moves.set(_C1_);
             }
         }
     }

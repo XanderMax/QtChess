@@ -94,6 +94,41 @@ bool Board::movePiece(const Move &move)
 
         if(fromCell != nullptr && toCell != nullptr)
         {
+
+            //For castling
+            if(fromCell->getPieceType() == PieceType::KING && fromCell->getMoveCount() == 0)
+            {
+                PieceParty::Enum party = fromCell->getPieceParty();
+
+                if(party == PieceParty::BLACK)
+                {
+                    if(move.getTo() == _G1_)
+                    {
+                        CellDataObject* rookH1 = getCellDataObject(_H1_);
+                        CellDataObject* cellForRook = getCellDataObject(_F1_);
+
+                        if(rookH1->getPieceType() == PieceType::ROOK && cellForRook->getPieceType() == PieceType::NONE)
+                        {
+                            cellForRook->setPiece(PieceType::ROOK, party, 1);
+                            rookH1->reset();
+                        }
+                    }
+                }
+                else if(party == PieceParty::WHITE)
+                {
+                    if(move.getTo() == _A1_)
+                    {
+                        CellDataObject* rookH1 = getCellDataObject(_H1_);
+                        CellDataObject* cellForRook = getCellDataObject(_F1_);
+
+                        if(rookH1->getPieceType() == PieceType::ROOK && cellForRook->getPieceType() == PieceType::NONE)
+                        {
+                            cellForRook->setPiece(PieceType::ROOK, party, 1);
+                        }
+                    }
+                }
+            }
+
             toCell->setPiece(fromCell->getPieceType(), fromCell->getPieceParty(), fromCell->getMoveCount() + 1);
             fromCell->setPieceType(PieceType::NONE);
 

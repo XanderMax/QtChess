@@ -56,6 +56,9 @@ private slots:
     void test_boardShouldEvaluateBoardStateCorrectlyForParticularConfiguration();
     void test_boardShouldEvaluateBoardStateCorrectlyForParticularConfiguration_data();
 
+    void test_availableMovesShouldContainParticularIndiciesForMove();
+    void test_availableMovesShouldContainParticularIndiciesForMove_data();
+
 };
 
 

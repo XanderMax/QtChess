@@ -51,7 +51,7 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
         {
             if(state->getPieceParty() != party && state->getPieceType() != PieceType::NONE)
             {
-                std::bitset<CELLS> cells = state->getCells(i, *this, PieceAction::ALL, CellOccupyPolicy::ALL);
+                std::bitset<CELLS> cells = state->getCells(i, *this, PieceAction::ATTACK, CellOccupyPolicy::FRIENDLY | CellOccupyPolicy::HOSTILE);
 
                 QList<int> tempList = getCellsFromBits(cells);
 

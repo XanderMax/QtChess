@@ -28,7 +28,7 @@ QList<int> BoardController::getDangerousCells(int index) const
         {
             if(board->getPiecePartyAt(i) != party && board->getPieceTypeAt(i) != PieceType::NONE)
             {
-                enemyCells |= (board->getAvailableCells(i, PieceAction::ATTACK, CellOccupyPolicy::POSSIBLE));
+                enemyCells |= (board->getAvailableCells(i, PieceAction::ATTACK, CellOccupyPolicy::FRIENDLY | CellOccupyPolicy::EMPTY));
             }
         }
 
@@ -45,7 +45,10 @@ QList<int> BoardController::getAvailableCells(int index) const
 
     if(board != nullptr)
     {
-        std::bitset<CELLS> cells = (board->getAvailableMoves(index, PieceAction::MOVE, CellOccupyPolicy::EMPTY) | board->getAvailableMoves(index, PieceAction::ATTACK, CellOccupyPolicy::HOSTILE));
+        std::bitset<CELLS> moveCells = board->getAvailableMoves(index, PieceAction::MOVE, CellOccupyPolicy::EMPTY);
+        std::bitset<CELLS> attackCells = board->getAvailableMoves(index, PieceAction::ATTACK, CellOccupyPolicy::HOSTILE);
+
+        std::bitset<CELLS> cells = (moveCells | attackCells);
 
         cellsList << (getCellsFromBits(cells));
     }
@@ -67,24 +70,21 @@ void BoardController::move(int from, int to)
             {
                 game.setBoardState(board->getBoardState(game.getActiveParty()));
                 game.switchActiveParty();
+
+                const QObject* root = game.getRootView();
+
+                if(root != nullptr)
+                {
+                    QObject* boardInput =  root->findChild<QObject*>("boardInput");
+
+                    if(boardInput != nullptr)
+                    {
+                        boardInput->setProperty("text", board->getBoardString());
+                    }
+                }
             }
         }
-
-        const QObject* root = game.getRootView();
-
-        if(root != nullptr)
-        {
-            QObject* boardInput =  root->findChild<QObject*>("boardInput");
-
-            if(boardInput != nullptr)
-            {
-                boardInput->setProperty("text", board->getBoardString());
-            }
-        }
-
-
     }
-
 }
 
 void BoardController::setBoardString(const QString &str)
