@@ -4,5 +4,7 @@
         <file>qmls/Cell.qml</file>
         <file>qmls/Main.qml</file>
         <file>qmls/Piece.qml</file>
+        <file>qmls/MoveList.qml</file>
+        <file>qmls/MovesDelegate.qml</file>
     </qresource>
 </RCC>

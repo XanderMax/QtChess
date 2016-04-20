@@ -11,6 +11,16 @@ void BoardController::_start()
     board = new Board(game.getCells());
 }
 
+void BoardController::_stop()
+{
+
+}
+
+BoardController::~BoardController()
+{
+    delete board;
+}
+
 QList<int> BoardController::getDangerousCells(int index) const
 {
     QList<int> cellsList;
@@ -56,18 +66,18 @@ QList<int> BoardController::getAvailableCells(int index) const
     return cellsList;
 }
 
-void BoardController::move(int from, int to)
+bool BoardController::move(int from, int to)
 {
     if(board != nullptr)
     {
         Move move(from, to);
 
-        game.addMove(move);
-
+        MoveModel* moveModel = game.createMoveModel(move);
         if(board->getPiecePartyAt(from) == game.getActiveParty() && board->getPieceTypeAt(from) != PieceType::NONE)
         {
             if(board->movePiece(move))
             {
+                game.addMove(moveModel);
                 game.switchActiveParty();
                 game.setBoardState(board->getBoardState(game.getActiveParty()));
 
@@ -82,9 +92,13 @@ void BoardController::move(int from, int to)
                         boardInput->setProperty("text", board->getBoardString());
                     }
                 }
+
+                return true;
             }
         }
     }
+
+    return false;
 }
 
 void BoardController::setBoardString(const QString &str)
@@ -103,4 +117,14 @@ void BoardController::setBoardString(const QString &str)
         game.setActiveParty(PieceParty::WHITE);
         game.setBoardState(board->getBoardState(game.getActiveParty()));
     }
+}
+
+int BoardController::getPartyKing(PieceParty::Enum party) const
+{
+    if(board != nullptr)
+    {
+        board->getKingIndex(party);
+    }
+
+    return -1;
 }

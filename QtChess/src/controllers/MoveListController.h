@@ -1,0 +1,30 @@
+#ifndef MOVE_LIST_CONTROLLER_H
+#define MOVE_LIST_CONTROLLER_H
+
+#include "Controller.h"
+
+#include "../boards/Board.h"
+
+class MoveListController : public Controller
+{
+private:
+
+    Board* board;
+protected:
+
+    void _start();
+    void _stop();
+
+public:
+
+    MoveListController(Game& game) : Controller(game){}
+    ~MoveListController(){}
+
+
+};
+
+
+
+
+
+#endif //MOVE_LIST_CONTROLLER_H

@@ -6,7 +6,9 @@
 
 #include "GameState.h"
 
-#include "src/controllers/BoardController.h"
+#include "../models/MoveModel.h"
+
+#include "../controllers/Controller.h"
 
 
 
@@ -23,7 +25,7 @@ private:
     GameState* gameState;
 
     QList<CellDataObject*> cells;
-    QList<Move>  moves;
+    QList<MoveModel*>  moves;
 
     QMap<QString, Controller*> controllers;
 
@@ -53,8 +55,12 @@ public:
     void updateBoardCells(const QString& stringCells);
 
     const QList<CellDataObject*>& getCells() const;
+    const QList<MoveModel*>& getMoves() const;
 
     void addMove(const Move& move);
+    void addMove(MoveModel* move);
+    MoveModel* createMoveModel(const Move& move) const;
+
     void emptyMoves();
     void updateMoves();
 
@@ -66,6 +72,8 @@ public:
     void switchActiveParty();
 
     const QObject* getRootView() const;
+
+    const QObject* findChild(const QString &name);
 
 
 

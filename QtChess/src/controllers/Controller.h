@@ -14,12 +14,16 @@ protected:
     Game& game;
 
     virtual void _start() = 0;
+    virtual void _stop() = 0;
+
+    void stop();
 public:
 
     Controller(Game& _game) : game(_game){}
-    ~Controller() {}
+    virtual ~Controller() {stop();}
 
     void start();
+
 };
 
 

@@ -21,7 +21,9 @@ SOURCES += $$PWD/boards/Board.cpp \
     $$PWD/boards/Move.cpp \
     $$PWD/boards/OneMoveAheadBoard.cpp \
     $$PWD/Utils.cpp \
-    $$PWD/controllers/Controller.cpp
+    $$PWD/controllers/Controller.cpp \
+    $$PWD/models/MoveModel.cpp \
+    $$PWD/controllers/MoveListController.cpp
 
 HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/BoardBase.h \
@@ -47,4 +49,6 @@ HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/Move.h \
     $$PWD/boards/OneMoveAheadBoard.h \
     $$PWD/Utils.h \
-    $$PWD/controllers/Controller.h
+    $$PWD/controllers/Controller.h \
+    $$PWD/models/MoveModel.h \
+    $$PWD/controllers/MoveListController.h

@@ -25,21 +25,22 @@ Window {
 
     Rectangle
     {
+        id: rec
         visible: true
-        color: GameState.state == 3 ? "yellow" : "green"
+        color: GameState.state === 3 ? "yellow" : "green"
         x: 1000
         y: 0
         height: 200
         width: 200
+    }
 
-        Column
-        {
-            Repeater
-            {
-                model: Moves
-
-                Text {height: 20; width: 20; text: "HELLO"}
-            }
-        }
+    MoveList
+    {
+        visible: true
+        movesModel: Moves
+        anchors.top: rec.bottom
+        anchors.left: board.right
+        anchors.right: parent.right
+        anchors.bottom: board.bottom
     }
 }

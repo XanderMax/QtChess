@@ -48,6 +48,10 @@ public:
 
     static PieceState *createPieceState(PieceType::Enum, PieceParty::Enum, int moveCount = 0);
 
+    static PieceState* copyPieceState(PieceState* pieceState);
+
+
+
 };
 
 template <size_t number>
@@ -85,6 +89,5 @@ QList<int> getCellsFromBits(const std::bitset<number> &set)
 
     return list;
 }
-
 
 #endif //PIECE_STATE

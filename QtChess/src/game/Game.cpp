@@ -6,17 +6,18 @@
 
 #include "../Utils.h"
 
+#include "../controllers/BoardController.h"
+#include "../controllers/MoveListController.h"
+
 Game::Game(QQmlApplicationEngine &_engine) : engine(_engine)
 {
-    qmlRegisterType<Move>();
-
     initGameState();
 
     initBoard();
 
-    initView();
-
     updateMoves();
+
+    initView();
 
     setUpControllers();
     startControllers();
@@ -39,6 +40,9 @@ Game::~Game()
 
     qDeleteAll(controllers);
     controllers.clear();
+
+    qDeleteAll(moves);
+    moves.clear();
 }
 
 QQmlApplicationEngine &Game::getEngine() const
@@ -92,6 +96,8 @@ void Game::updateBoardCells(const QString &stringCells)
     {
         cntx->setContextProperty("myBoardModel", QVariant::fromValue(cellObjects));
     }
+
+    emptyMoves();
 }
 
 const QList<CellDataObject *> &Game::getCells() const
@@ -101,26 +107,62 @@ const QList<CellDataObject *> &Game::getCells() const
 
 void Game::addMove(const Move &move)
 {
-    moves << move;
+    moves << new MoveModel(move, cells);
     updateMoves();
+}
+
+void Game::addMove(MoveModel *move)
+{
+    if(move != nullptr)
+    {
+        moves << move;
+    }
+
+    updateMoves();
+}
+
+MoveModel *Game::createMoveModel(const Move &move) const
+{
+    return new MoveModel(move, cells);
 }
 
 void Game::emptyMoves()
 {
-    moves.clear();
-    updateMoves();
+    QQmlContext* cntx = engine.rootContext();
+
+    QList<QObject*> list;
+
+    if(cntx != nullptr)
+    {
+        cntx->setContextProperty("Moves", QVariant::fromValue(list));
+    }
+
+    if(!moves.isEmpty())
+    {
+        qDeleteAll(moves);
+        moves.clear();
+    }
 }
 
 void Game::updateMoves()
 {
     QQmlContext* cntx = engine.rootContext();
 
-    Move move(0, 0);
-    QVariant var = QVariant::fromValue(move);
+    QList<QObject*> list;
+
+    for(int i = 0; i < moves.size(); i++)
+    {
+        MoveModel* model = moves[i];
+
+        if(model != nullptr)
+        {
+            list << (QObject*) model;
+        }
+    }
 
     if(cntx != nullptr)
     {
-        cntx->setContextProperty("Moves", QVariant::fromValue(moves));
+        cntx->setContextProperty("Moves", QVariant::fromValue(list));
     }
 }
 
@@ -178,6 +220,16 @@ void Game::switchActiveParty()
 const QObject *Game::getRootView() const
 {
     return rootView;
+}
+
+const QObject *Game::findChild(const QString &name)
+{
+    if(rootView != nullptr)
+    {
+        return rootView->findChild<QObject*>(name);
+    }
+
+    return nullptr;
 }
 
 void Game::addController(const QString &name, Controller *controller)
@@ -243,4 +295,5 @@ void Game::startControllers()
 void Game::setUpControllers()
 {
     addController("boardController", new BoardController(*this));
+    addController("moveListController", new MoveListController(*this));
 }

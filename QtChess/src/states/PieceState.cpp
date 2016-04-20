@@ -185,3 +185,13 @@ PieceState *PieceState::createPieceState(PieceType::Enum type, PieceParty::Enum 
 
     return new NoneState();
 }
+
+PieceState *PieceState::copyPieceState(PieceState *pieceState)
+{
+    if(pieceState != nullptr)
+    {
+        return createPieceState(pieceState->getPieceType(), pieceState->getPieceParty(), pieceState->getMoveCount());
+    }
+
+    return new NoneState();
+}

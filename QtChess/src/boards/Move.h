@@ -7,11 +7,6 @@
 
 class Move
 {
-
-    Q_GADGET
-    Q_PROPERTY(int fromIndex READ getFrom)
-    Q_PROPERTY(int toIndex READ getTo)
-
 private:
 
     int from;
@@ -21,7 +16,6 @@ protected:
 public:
 
     Move(int _from, int _to);
-    Move():from(0), to(0){}
 
     Move(const Move& move):from(move.getFrom()), to(move.getTo()){}
 
@@ -33,10 +27,6 @@ public:
 
 
 };
-
-Q_DECLARE_METATYPE(Move)
-
-
 
 
 #endif //MOVE_H
