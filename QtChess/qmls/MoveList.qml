@@ -5,7 +5,10 @@ Rectangle
 {
     property alias movesModel: movesList.model
 
-    property int currentIndex: movesList.count - 1;
+    property int moveCount: movesList && movesList.count ? movesList.count : 0
+    property int currentIndex: moveCount > 0 ? moveCount - 1: 0
+    property bool isLastMove: moveCount === 0 || (moveCount - 1 === currentIndex)
+
     visible: true
     color: "white"
 
@@ -22,11 +25,13 @@ Rectangle
         var row = index / 8
         var col = index % 8
 
-        return (String("ABCDEFGH").charAt(col)) + ("" + Math.round(8 - row + 1))
+        return (String("ABCDEFGH").charAt(col)) + ("" + (8 - (Math.floor(row))))
     }
 
-
-
+    onMoveCountChanged:
+    {
+        currentIndex = moveCount > 0 ? moveCount - 1: 0
+    }
 
     ScrollView
     {
@@ -40,9 +45,24 @@ Rectangle
 
             delegate: MovesDelegate{
 
+                id: moveDelegate
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.margins: 10
+                moveIndex: index
+
+                MouseArea
+                {
+                    anchors.fill: parent
+
+                    onDoubleClicked:
+                    {
+                        currentIndex = moveDelegate.moveIndex
+                        moveListController.restoreToMove(currentIndex)
+
+                        console.log(moveCount + "  " + currentIndex)
+                    }
+                }
             }
 
         }

@@ -7,6 +7,8 @@
 
 class MoveListController : public Controller
 {
+    Q_OBJECT
+
 private:
 
     Board* board;
@@ -19,6 +21,8 @@ public:
 
     MoveListController(Game& game) : Controller(game){}
     ~MoveListController(){}
+
+    Q_INVOKABLE void restoreToMove(int index);
 
 
 };

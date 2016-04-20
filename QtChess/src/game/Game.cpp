@@ -96,13 +96,16 @@ void Game::updateBoardCells(const QString &stringCells)
     {
         cntx->setContextProperty("myBoardModel", QVariant::fromValue(cellObjects));
     }
-
-    emptyMoves();
 }
 
 const QList<CellDataObject *> &Game::getCells() const
 {
     return cells;
+}
+
+const QList<MoveModel *> &Game::getMoves() const
+{
+    return moves;
 }
 
 void Game::addMove(const Move &move)
@@ -277,6 +280,7 @@ void Game::initView()
 void Game::initBoard()
 {
     updateBoardCells(BoardConfigurationsString::EMPTY_BOARD());
+    emptyMoves();
 }
 
 void Game::startControllers()

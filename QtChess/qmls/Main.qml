@@ -21,6 +21,7 @@ Window {
     {
         id: board
         boardModel: myBoardModel
+        moveIsLast: moveList.isLastMove
     }
 
     Rectangle
@@ -36,6 +37,7 @@ Window {
 
     MoveList
     {
+        id: moveList
         visible: true
         movesModel: Moves
         anchors.top: rec.bottom

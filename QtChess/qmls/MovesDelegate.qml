@@ -2,10 +2,11 @@ import QtQuick 2.4
 
 Rectangle
 {
+    property int moveIndex: 0
     id: moveDelegate
 
     color: "#F5CF9A"
-    border.color: currentIndex === index ? "red" : "black"
+    border.color: currentIndex === moveIndex ? "red" : "black"
     border.width: 2
 
     height: 50

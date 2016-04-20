@@ -4,6 +4,8 @@ Rectangle
 {
     property alias boardModel: boardCells.model
 
+    property bool moveIsLast: true
+
     property int selectedCellIndex: -1
 
     width: 820
@@ -131,7 +133,10 @@ Rectangle
                         }
                         else
                         {
-                            boardController.move(selectedCellIndex, cellIndex)
+                            if(moveIsLast)
+                            {
+                                boardController.move(selectedCellIndex, cellIndex)
+                            }
 
                             if(selectedCellIndex !== cellIndex)
                             {
@@ -151,10 +156,6 @@ Rectangle
 
                             highlightMoveCells(cellIndex)
                         }
-
-
-
-                        console.log(cellIndex + " index clicked")
                     }
 
                     onExited:
@@ -169,6 +170,16 @@ Rectangle
 
 
         }
+    }
+
+    Rectangle
+    {
+        anchors.fill: boardGrid
+
+        visible: !moveIsLast
+
+        color: "grey"
+        opacity: 0.6
     }
 
     Row
