@@ -14,5 +14,8 @@
         <file>imgs/rook_white.svg</file>
         <file>imgs/move_arrow.png</file>
         <file>imgs/sword.png</file>
+        <file>imgs/play.png</file>
+        <file>imgs/rewind.png</file>
+        <file>imgs/stop.png</file>
     </qresource>
 </RCC>

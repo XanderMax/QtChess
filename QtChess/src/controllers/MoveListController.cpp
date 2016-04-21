@@ -59,3 +59,45 @@ void MoveListController::restoreToMove(int index)
         }
     }
 }
+
+void MoveListController::startFrom(int index)
+{
+    const QList<MoveModel*> moveModels = game.getMoves();
+    if(index >= 0 && index < moveModels.size())
+    {
+        if(board != nullptr)
+        {
+            if(index == 0)
+            {
+                game.updateBoardCells(BoardConfigurationsString::REGULAR_BOARD());
+
+                game.setActiveParty(PieceParty::WHITE);
+                game.setBoardState(BoardState::REGULAR);
+
+                return;
+            }
+
+            QList<Move> moves;
+
+            for(MoveModel* model : moveModels.mid(0, index + 1))
+            {
+                if(model != nullptr)
+                {
+                    moves << model->getMove();
+                }
+            }
+
+            for(Move move : moves)
+            {
+                if(!board->movePiece(move))
+                {
+                    break;
+                }
+
+                game.switchActiveParty();
+                game.setBoardState(board->getBoardState(game.getActiveParty()));
+            }
+
+        }
+    }
+}

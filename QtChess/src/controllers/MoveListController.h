@@ -24,6 +24,8 @@ public:
 
     Q_INVOKABLE void restoreToMove(int index);
 
+    Q_INVOKABLE void startFrom(int index);
+
 
 };
 
