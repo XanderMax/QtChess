@@ -13,5 +13,6 @@
         <file>imgs/rook_black.svg</file>
         <file>imgs/rook_white.svg</file>
         <file>imgs/move_arrow.png</file>
+        <file>imgs/sword.png</file>
     </qresource>
 </RCC>

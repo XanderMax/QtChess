@@ -1,12 +1,27 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
+import QtQuick.Controls 1.4
+import QtQuick.Dialogs 1.0
 
 
-Window {
+ApplicationWindow {
     visible: true
 
     width: 1200
     height: 900
+
+    menuBar: MenuBar {
+        Menu
+        {
+            title: "Game"
+
+            MenuItem {text: "New"; onTriggered: {boardController.resetBoardToNewGame()}}
+            MenuItem {text: "Load..."; onTriggered: {fileDialog.open()}}
+            MenuItem {text: "Save..."}
+            MenuItem {text: "Exit"}
+        }
+
+    }
 
 
     Rectangle
@@ -44,5 +59,16 @@ Window {
         anchors.left: board.right
         anchors.right: parent.right
         anchors.bottom: board.bottom
+    }
+
+    FileDialog {
+        id: fileDialog
+        title: "Please choose a file"
+        folder: shortcuts.home
+
+        onAccepted: {
+
+        }
+
     }
 }

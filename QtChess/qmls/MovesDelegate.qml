@@ -13,13 +13,17 @@ Rectangle
 
     Row
     {
-        spacing: 26
+        spacing: 39
         anchors.fill: parent
         Text
         {
             color: "black"
-            width: 50
-            height: width
+
+            visible: true
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: 5
+            width: height
 
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter
@@ -29,39 +33,55 @@ Rectangle
             text: indexToCell(model.modelData.fromIndex)
         }
 
-        Piece
+        Cell
         {
             visible: true
-//                        anchors.top: parent.top
-//                        anchors.bottom: parent.bottom
-            width: 50
-            height: width
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: 5
+            width: height
 
-            state: model.modelData.stateFrom
+            pieceState: model.modelData.stateFrom
+            state: "regular"
+
+            property int verIndex: model.modelData.fromIndex % 8
+            property int horIndex: model.modelData.fromIndex / 8
+            color: verIndex % 2 == 0 ? (horIndex % 2 == 0 ? "#F5CF9A" : "#D1A05C") : (horIndex % 2 == 0 ? "#D1A05C" : "#F5CF9A")
         }
 
         Image
         {
-            width: 50
-            height: width
-            source: "qrc:/imgs/move_arrow.png"
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: 5
+            width: height
+            source: model.modelData.stateTo === "none" ? "qrc:/imgs/move_arrow.png" : "qrc:/imgs/sword.png"
         }
 
-        Piece
+        Cell
         {
             visible: true
-//                        anchors.top: parent.top
-//                        anchors.bottom: parent.bottom
-            width: 50
-            height: width
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: 5
+            width: height
 
-            state: model.modelData.stateTo
+            pieceState: model.modelData.stateTo
+            state: "regular"
+
+            property int verIndex: model.modelData.toIndex % 8
+            property int horIndex: model.modelData.toIndex / 8
+            color: verIndex % 2 == 0 ? (horIndex % 2 == 0 ? "#F5CF9A" : "#D1A05C") : (horIndex % 2 == 0 ? "#D1A05C" : "#F5CF9A")
         }
         Text
         {
             color: "black"
-            width: 50
-            height: width
+
+            visible: true
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.margins: 5
+            width: height
 
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignVCenter

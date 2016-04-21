@@ -128,3 +128,11 @@ int BoardController::getPartyKing(PieceParty::Enum party) const
 
     return -1;
 }
+
+void BoardController::resetBoardToNewGame()
+{
+    game.emptyMoves();
+    game.updateBoardCells(BoardConfigurationsString::REGULAR_BOARD());
+    game.setActiveParty(PieceParty::WHITE);
+    game.setBoardState(board->getBoardState(game.getActiveParty()));
+}

@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 
 Item
 {
@@ -11,6 +12,16 @@ Item
         anchors.fill: parent
         anchors.centerIn: parent
     }
+
+//    DropShadow {
+//            anchors.fill: pieceImage
+//            horizontalOffset: 7
+//            verticalOffset: 7
+//            radius: 8.0
+//            samples: 17
+//            color: "#80000000"
+//            source: pieceImage
+//        }
 
 
     states:

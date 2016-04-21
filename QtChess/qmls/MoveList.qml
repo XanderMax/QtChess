@@ -37,6 +37,7 @@ Rectangle
     {
         anchors.fill: parent
         anchors.topMargin: 10
+        anchors.bottomMargin: 10
         ListView
         {
             id: movesList

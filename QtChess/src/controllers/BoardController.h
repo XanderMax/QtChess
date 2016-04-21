@@ -34,6 +34,8 @@ public:
     Q_INVOKABLE void setBoardString(const QString& str);
 
     Q_INVOKABLE int getPartyKing(PieceParty::Enum party) const;
+
+    Q_INVOKABLE void resetBoardToNewGame();
 };
 
 
