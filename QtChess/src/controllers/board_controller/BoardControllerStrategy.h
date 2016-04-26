@@ -17,7 +17,7 @@ protected:
 public:
 
     BoardControllerStrategy(BoardController& _controller) : controller(_controller) {}
-    ~BoardControllerStrategy() {}
+    virtual ~BoardControllerStrategy() {}
 
     bool makeMove(const Move& move);
 };
