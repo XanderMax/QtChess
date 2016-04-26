@@ -23,7 +23,10 @@ SOURCES += $$PWD/boards/Board.cpp \
     $$PWD/Utils.cpp \
     $$PWD/controllers/Controller.cpp \
     $$PWD/models/MoveModel.cpp \
-    $$PWD/controllers/MoveListController.cpp
+    $$PWD/controllers/MoveListController.cpp \
+    $$PWD/controllers/board_controller/BoardControllerStrategy.cpp \
+    $$PWD/controllers/board_controller/LocalGameBoardControllerStartegy.cpp \
+    $$PWD/controllers/board_controller/NetworkGameBoardControllerStrategy.cpp
 
 HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/BoardBase.h \
@@ -51,4 +54,7 @@ HEADERS += $$PWD/boards/Board.h \
     $$PWD/Utils.h \
     $$PWD/controllers/Controller.h \
     $$PWD/models/MoveModel.h \
-    $$PWD/controllers/MoveListController.h
+    $$PWD/controllers/MoveListController.h \
+    $$PWD/controllers/board_controller/BoardControllerStrategy.h \
+    $$PWD/controllers/board_controller/LocalGameBoardControllerStartegy.h \
+    $$PWD/controllers/board_controller/NetworkGameBoardControllerStrategy.h

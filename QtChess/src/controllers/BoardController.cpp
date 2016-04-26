@@ -5,6 +5,8 @@
 #include "../game/Game.h"
 #include "../boards/FreeMovePolicy.h"
 
+#include "board_controller/LocalGameBoardControllerStartegy.h"
+
 
 void BoardController::_start()
 {
@@ -12,6 +14,11 @@ void BoardController::_start()
 }
 
 void BoardController::_stop()
+{
+
+}
+
+BoardController::BoardController(Game &game)  : Controller(game), controllerStrategy(new LocalGameboardControllerStrategy(*this))
 {
 
 }
@@ -72,29 +79,9 @@ bool BoardController::move(int from, int to)
     {
         Move move(from, to);
 
-        MoveModel* moveModel = game.createMoveModel(move);
-        if(board->getPiecePartyAt(from) == game.getActiveParty() && board->getPieceTypeAt(from) != PieceType::NONE)
+        if(controllerStrategy != nullptr)
         {
-            if(board->movePiece(move))
-            {
-                game.addMove(moveModel);
-                game.switchActiveParty();
-                game.setBoardState(board->getBoardState(game.getActiveParty()));
-
-                const QObject* root = game.getRootView();
-
-                if(root != nullptr)
-                {
-                    QObject* boardInput =  root->findChild<QObject*>("boardInput");
-
-                    if(boardInput != nullptr)
-                    {
-                        boardInput->setProperty("text", board->getBoardString());
-                    }
-                }
-
-                return true;
-            }
+            return controllerStrategy->makeMove(move);
         }
     }
 
@@ -135,4 +122,24 @@ void BoardController::resetBoardToNewGame()
     game.updateBoardCells(BoardConfigurationsString::REGULAR_BOARD());
     game.setActiveParty(PieceParty::WHITE);
     game.setBoardState(board->getBoardState(game.getActiveParty()));
+}
+
+void BoardController::onMove(const Move&)
+{
+    const QObject* root = game.getRootView();
+
+    if(root != nullptr)
+    {
+        QObject* boardInput =  root->findChild<QObject*>("boardInput");
+
+        if(boardInput != nullptr)
+        {
+            boardInput->setProperty("text", board->getBoardString());
+        }
+    }
+}
+
+Board *BoardController::getBoard() const
+{
+    return board;
 }

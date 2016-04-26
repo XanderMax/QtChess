@@ -24,6 +24,8 @@ public:
 
     void start();
 
+    Game& getGame() const;
+
 };
 
 

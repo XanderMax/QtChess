@@ -1,6 +1,8 @@
 #ifndef BOARD_CONTROLLER_H
 #define BOARD_CONTROLLER_H
 
+#include <memory>
+
 #include <QList>
 #include <QObject>
 
@@ -8,6 +10,7 @@
 #include "../models/CellDataObject.h"
 #include "../game/GameState.h"
 #include "Controller.h"
+#include "board_controller/BoardControllerStrategy.h"
 
 class BoardController : public Controller
 {
@@ -16,6 +19,7 @@ class BoardController : public Controller
 private:
 
     Board* board;
+    std::unique_ptr<BoardControllerStrategy> controllerStrategy;
 
 protected:
 
@@ -24,7 +28,7 @@ protected:
 
 public:
 
-    BoardController(Game& game) : Controller(game){}
+    BoardController(Game& game);
     ~BoardController();
 
     Q_INVOKABLE QList<int> getDangerousCells(int index) const;
@@ -36,6 +40,10 @@ public:
     Q_INVOKABLE int getPartyKing(PieceParty::Enum party) const;
 
     Q_INVOKABLE void resetBoardToNewGame();
+
+    void onMove(const Move& move);
+
+    Board* getBoard() const;
 };
 
 
