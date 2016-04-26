@@ -9,6 +9,8 @@ private:
 protected:
 
     bool _makeMove(const Move &move);
+
+    bool canMove(const Move &move) const {return true;}
 public:
 
     LocalGameboardControllerStrategy(BoardController& controller);

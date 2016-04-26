@@ -3,6 +3,7 @@ import QtQuick.Controls 1.4
 
 Rectangle
 {
+    property bool moveNavigationDisabled: false
     property alias movesModel: movesList.model
 
     property int moveCount: movesList && movesList.count ? movesList.count : 0
@@ -71,7 +72,7 @@ Rectangle
 
                     onClicked:
                     {
-                        if(moveList && moveList.count)
+                        if(!moveNavigationDisabled && moveList && moveList.count)
                         {
                             currentIndex = 0
                             moveListController.restoreToMove(currentIndex)
@@ -97,7 +98,7 @@ Rectangle
 
                     onClicked:
                     {
-                        if(currentIndex > 0)
+                        if(!moveNavigationDisabled && currentIndex > 0)
                         {
                             currentIndex--
                             moveListController.restoreToMove(currentIndex)
@@ -133,7 +134,7 @@ Rectangle
 
                     onClicked:
                     {
-                        if(currentIndex < moveCount - 1)
+                        if(!moveNavigationDisabled && currentIndex < moveCount - 1)
                         {
                             currentIndex++
                             moveListController.restoreToMove(currentIndex)
@@ -161,7 +162,7 @@ Rectangle
 
                     onClicked:
                     {
-                        if(moveCount > 0)
+                        if(!moveNavigationDisabled && moveCount > 0)
                         {
                             currentIndex = moveCount > 0 ? moveCount - 1: 0
                             moveListController.restoreToMove(currentIndex)
@@ -200,10 +201,13 @@ Rectangle
 
                     onDoubleClicked:
                     {
-                        currentIndex = moveDelegate.moveIndex
-                        moveListController.restoreToMove(currentIndex)
+                        if(!moveNavigationDisabled)
+                        {
+                            currentIndex = moveDelegate.moveIndex
+                            moveListController.restoreToMove(currentIndex)
 
-                        console.log(moveCount + "  " + currentIndex)
+                            console.log(moveCount + "  " + currentIndex)
+                        }
                     }
                 }
             }

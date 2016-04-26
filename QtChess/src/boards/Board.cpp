@@ -2,7 +2,7 @@
 
 void Board::setCell(int index, PieceType::Enum type, PieceParty::Enum party)
 {
-    if(index >= 0 && index << CELLS)
+    if(index >= 0 && index < CELLS)
     {
         CellDataObject* cell = cells[index];
 
@@ -156,6 +156,11 @@ bool Board::movePiece(const Move &move)
 
             toCell->setPiece(fromCell->getPieceType(), fromCell->getPieceParty(), fromCell->getMoveCount() + 1);
             fromCell->setPieceType(PieceType::NONE);
+
+            if((ROW(move.getTo()) == 0 || ROW(move.getTo()) == 7) && toCell->getPieceType() == PieceType::PAWN)
+            {
+                toCell->setPieceType(PieceType::QUEEN);
+            }
 
             return true;
         }

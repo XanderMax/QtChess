@@ -6,6 +6,7 @@
 #include "../boards/FreeMovePolicy.h"
 
 #include "board_controller/LocalGameBoardControllerStartegy.h"
+#include "board_controller/PlayerMockBoardControllerStrategy.h"
 
 
 void BoardController::_start()
@@ -79,7 +80,7 @@ bool BoardController::move(int from, int to)
     {
         Move move(from, to);
 
-        if(controllerStrategy != nullptr)
+        if(controllerStrategy != nullptr && controllerStrategy->canMove(move))
         {
             return controllerStrategy->makeMove(move);
         }

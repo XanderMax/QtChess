@@ -10,12 +10,31 @@ ApplicationWindow {
     width: 1200
     height: 900
 
+    property bool disableMoveNavigation: false
+
     menuBar: MenuBar {
         Menu
         {
             title: "Game"
 
-            MenuItem {text: "New"; onTriggered: {boardController.resetBoardToNewGame()}}
+            Menu
+            {
+                title: "New";
+
+                MenuItem {text: "Local multiplayer"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = false}}
+                MenuItem {text: "Local with computer"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = true}}
+                MenuItem {text: "Network"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = true}}
+            }
+
+            Menu
+            {
+                title: "Continue"
+
+                MenuItem {text: "Local multiplayer"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = false}}
+                MenuItem {text: "Local with computer"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = true}}
+                MenuItem {text: "Network"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = true}}
+            }
+
             MenuItem {text: "Load..."; onTriggered: {fileDialog.open()}}
             MenuItem {text: "Save..."}
             MenuItem {text: "Exit"}
@@ -59,6 +78,8 @@ ApplicationWindow {
         anchors.left: board.right
         anchors.right: parent.right
         anchors.bottom: board.bottom
+
+        moveNavigationDisabled: disableMoveNavigation
     }
 
     FileDialog {

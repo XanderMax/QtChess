@@ -17,6 +17,8 @@ protected:
     bool _makeMove(const Move &move);
 
     virtual bool __makeMove(const Move &move) = 0;
+
+    bool canMove(const Move &move) const;
 public:
 
     NetworkGameBoardControllerStrategy(BoardController& controller, int _port);

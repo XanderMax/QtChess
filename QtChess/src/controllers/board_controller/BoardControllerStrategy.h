@@ -14,12 +14,15 @@ protected:
     BoardController& controller;
 
     virtual bool _makeMove(const Move& move) = 0;
+
 public:
 
     BoardControllerStrategy(BoardController& _controller) : controller(_controller) {}
     virtual ~BoardControllerStrategy() {}
 
     bool makeMove(const Move& move);
+
+    virtual bool canMove(const Move& move) const = 0;
 };
 
 

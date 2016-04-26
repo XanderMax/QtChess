@@ -28,3 +28,10 @@ bool NetworkGameBoardControllerStrategy::_makeMove(const Move &move)
 
     return false;
 }
+
+bool NetworkGameBoardControllerStrategy::canMove(const Move &move) const
+{
+    PieceParty::Enum activeParty = controller.getGame().getActiveParty();
+
+    return activeParty != party;
+}
