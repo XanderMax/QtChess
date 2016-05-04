@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <memory>
+
 #include <QObject>
 #include <QQmlApplicationEngine>
 
@@ -8,7 +10,7 @@
 
 #include "../models/MoveModel.h"
 
-#include "../controllers/Controller.h"
+#include "../controllers/Controller.h"  
 
 
 
@@ -27,7 +29,7 @@ private:
     QList<CellDataObject*> cells;
     QList<MoveModel*>  moves;
 
-    QMap<QString, Controller*> controllers;
+    QMap<QString, std::shared_ptr<Controller>> controllers;
 
     void initGameState();
 
@@ -64,26 +66,18 @@ public:
     void emptyMoves();
     void updateMoves();
 
-    template <class TController>
-    TController& getController(const QString& name) const
+    template <class TController = Controller>
+    std::shared_ptr<TController> getController(const QString& name) const
     {
         if(controllers.contains(name))
         {
-            Controller* controller = controllers[name];
+            std::shared_ptr<Controller> controller = controllers[name];
 
-            try
+            if(controller != nullptr)
             {
-                TController* tController = dynamic_cast<TController*>(controller);
-
-                if(tController != nullptr)
-                {
-                    return *tController;
-                }
+                return std::dynamic_pointer_cast<TController>(controller);
             }
-            catch(const std::bad_cast&)
-            {
 
-            }
         }
 
         return nullptr;

@@ -38,7 +38,6 @@ Game::~Game()
     delete rootComponent;
     rootComponent = nullptr;
 
-    qDeleteAll(controllers);
     controllers.clear();
 
     qDeleteAll(moves);
@@ -239,7 +238,7 @@ void Game::addController(const QString &name, Controller *controller)
 {
     if(!controllers.contains(name) && controller != nullptr)
     {
-        controllers.insert(name, controller);
+        controllers.insert(name, std::shared_ptr<Controller>(controller));
     }
 }
 
@@ -249,11 +248,11 @@ void Game::exposeControllersToQmlApp()
 
     for(auto it = controllers.begin(); it != controllers.end(); ++it)
     {
-        Controller* ctr = it.value();
+        std::shared_ptr<Controller> ctr = it.value();
 
         if(ctr != nullptr && cntx != nullptr)
         {
-            cntx->setContextProperty(it.key(), ctr);
+            cntx->setContextProperty(it.key(), ctr.get());
         }
     }
 }
@@ -287,7 +286,7 @@ void Game::startControllers()
 {
     for(auto it = controllers.begin(); it != controllers.end(); ++it)
     {
-        Controller* ctr = it.value();
+        std::shared_ptr<Controller> ctr = it.value();
 
         if(ctr != nullptr)
         {
