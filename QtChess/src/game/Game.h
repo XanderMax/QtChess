@@ -64,6 +64,31 @@ public:
     void emptyMoves();
     void updateMoves();
 
+    template <class TController>
+    TController& getController(const QString& name) const
+    {
+        if(controllers.contains(name))
+        {
+            Controller* controller = controllers[name];
+
+            try
+            {
+                TController* tController = dynamic_cast<TController*>(controller);
+
+                if(tController != nullptr)
+                {
+                    return *tController;
+                }
+            }
+            catch(const std::bad_cast&)
+            {
+
+            }
+        }
+
+        return nullptr;
+    }
+
     BoardState::Enum getBoardState() const;
     void setBoardState(BoardState::Enum boardState);
 
