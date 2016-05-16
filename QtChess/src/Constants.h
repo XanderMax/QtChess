@@ -39,5 +39,12 @@ namespace StateName
     static const char *B_KING = "b_king";
 }
 
+namespace ControllerName
+{
+    static const char *BOARD_CONTROLLER = "boardController";
+    static const char *MOVE_LIST_CONTROLLER = "moveListController";
+    static const char *GAME_MENU_CONTROLLER = "gameMenuController";
+}
+
 
 #endif //CONSTANTS_H

@@ -3,14 +3,14 @@
 #include "../BoardController.h"
 #include "../../game/Game.h"
 
-LocalGameboardControllerStrategy::LocalGameboardControllerStrategy(BoardController &controller) :
-    BoardControllerStrategy(controller)
+LocalGameboardControllerState::LocalGameboardControllerState(BoardController &controller) :
+    BoardControllerState(controller)
 {
 
 }
 
 
-bool LocalGameboardControllerStrategy::_makeMove(const Move &move)
+bool LocalGameboardControllerState::_makeMove(const Move &move)
 {
     Board* board = controller.getBoard();
 

@@ -6,17 +6,19 @@
 
 #include "../../game/Game.h"
 
-#define MSEC_BASE 5000
-#define MSEC_OFFSET 2000
+#define MSEC_BASE 2000
+#define MSEC_OFFSET 1000
+
+#define MAX_RANDOM_ITERATIONS 10000
 
 
-void PlayerMockBoardControllerStrategy::setUpTimer()
+void PlayerMockBoardControllerState::setUpTimer()
 {
     int delay = (rand() % MSEC_BASE) + MSEC_OFFSET;
     QTimer::singleShot(delay, this, SLOT(onTimer()));
 }
 
-bool PlayerMockBoardControllerStrategy::_makeMove(const Move &move)
+bool PlayerMockBoardControllerState::_makeMove(const Move &move)
 {
     Board* board = controller.getBoard();
 
@@ -39,63 +41,79 @@ bool PlayerMockBoardControllerStrategy::_makeMove(const Move &move)
     return false;
 }
 
-bool PlayerMockBoardControllerStrategy::canMove(const Move &move) const
+bool PlayerMockBoardControllerState::canMove(const Move &move) const
 {
     PieceParty::Enum activeParty = controller.getGame().getActiveParty();
 
     return activeParty != party;
 }
 
-PlayerMockBoardControllerStrategy::PlayerMockBoardControllerStrategy(BoardController &controller, PieceParty::Enum _party) :
-    BoardControllerStrategy(controller), party(_party)
+PlayerMockBoardControllerState::PlayerMockBoardControllerState(BoardController &controller, PieceParty::Enum _party) :
+    BoardControllerState(controller), party(_party)
 {
     setUpTimer();
 }
 
-PlayerMockBoardControllerStrategy::~PlayerMockBoardControllerStrategy()
+PlayerMockBoardControllerState::~PlayerMockBoardControllerState()
 {
 
 }
 
-void PlayerMockBoardControllerStrategy::onTimer()
+void PlayerMockBoardControllerState::onTimer()
 {
     Board* board = controller.getBoard();
 
     Game& game = controller.getGame();
 
-    if(game.getActiveParty() == party && board != nullptr && board->getBoardState(party) != BoardState::MATED)
+    if(game.getActiveParty() == party && board != nullptr)
     {
-        while(true)
+        if(board != nullptr)
         {
-            int rnd = rand() % CELLS;
+            BoardState::Enum boardState = board->getBoardState(party);
 
-            if(board->getPiecePartyAt(rnd) == party && board->getPieceTypeAt(rnd) != PieceType::NONE)
+            if(boardState != BoardState::PATED && boardState != BoardState::MATED)
             {
-                std::bitset<CELLS> availableMoves = board->getAvailableMoves(rnd);
-
-                if(availableMoves.any())
+                while(true)
                 {
-                    while(true)
-                    {
-                        int randomCell = rand() % CELLS;
+                    int rnd = rand() % CELLS;
 
-                        if(getBit(randomCell, availableMoves))
+                    if(board->getPiecePartyAt(rnd) == party && board->getPieceTypeAt(rnd) != PieceType::NONE)
+                    {
+                        std::bitset<CELLS> availableMoves = board->getAvailableMoves(rnd);
+
+                        if(availableMoves.any())
                         {
-                            Move move(rnd, randomCell);
-                            if(makeMove(move))
+                            int iterations = 0;
+                            while(true)
                             {
-                                break;
+                                iterations++;
+                                int randomCell = rand() % CELLS;
+
+                                if(getBit(randomCell, availableMoves))
+                                {
+                                    Move move(rnd, randomCell);
+                                    if(makeMove(move))
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                if(iterations >= MAX_RANDOM_ITERATIONS)
+                                {
+                                    break;
+                                }
                             }
+
+                            break;
                         }
                     }
-
-                    break;
                 }
             }
         }
+
     }
 
-    if(game.getBoardState() != BoardState::MATED)
+    if(game.getBoardState() != BoardState::MATED && game.getBoardState() != BoardState::PATED)
     {
         setUpTimer();
     }

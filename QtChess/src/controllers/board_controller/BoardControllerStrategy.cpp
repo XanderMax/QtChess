@@ -4,7 +4,7 @@
 #include "../../game/Game.h"
 
 
-bool BoardControllerStrategy::makeMove(const Move &move)
+bool BoardControllerState::makeMove(const Move &move)
 {
     Game& game = controller.getGame();
 

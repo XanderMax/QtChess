@@ -8,7 +8,7 @@
 #include "../../Enums.h"
 
 
-class PlayerMockBoardControllerStrategy : public QObject,  public BoardControllerStrategy
+class PlayerMockBoardControllerState : public QObject,  public BoardControllerState
 {
     Q_OBJECT
 
@@ -24,8 +24,8 @@ protected:
     bool canMove(const Move &move) const;
 public:
 
-    PlayerMockBoardControllerStrategy(BoardController& controller, PieceParty::Enum _party);
-    ~PlayerMockBoardControllerStrategy();
+    PlayerMockBoardControllerState(BoardController& controller, PieceParty::Enum _party);
+    ~PlayerMockBoardControllerState();
 
 public slots:
 

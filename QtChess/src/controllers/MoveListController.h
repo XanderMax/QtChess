@@ -26,7 +26,6 @@ public:
 
     Q_INVOKABLE void startFrom(int index);
 
-
 };
 
 

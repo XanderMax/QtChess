@@ -29,7 +29,8 @@ SOURCES += $$PWD/boards/Board.cpp \
     $$PWD/controllers/board_controller/NetworkGameBoardControllerStrategy.cpp \
     $$PWD/controllers/board_controller/ClientNetworkGameBoardControllerStrategy.cpp \
     $$PWD/controllers/board_controller/ServerNetworkGameBoardControllerStrategy.cpp \
-    $$PWD/controllers/board_controller/PlayerMockBoardControllerStrategy.cpp
+    $$PWD/controllers/board_controller/PlayerMockBoardControllerStrategy.cpp \
+    $$PWD/controllers/GameMenuController.cpp
 
 HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/BoardBase.h \
@@ -63,4 +64,5 @@ HEADERS += $$PWD/boards/Board.h \
     $$PWD/controllers/board_controller/NetworkGameBoardControllerStrategy.h \
     $$PWD/controllers/board_controller/ClientNetworkGameBoardControllerStrategy.h \
     $$PWD/controllers/board_controller/ServerNetworkGameBoardControllerStrategy.h \
-    $$PWD/controllers/board_controller/PlayerMockBoardControllerStrategy.h
+    $$PWD/controllers/board_controller/PlayerMockBoardControllerStrategy.h \
+    $$PWD/controllers/GameMenuController.h

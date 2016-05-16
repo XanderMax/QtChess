@@ -4,14 +4,14 @@
 #include "NetworkGameBoardControllerStrategy.h"
 
 
-class ServerNetworkGameBoardControllerStrategy : public NetworkGameBoardControllerStrategy
+class ServerNetworkGameBoardControllerState : public NetworkGameBoardControllerState
 {
 private:
 protected:
 public:
 
-    ServerNetworkGameBoardControllerStrategy(BoardController& controller, PieceParty::Enum _party, int port);
-    ~ServerNetworkGameBoardControllerStrategy();
+    ServerNetworkGameBoardControllerState(BoardController& controller, PieceParty::Enum _party, int port);
+    ~ServerNetworkGameBoardControllerState();
 };
 
 

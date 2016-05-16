@@ -5,7 +5,7 @@
 #include "../../Enums.h"
 
 
-class NetworkGameBoardControllerStrategy : public BoardControllerStrategy
+class NetworkGameBoardControllerState : public BoardControllerState
 {
 private:
     int port;
@@ -21,8 +21,8 @@ protected:
     bool canMove(const Move &move) const;
 public:
 
-    NetworkGameBoardControllerStrategy(BoardController& controller, int _port);
-    virtual ~NetworkGameBoardControllerStrategy();
+    NetworkGameBoardControllerState(BoardController& controller, int _port);
+    virtual ~NetworkGameBoardControllerState();
 
     int getPort() const;
 };

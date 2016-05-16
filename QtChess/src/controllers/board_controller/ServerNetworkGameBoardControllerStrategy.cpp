@@ -2,13 +2,13 @@
 
 #include "../BoardController.h"
 
-ServerNetworkGameBoardControllerStrategy::ServerNetworkGameBoardControllerStrategy(BoardController &controller, PieceParty::Enum _party, int port) :
-    NetworkGameBoardControllerStrategy(controller, port)
+ServerNetworkGameBoardControllerState::ServerNetworkGameBoardControllerState(BoardController &controller, PieceParty::Enum _party, int port) :
+    NetworkGameBoardControllerState(controller, port)
 {
 
 }
 
-ServerNetworkGameBoardControllerStrategy::~ServerNetworkGameBoardControllerStrategy()
+ServerNetworkGameBoardControllerState::~ServerNetworkGameBoardControllerState()
 {
 
 }

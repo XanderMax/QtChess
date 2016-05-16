@@ -19,7 +19,7 @@ void BoardController::_stop()
 
 }
 
-BoardController::BoardController(Game &game)  : Controller(game), controllerStrategy(new LocalGameboardControllerStrategy(*this))
+BoardController::BoardController(Game &game)  : Controller(game), controllerState(new PlayerMockBoardControllerState(*this, PieceParty::BLACK))
 {
 
 }
@@ -80,9 +80,9 @@ bool BoardController::move(int from, int to)
     {
         Move move(from, to);
 
-        if(controllerStrategy != nullptr && controllerStrategy->canMove(move))
+        if(controllerState != nullptr && controllerState->canMove(move))
         {
-            return controllerStrategy->makeMove(move);
+            return controllerState->makeMove(move);
         }
     }
 
@@ -123,6 +123,17 @@ void BoardController::resetBoardToNewGame()
     game.updateBoardCells(BoardConfigurationsString::REGULAR_BOARD());
     game.setActiveParty(PieceParty::WHITE);
     game.setBoardState(board->getBoardState(game.getActiveParty()));
+}
+
+void BoardController::continueWithState(BoardControllerState *boardControllerState)
+{
+    controllerState.reset(boardControllerState);
+}
+
+void BoardController::startNewWithState(BoardControllerState *boardControllerState)
+{
+    resetBoardToNewGame();
+    controllerState.reset(boardControllerState);
 }
 
 void BoardController::onMove(const Move&)

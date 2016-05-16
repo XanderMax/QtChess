@@ -19,7 +19,7 @@ class BoardController : public Controller
 private:
 
     Board* board;
-    std::unique_ptr<BoardControllerStrategy> controllerStrategy;
+    std::unique_ptr<BoardControllerState> controllerState;
 
 protected:
 
@@ -40,6 +40,9 @@ public:
     Q_INVOKABLE int getPartyKing(PieceParty::Enum party) const;
 
     Q_INVOKABLE void resetBoardToNewGame();
+
+    void continueWithState(BoardControllerState* boardControllerState);
+    void startNewWithState(BoardControllerState* boardControllerState);
 
     void onMove(const Move& move);
 

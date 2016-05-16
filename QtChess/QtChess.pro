@@ -5,6 +5,8 @@ QT += qml quick
 #CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++11
 
+CONFIG += static
+
 
 #RESOURCES += qml.qrc
 

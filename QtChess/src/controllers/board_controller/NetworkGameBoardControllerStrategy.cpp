@@ -2,24 +2,24 @@
 #include "../BoardController.h"
 #include "../../game/Game.h"
 
-NetworkGameBoardControllerStrategy::NetworkGameBoardControllerStrategy(BoardController &controller, int _port) :
-    port(_port), BoardControllerStrategy(controller)
+NetworkGameBoardControllerState::NetworkGameBoardControllerState(BoardController &controller, int _port) :
+    port(_port), BoardControllerState(controller)
 {
 
 }
 
-NetworkGameBoardControllerStrategy::~NetworkGameBoardControllerStrategy()
+NetworkGameBoardControllerState::~NetworkGameBoardControllerState()
 {
 
 }
 
-int NetworkGameBoardControllerStrategy::getPort() const
+int NetworkGameBoardControllerState::getPort() const
 {
     return port;
 }
 
 
-bool NetworkGameBoardControllerStrategy::_makeMove(const Move &move)
+bool NetworkGameBoardControllerState::_makeMove(const Move &move)
 {
     if(controller.getGame().getActiveParty() == party)
     {
@@ -29,7 +29,7 @@ bool NetworkGameBoardControllerStrategy::_makeMove(const Move &move)
     return false;
 }
 
-bool NetworkGameBoardControllerStrategy::canMove(const Move &move) const
+bool NetworkGameBoardControllerState::canMove(const Move &move) const
 {
     PieceParty::Enum activeParty = controller.getGame().getActiveParty();
 

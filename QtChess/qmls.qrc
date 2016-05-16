@@ -6,5 +6,6 @@
         <file>qmls/Piece.qml</file>
         <file>qmls/MoveList.qml</file>
         <file>qmls/MovesDelegate.qml</file>
+        <file>qmls/GameStat.qml</file>
     </qresource>
 </RCC>

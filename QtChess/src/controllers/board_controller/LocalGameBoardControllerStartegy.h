@@ -3,7 +3,7 @@
 
 #include "BoardControllerStrategy.h"
 
-class LocalGameboardControllerStrategy : public BoardControllerStrategy
+class LocalGameboardControllerState : public BoardControllerState
 {
 private:
 protected:
@@ -13,8 +13,8 @@ protected:
     bool canMove(const Move &move) const {return true;}
 public:
 
-    LocalGameboardControllerStrategy(BoardController& controller);
-    ~LocalGameboardControllerStrategy() {}
+    LocalGameboardControllerState(BoardController& controller);
+    ~LocalGameboardControllerState() {}
 
 };
 

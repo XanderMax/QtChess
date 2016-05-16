@@ -21,18 +21,18 @@ ApplicationWindow {
             {
                 title: "New";
 
-                MenuItem {text: "Local multiplayer"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = false}}
-                MenuItem {text: "Local with computer"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = true}}
-                MenuItem {text: "Network"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = true}}
+                MenuItem {text: "Local multiplayer"; onTriggered: {gameMenuController.onNewLocalGame(); disableMoveNavigation = false}}
+                MenuItem {text: "Local with computer"; onTriggered: {gameMenuController.onNewLocalGameWithMockPlayer(); disableMoveNavigation = true}}
+                MenuItem {text: "Network"; onTriggered: {gameMenuController.onNewLocalGame(); disableMoveNavigation = true}}
             }
 
             Menu
             {
                 title: "Continue"
 
-                MenuItem {text: "Local multiplayer"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = false}}
-                MenuItem {text: "Local with computer"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = true}}
-                MenuItem {text: "Network"; onTriggered: {boardController.resetBoardToNewGame(); disableMoveNavigation = true}}
+                MenuItem {text: "Local multiplayer"; onTriggered: {gameMenuController.onContinueLocalGame(); disableMoveNavigation = false}}
+                MenuItem {text: "Local with computer"; onTriggered: {gameMenuController.onContinueLocalGameWithMockPlayer(); disableMoveNavigation = true}}
+                MenuItem {text: "Network"; onTriggered: {gameMenuController.onContinueLocalGame(); disableMoveNavigation = true}}
             }
 
             MenuItem {text: "Load..."; onTriggered: {fileDialog.open()}}
@@ -58,15 +58,17 @@ ApplicationWindow {
         moveIsLast: moveList.isLastMove
     }
 
-    Rectangle
+    GameStat
     {
         id: rec
         visible: true
-        color: GameState.state === 3 ? "yellow" : "green"
-        x: 1000
+        x: 8
         y: 0
         height: 200
-        width: 200
+//        width: 200
+
+        anchors.left: board.right
+        anchors.right: parent.right
     }
 
     MoveList

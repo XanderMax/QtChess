@@ -6,7 +6,7 @@
 
 class BoardController;
 
-class BoardControllerStrategy
+class BoardControllerState
 {
 private:
 protected:
@@ -17,8 +17,8 @@ protected:
 
 public:
 
-    BoardControllerStrategy(BoardController& _controller) : controller(_controller) {}
-    virtual ~BoardControllerStrategy() {}
+    BoardControllerState(BoardController& _controller) : controller(_controller) {}
+    virtual ~BoardControllerState() {}
 
     bool makeMove(const Move& move);
 
