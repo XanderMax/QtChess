@@ -40,14 +40,15 @@ ApplicationWindow {
                 MenuItem {
                     text: "Local multiplayer";
                     onTriggered: {
-                        gameMenuController.onNewLocalGame(); disableMoveNavigation = false
+                        gameMenuController.onNewLocalGame();
+                        disableMoveNavigation = false
                     }
                 }
 
                 MenuItem {
                     text: "Local with computer";
                     onTriggered: {
-                        partySelect._show(partySelectToken.new_local_with_computer);  disableMoveNavigation = true
+                        partySelect._show(partySelectToken.new_local_with_computer);
                     }
                 }
 
@@ -55,8 +56,17 @@ ApplicationWindow {
                 {
                     title: "Network"
 
-                    MenuItem {text: "Server"; onTriggered: {} }
-                    MenuItem {text: "Client"; onTriggered: {} }
+                    MenuItem {text: "Server";
+                        onTriggered: {
+                            networkPartySelect.showServer(partySelectToken.new_network_server)
+                        }
+                    }
+
+                    MenuItem {text: "Client";
+                        onTriggered: {
+                            networkPartySelect.showServer(partySelectToken.new_network_client)
+                        }
+                    }
                 }
             }
 
@@ -67,14 +77,15 @@ ApplicationWindow {
                 MenuItem {
                     text: "Local multiplayer";
                     onTriggered: {
-                        gameMenuController.onContinueLocalGame(); disableMoveNavigation = false
+                        gameMenuController.onContinueLocalGame();
+                        disableMoveNavigation = false
                     }
                 }
 
                 MenuItem {
                     text: "Local with computer";
                     onTriggered: {
-                        partySelect._show(partySelectToken.continue_local_with_computer); disableMoveNavigation = true
+                        partySelect._show(partySelectToken.continue_local_with_computer);
                     }
                 }
 
@@ -82,8 +93,17 @@ ApplicationWindow {
                 {
                     title: "Network"
 
-                    MenuItem {text: "Server"; onTriggered: {} }
-                    MenuItem {text: "Client"; onTriggered: {} }
+                    MenuItem {text: "Server";
+                        onTriggered: {
+                            networkPartySelect.showServer(partySelectToken.continue_network_server)
+                        }
+                    }
+                    MenuItem {text: "Client";
+                        onTriggered: {
+                            networkPartySelect.showServer(partySelectToken.continue_network_client)
+
+                        }
+                    }
                 }
             }
 
@@ -177,13 +197,41 @@ ApplicationWindow {
             if(token === partySelectToken.new_local_with_computer)
             {
                 gameMenuController.onNewLocalGameWithMockPlayer(party)
+                disableMoveNavigation = true
             }
             else if(token === partySelectToken.continue_local_with_computer)
             {
                 gameMenuController.onContinueLocalGameWithMockPlayer(party)
+                disableMoveNavigation = true
             }
 
-            close()
+            _close()
+        }
+    }
+
+    SelectPartyForNetworkGame
+    {
+        id: networkPartySelect
+
+        visible: false
+
+        x: root.x + (root.width - width) / 2
+        y: root.y + (root.height - height) / 2
+
+        onSelected:
+        {
+            if(token === partySelectToken.new_network_server)
+            {
+                gameMenuController.onNewLocalGameWithMockPlayer(party)
+                disableMoveNavigation = true
+            }
+            else if(token === partySelectToken.new_network_client)
+            {
+                gameMenuController.onContinueLocalGameWithMockPlayer(party)
+                disableMoveNavigation = true
+            }
+
+            _close()
         }
     }
 }

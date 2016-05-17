@@ -1,53 +1,79 @@
 import QtQuick 2.0
 import QtQuick.Window 2.2
+import QtQuick.Controls 1.4
 
 
 
-Window
+UTMWindow
 {
     width: 400
     height: 250
 
-    modality: Qt.WindowModal
-    flags: Qt.FramelessWindowHint
-
-
     QtObject
     {
         id: internal
-        property int token: 0
+        property bool server: true
     }
 
-    function _show (token)
+    function showServer(token)
     {
-
-        internal.token = token
-        show()
+        internal.server = true
+        _show(token)
     }
 
-    signal partySelected(int party, int token)
-
-    SelectParty
+    function showClient(token)
     {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        height: 200
+        internal.server = false
+        _show(token)
     }
 
-    Row
+    signal selected(int party, int port, string host, int token)
+
+
+    onClosing:
     {
-        TextInput
+        internal.server = true
+    }
+
+    Column
+    {
+        SelectParty
         {
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            width: 400
+
+            height: 200
+
+            onPartySelected:
+            {
+                selected(party, port.text*1, host.text, getToken())
+            }
         }
 
-        TextInput
+        Row
         {
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
+            TextInput
+            {
+                id: port
+                width: 200
+                height: 50
+
+                text: "" + Math.ceil(Math.random() % 100 + 1024)
+
+                mouseSelectionMode: TextInput.SelectCharacters
+                selectByMouse: true
+            }
+
+            TextInput
+            {
+                id: host
+                width: 200
+                height: 50
+
+                text: "127.0.0.1"
+
+                mouseSelectionMode: TextInput.SelectCharacters
+                selectByMouse: true
+            }
         }
     }
 

@@ -8,8 +8,6 @@ Rectangle
     border.color: "black"
     border.width: 2
 
-    anchors.fill: parent
-
     signal partySelected(int party)
 
     Row
