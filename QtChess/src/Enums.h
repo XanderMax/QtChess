@@ -51,6 +51,11 @@ namespace PieceParty
         BLACK = 0,
         WHITE
     };
+
+    static PieceParty::Enum getOpposite(PieceParty::Enum party)
+    {
+        return party == PieceParty::BLACK ? PieceParty::WHITE : PieceParty::BLACK;
+    }
 }
 
 Q_DECLARE_METATYPE(PieceParty::Enum)

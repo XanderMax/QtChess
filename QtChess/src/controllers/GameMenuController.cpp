@@ -27,14 +27,14 @@ void GameMenuController::onNewLocalGame()
     }
 }
 
-void GameMenuController::onNewLocalGameWithMockPlayer()
+void GameMenuController::onNewLocalGameWithMockPlayer(PieceParty::Enum party)
 {
     std::shared_ptr<BoardController> controller = game.getController<BoardController>(ControllerName::BOARD_CONTROLLER);
 
     if(controller != nullptr)
     {
         //TODO: Add to logic to be able to select party from GUI
-        controller->startNewWithState(new PlayerMockBoardControllerState(*controller, PieceParty::BLACK));
+        controller->startNewWithState(new PlayerMockBoardControllerState(*controller, PieceParty::getOpposite(party)));
     }
 }
 
@@ -48,14 +48,14 @@ void GameMenuController::onContinueLocalGame()
     }
 }
 
-void GameMenuController::onContinueLocalGameWithMockPlayer()
+void GameMenuController::onContinueLocalGameWithMockPlayer(PieceParty::Enum party)
 {
     std::shared_ptr<BoardController> controller = game.getController<BoardController>(ControllerName::BOARD_CONTROLLER);
 
     if(controller != nullptr)
     {
         //TODO: Add to logic to be able to select party from GUI
-        controller->continueWithState(new PlayerMockBoardControllerState(*controller, PieceParty::BLACK));
+        controller->continueWithState(new PlayerMockBoardControllerState(*controller, PieceParty::getOpposite(party)));
     }
 }
 

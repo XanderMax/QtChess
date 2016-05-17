@@ -7,8 +7,22 @@ import QtQuick.Dialogs 1.0
 ApplicationWindow {
     visible: true
 
+    id: root
+
     width: 1200
     height: 900
+
+    QtObject
+    {
+        id: partySelectToken
+
+        property int new_local_with_computer: 1
+        property int new_network_server: 2
+        property int new_network_client: 3
+
+        property int continue_local_with_computer: 4
+
+    }
 
     property bool disableMoveNavigation: false
 
@@ -22,8 +36,8 @@ ApplicationWindow {
                 title: "New";
 
                 MenuItem {text: "Local multiplayer"; onTriggered: {gameMenuController.onNewLocalGame(); disableMoveNavigation = false}}
-                MenuItem {text: "Local with computer"; onTriggered: {gameMenuController.onNewLocalGameWithMockPlayer(); disableMoveNavigation = true}}
-                MenuItem {text: "Network"; onTriggered: {gameMenuController.onNewLocalGame(); disableMoveNavigation = true}}
+                MenuItem {text: "Local with computer"; onTriggered: {partySelect._show(partySelectToken.new_local_with_computer);  disableMoveNavigation = true}}
+                MenuItem {text: "Network"; onTriggered: { disableMoveNavigation = true}}
             }
 
             Menu
@@ -31,7 +45,7 @@ ApplicationWindow {
                 title: "Continue"
 
                 MenuItem {text: "Local multiplayer"; onTriggered: {gameMenuController.onContinueLocalGame(); disableMoveNavigation = false}}
-                MenuItem {text: "Local with computer"; onTriggered: {gameMenuController.onContinueLocalGameWithMockPlayer(); disableMoveNavigation = true}}
+                MenuItem {text: "Local with computer"; onTriggered: {partySelect._show(partySelectToken.continue_local_with_computer); disableMoveNavigation = true}}
                 MenuItem {text: "Network"; onTriggered: {gameMenuController.onContinueLocalGame(); disableMoveNavigation = true}}
             }
 
@@ -93,5 +107,29 @@ ApplicationWindow {
 
         }
 
+    }
+
+    SelectParty
+    {
+        id: partySelect
+
+        visible: false
+
+        x: root.x + (root.width - width) / 2
+        y: root.y + (root.height - height) / 2
+
+        onPartySelected:
+        {
+            if(token === partySelectToken.new_local_with_computer)
+            {
+                gameMenuController.onNewLocalGameWithMockPlayer(party)
+            }
+            else if(token === partySelectToken.continue_local_with_computer)
+            {
+                gameMenuController.onContinueLocalGameWithMockPlayer(party)
+            }
+
+            close()
+        }
     }
 }

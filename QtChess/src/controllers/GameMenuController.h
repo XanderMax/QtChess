@@ -6,6 +6,8 @@
 
 #include "board_controller/BoardControllerStrategy.h"
 
+#include "../Enums.h"
+
 
 class GameMenuController : public Controller
 {
@@ -24,12 +26,12 @@ public:
     ~GameMenuController();
 
     Q_INVOKABLE void onNewLocalGame();
-    Q_INVOKABLE void onNewLocalGameWithMockPlayer();
+    Q_INVOKABLE void onNewLocalGameWithMockPlayer(PieceParty::Enum);
 //    void onNewNetworkGameAsServer(int port);
 //    void onNewNetworkGameAsClient(int port, const QString& host);
 
     Q_INVOKABLE void onContinueLocalGame();
-    Q_INVOKABLE void onContinueLocalGameWithMockPlayer();
+    Q_INVOKABLE void onContinueLocalGameWithMockPlayer(PieceParty::Enum);
 //    void onContinueNetworkGameAsServer(int port);
 //    void onContinueNetworkGameAsClient(int port, const QString& host);
 

@@ -7,5 +7,6 @@
         <file>qmls/MoveList.qml</file>
         <file>qmls/MovesDelegate.qml</file>
         <file>qmls/GameStat.qml</file>
+        <file>qmls/SelectParty.qml</file>
     </qresource>
 </RCC>
