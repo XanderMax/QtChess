@@ -5,8 +5,8 @@
 #include "../game/Game.h"
 #include "../boards/FreeMovePolicy.h"
 
-#include "board_controller/LocalGameBoardControllerStartegy.h"
-#include "board_controller/PlayerMockBoardControllerStrategy.h"
+#include "board_controller/LocalGameBoardControllerState.h"
+#include "board_controller/PlayerMockBoardControllerState.h"
 
 
 void BoardController::_start()

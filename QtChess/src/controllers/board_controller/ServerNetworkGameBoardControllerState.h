@@ -1,7 +1,7 @@
 #ifndef SERVER_NETWORK_GAME_BOARD_CONTROLLER_STRATEGY_H
 #define SERVER_NETWORK_GAME_BOARD_CONTROLLER_STRATEGY_H
 
-#include "NetworkGameBoardControllerStrategy.h"
+#include "NetworkGameBoardControllerState.h"
 
 
 class ServerNetworkGameBoardControllerState : public NetworkGameBoardControllerState

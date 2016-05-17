@@ -1,4 +1,4 @@
-#include "ServerNetworkGameBoardControllerStrategy.h"
+#include "ServerNetworkGameBoardControllerState.h"
 
 #include "../BoardController.h"
 

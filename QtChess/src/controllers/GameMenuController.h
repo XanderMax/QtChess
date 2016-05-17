@@ -4,7 +4,7 @@
 
 #include "Controller.h"
 
-#include "board_controller/BoardControllerStrategy.h"
+#include "board_controller/BoardControllerState.h"
 
 #include "../Enums.h"
 
@@ -27,13 +27,13 @@ public:
 
     Q_INVOKABLE void onNewLocalGame();
     Q_INVOKABLE void onNewLocalGameWithMockPlayer(PieceParty::Enum);
-//    void onNewNetworkGameAsServer(int port);
-//    void onNewNetworkGameAsClient(int port, const QString& host);
+    Q_INVOKABLE void onNewNetworkGameAsServer(PieceParty::Enum, int port);
+    Q_INVOKABLE void onNewNetworkGameAsClient(PieceParty::Enum, int port, const QString& host);
 
     Q_INVOKABLE void onContinueLocalGame();
     Q_INVOKABLE void onContinueLocalGameWithMockPlayer(PieceParty::Enum);
-//    void onContinueNetworkGameAsServer(int port);
-//    void onContinueNetworkGameAsClient(int port, const QString& host);
+    Q_INVOKABLE void onContinueNetworkGameAsServer(PieceParty::Enum, int port);
+    Q_INVOKABLE void onContinueNetworkGameAsClient(PieceParty::Enum, int port, const QString& host);
 
 };
 

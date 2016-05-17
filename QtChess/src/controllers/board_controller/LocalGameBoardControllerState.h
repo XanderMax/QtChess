@@ -1,7 +1,7 @@
 #ifndef LOCAL_GAME_BOARD_CONTROLLER_STARTEGY_H
 #define LOCAL_GAME_BOARD_CONTROLLER_STARTEGY_H
 
-#include "BoardControllerStrategy.h"
+#include "BoardControllerState.h"
 
 class LocalGameboardControllerState : public BoardControllerState
 {

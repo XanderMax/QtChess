@@ -3,7 +3,7 @@
 
 #include <QTimer>
 
-#include "BoardControllerStrategy.h"
+#include "BoardControllerState.h"
 
 #include "../../Enums.h"
 

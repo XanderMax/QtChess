@@ -1,4 +1,4 @@
-#include "LocalGameBoardControllerStartegy.h"
+#include "LocalGameBoardControllerState.h"
 
 #include "../BoardController.h"
 #include "../../game/Game.h"

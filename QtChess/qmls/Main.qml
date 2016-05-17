@@ -9,8 +9,14 @@ ApplicationWindow {
 
     id: root
 
-    width: 1200
-    height: 900
+    maximumWidth: 1300
+    maximumHeight: 900
+
+    minimumWidth: maximumWidth
+    minimumHeight: maximumHeight
+
+    width: maximumWidth
+    height: maximumHeight
 
     QtObject
     {
@@ -222,12 +228,22 @@ ApplicationWindow {
         {
             if(token === partySelectToken.new_network_server)
             {
-                gameMenuController.onNewLocalGameWithMockPlayer(party)
+                gameMenuController.onNewNetworkGameAsServer(party, port)
                 disableMoveNavigation = true
             }
             else if(token === partySelectToken.new_network_client)
             {
-                gameMenuController.onContinueLocalGameWithMockPlayer(party)
+                gameMenuController.onNewNetworkGameAsClient(party, port, host)
+                disableMoveNavigation = true
+            }
+            else if(token == partySelectToken.continue_network_server)
+            {
+                gameMenuController.onContinueNetworkGameAsServer(party, port)
+                disableMoveNavigation = true
+            }
+            else if(token === partySelectToken.continue_network_client)
+            {
+                gameMenuController.onContinueNetworkGameAsClient(party, port, host)
                 disableMoveNavigation = true
             }
 

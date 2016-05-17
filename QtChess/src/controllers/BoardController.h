@@ -10,7 +10,7 @@
 #include "../models/CellDataObject.h"
 #include "../game/GameState.h"
 #include "Controller.h"
-#include "board_controller/BoardControllerStrategy.h"
+#include "board_controller/BoardControllerState.h"
 
 class BoardController : public Controller
 {

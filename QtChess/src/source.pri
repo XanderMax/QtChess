@@ -24,13 +24,13 @@ SOURCES += $$PWD/boards/Board.cpp \
     $$PWD/controllers/Controller.cpp \
     $$PWD/models/MoveModel.cpp \
     $$PWD/controllers/MoveListController.cpp \
-    $$PWD/controllers/board_controller/BoardControllerStrategy.cpp \
-    $$PWD/controllers/board_controller/LocalGameBoardControllerStartegy.cpp \
-    $$PWD/controllers/board_controller/NetworkGameBoardControllerStrategy.cpp \
-    $$PWD/controllers/board_controller/ClientNetworkGameBoardControllerStrategy.cpp \
-    $$PWD/controllers/board_controller/ServerNetworkGameBoardControllerStrategy.cpp \
-    $$PWD/controllers/board_controller/PlayerMockBoardControllerStrategy.cpp \
-    $$PWD/controllers/GameMenuController.cpp
+    $$PWD/controllers/GameMenuController.cpp \
+    $$PWD/controllers/board_controller/BoardControllerState.cpp \
+    $$PWD/controllers/board_controller/ClientNetworkGameBoardControllerState.cpp \
+    $$PWD/controllers/board_controller/LocalGameBoardControllerState.cpp \
+    $$PWD/controllers/board_controller/NetworkGameBoardControllerState.cpp \
+    $$PWD/controllers/board_controller/PlayerMockBoardControllerState.cpp \
+    $$PWD/controllers/board_controller/ServerNetworkGameBoardControllerState.cpp
 
 HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/BoardBase.h \
@@ -59,10 +59,10 @@ HEADERS += $$PWD/boards/Board.h \
     $$PWD/controllers/Controller.h \
     $$PWD/models/MoveModel.h \
     $$PWD/controllers/MoveListController.h \
-    $$PWD/controllers/board_controller/BoardControllerStrategy.h \
-    $$PWD/controllers/board_controller/LocalGameBoardControllerStartegy.h \
-    $$PWD/controllers/board_controller/NetworkGameBoardControllerStrategy.h \
-    $$PWD/controllers/board_controller/ClientNetworkGameBoardControllerStrategy.h \
-    $$PWD/controllers/board_controller/ServerNetworkGameBoardControllerStrategy.h \
-    $$PWD/controllers/board_controller/PlayerMockBoardControllerStrategy.h \
-    $$PWD/controllers/GameMenuController.h
+    $$PWD/controllers/GameMenuController.h \
+    $$PWD/controllers/board_controller/BoardControllerState.h \
+    $$PWD/controllers/board_controller/LocalGameBoardControllerState.h \
+    $$PWD/controllers/board_controller/NetworkGameBoardControllerState.h \
+    $$PWD/controllers/board_controller/PlayerMockBoardControllerState.h \
+    $$PWD/controllers/board_controller/ServerNetworkGameBoardControllerState.h \
+    $$PWD/controllers/board_controller/ClientNetworkGameBoardControllerState.h

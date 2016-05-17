@@ -1,4 +1,4 @@
-#include "PlayerMockBoardControllerStrategy.h"
+#include "PlayerMockBoardControllerState.h"
 
 #include <stdlib.h>
 

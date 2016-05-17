@@ -1,7 +1,7 @@
 #ifndef NETWORK_GAME_BOARD_CONTROLLER_STRATEGY_H
 #define NETWORK_GAME_BOARD_CONTROLLER_STRATEGY_H
 
-#include "BoardControllerStrategy.h"
+#include "BoardControllerState.h"
 #include "../../Enums.h"
 
 
