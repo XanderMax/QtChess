@@ -8,5 +8,8 @@
         <file>qmls/MovesDelegate.qml</file>
         <file>qmls/GameStat.qml</file>
         <file>qmls/SelectParty.qml</file>
+        <file>qmls/SelectPartyDialog.qml</file>
+        <file>qmls/SelectPartyForNetworkGame.qml</file>
+        <file>qmls/UTMWindow.qml</file>
     </qresource>
 </RCC>

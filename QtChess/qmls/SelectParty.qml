@@ -1,89 +1,57 @@
 import QtQuick 2.0
-import QtQuick.Window 2.2
 
 
-Window
+Rectangle
 {
-    width: 400
-    height: 200
+    color: "#F5CF9A"
 
-    modality: Qt.WindowModal
-    flags: Qt.FramelessWindowHint
+    border.color: "black"
+    border.width: 2
 
-    QtObject
+    anchors.fill: parent
+
+    signal partySelected(int party)
+
+    Row
     {
-        id: internal
-        property int token: 0
-    }
-
-    function _show (token)
-    {
-
-        internal.token = token
-        show()
-    }
-
-    signal partySelected(int party, int token)
-
-    Rectangle
-    {
-        color: "#F5CF9A"
-
-        border.color: "black"
-        border.width: 2
-
         anchors.fill: parent
 
-        Row
+        Cell
         {
-            anchors.fill: parent
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: height
 
-            Cell
+            pieceState: "w_king"
+            state: "regular"
+
+            MouseArea
             {
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                width: height
+                anchors.fill: parent
 
-                pieceState: "w_king"
-                state: "regular"
-
-                MouseArea
+                onClicked:
                 {
-                    anchors.fill: parent
-
-                    onClicked:
-                    {
-                        if(internal.token !== 0)
-                        {
-                            partySelected(1, internal.token)
-                        }
-
-                        internal.token = 0
-                    }
+                    partySelected(1)
                 }
             }
+        }
 
-            Cell
+        Cell
+        {
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: height
+
+            pieceState: "b_king"
+            state: "regular"
+
+            MouseArea
             {
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                width: height
+                anchors.fill: parent
 
-                pieceState: "b_king"
-                state: "regular"
-
-                MouseArea
+                onClicked:
                 {
-                    anchors.fill: parent
-
-                    onClicked:
-                    {
-                        if(internal.token !== 0)
-                        {
-                            partySelected(0, internal.token)
-                        }
-                        internal.token = 0
-                    }
+                    partySelected(0)
                 }
             }
         }

@@ -21,6 +21,8 @@ ApplicationWindow {
         property int new_network_client: 3
 
         property int continue_local_with_computer: 4
+        property int continue_network_server: 5
+        property int continue_network_client: 6
 
     }
 
@@ -35,23 +37,75 @@ ApplicationWindow {
             {
                 title: "New";
 
-                MenuItem {text: "Local multiplayer"; onTriggered: {gameMenuController.onNewLocalGame(); disableMoveNavigation = false}}
-                MenuItem {text: "Local with computer"; onTriggered: {partySelect._show(partySelectToken.new_local_with_computer);  disableMoveNavigation = true}}
-                MenuItem {text: "Network"; onTriggered: { disableMoveNavigation = true}}
+                MenuItem {
+                    text: "Local multiplayer";
+                    onTriggered: {
+                        gameMenuController.onNewLocalGame(); disableMoveNavigation = false
+                    }
+                }
+
+                MenuItem {
+                    text: "Local with computer";
+                    onTriggered: {
+                        partySelect._show(partySelectToken.new_local_with_computer);  disableMoveNavigation = true
+                    }
+                }
+
+                Menu
+                {
+                    title: "Network"
+
+                    MenuItem {text: "Server"; onTriggered: {} }
+                    MenuItem {text: "Client"; onTriggered: {} }
+                }
             }
 
             Menu
             {
                 title: "Continue"
 
-                MenuItem {text: "Local multiplayer"; onTriggered: {gameMenuController.onContinueLocalGame(); disableMoveNavigation = false}}
-                MenuItem {text: "Local with computer"; onTriggered: {partySelect._show(partySelectToken.continue_local_with_computer); disableMoveNavigation = true}}
-                MenuItem {text: "Network"; onTriggered: {gameMenuController.onContinueLocalGame(); disableMoveNavigation = true}}
+                MenuItem {
+                    text: "Local multiplayer";
+                    onTriggered: {
+                        gameMenuController.onContinueLocalGame(); disableMoveNavigation = false
+                    }
+                }
+
+                MenuItem {
+                    text: "Local with computer";
+                    onTriggered: {
+                        partySelect._show(partySelectToken.continue_local_with_computer); disableMoveNavigation = true
+                    }
+                }
+
+                Menu
+                {
+                    title: "Network"
+
+                    MenuItem {text: "Server"; onTriggered: {} }
+                    MenuItem {text: "Client"; onTriggered: {} }
+                }
             }
 
-            MenuItem {text: "Load..."; onTriggered: {fileDialog.open()}}
-            MenuItem {text: "Save..."}
-            MenuItem {text: "Exit"}
+            MenuItem {
+                text: "Load...";
+                onTriggered: {fileDialog.open()
+                }
+            }
+
+            MenuItem {
+                text: "Save...";
+                onTriggered: {
+
+                }
+            }
+
+            MenuItem {
+                text: "Exit";
+                onTriggered: {
+
+                }
+            }
         }
 
     }
@@ -109,7 +163,7 @@ ApplicationWindow {
 
     }
 
-    SelectParty
+    SelectPartyDialog
     {
         id: partySelect
 
@@ -118,7 +172,7 @@ ApplicationWindow {
         x: root.x + (root.width - width) / 2
         y: root.y + (root.height - height) / 2
 
-        onPartySelected:
+        onSelected:
         {
             if(token === partySelectToken.new_local_with_computer)
             {
