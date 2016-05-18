@@ -125,17 +125,6 @@ void BoardController::resetBoardToNewGame()
     game.setBoardState(board->getBoardState(game.getActiveParty()));
 }
 
-void BoardController::continueWithState(BoardControllerState *boardControllerState)
-{
-    controllerState.reset(boardControllerState);
-}
-
-void BoardController::startNewWithState(BoardControllerState *boardControllerState)
-{
-    resetBoardToNewGame();
-    controllerState.reset(boardControllerState);
-}
-
 void BoardController::onMove(const Move&)
 {
     const QObject* root = game.getRootView();

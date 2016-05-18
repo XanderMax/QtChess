@@ -41,8 +41,18 @@ public:
 
     Q_INVOKABLE void resetBoardToNewGame();
 
-    void continueWithState(BoardControllerState* boardControllerState);
-    void startNewWithState(BoardControllerState* boardControllerState);
+    template <class TBoardControllerState, typename...Args>
+    void continueWithState(Args...args)
+    {
+        controllerState.reset(new TBoardControllerState(*this, args...));
+    }
+
+    template <class TBoardControllerState, typename...Args>
+    void startNewWithState(Args...args)
+    {
+        resetBoardToNewGame();
+        controllerState.reset(new TBoardControllerState(*this, args...));
+    }
 
     void onMove(const Move& move);
 

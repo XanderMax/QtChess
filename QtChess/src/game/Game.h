@@ -41,7 +41,14 @@ private:
 
     void setUpControllers();
 
-    void addController(const QString& name, Controller* controller);
+    template<class TController, typename ... Types>
+    void addController(const QString& name, Types...args)
+    {
+        if(!controllers.contains(name))
+        {
+            controllers.insert(name, std::shared_ptr<Controller>(new TController(*this, args...)));
+        }
+    }
 
     void exposeControllersToQmlApp();
 

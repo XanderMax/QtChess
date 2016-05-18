@@ -235,14 +235,6 @@ const QObject *Game::findChild(const QString &name)
     return nullptr;
 }
 
-void Game::addController(const QString &name, Controller *controller)
-{
-    if(!controllers.contains(name) && controller != nullptr)
-    {
-        controllers.insert(name, std::shared_ptr<Controller>(controller));
-    }
-}
-
 void Game::exposeControllersToQmlApp()
 {
     QQmlContext* cntx = engine.rootContext();
@@ -298,7 +290,7 @@ void Game::startControllers()
 
 void Game::setUpControllers()
 {
-    addController(ControllerName::BOARD_CONTROLLER, new BoardController(*this));
-    addController(ControllerName::MOVE_LIST_CONTROLLER, new MoveListController(*this));
-    addController(ControllerName::GAME_MENU_CONTROLLER, new GameMenuController(*this));
+    addController<BoardController>(ControllerName::BOARD_CONTROLLER);
+    addController<MoveListController>(ControllerName::MOVE_LIST_CONTROLLER);
+    addController<GameMenuController>(ControllerName::GAME_MENU_CONTROLLER);
 }

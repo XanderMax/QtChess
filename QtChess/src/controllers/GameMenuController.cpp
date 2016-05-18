@@ -23,7 +23,7 @@ void GameMenuController::onNewLocalGame()
 
     if(controller != nullptr)
     {
-        controller->startNewWithState(new LocalGameboardControllerState(*controller));
+        controller->startNewWithState<LocalGameboardControllerState>();
     }
 }
 
@@ -33,7 +33,7 @@ void GameMenuController::onNewLocalGameWithMockPlayer(PieceParty::Enum party)
 
     if(controller != nullptr)
     {
-        controller->startNewWithState(new PlayerMockBoardControllerState(*controller, PieceParty::getOpposite(party)));
+        controller->startNewWithState<PlayerMockBoardControllerState>(PieceParty::getOpposite(party));
     }
 }
 
@@ -44,7 +44,7 @@ void GameMenuController::onNewNetworkGameAsServer(PieceParty::Enum party, int po
 
     if(controller != nullptr)
     {
-        controller->startNewWithState(new PlayerMockBoardControllerState(*controller, PieceParty::getOpposite(party)));
+        controller->startNewWithState<PlayerMockBoardControllerState>(PieceParty::getOpposite(party));
     }
 }
 
@@ -55,7 +55,7 @@ void GameMenuController::onNewNetworkGameAsClient(PieceParty::Enum party, int po
 
     if(controller != nullptr)
     {
-        controller->startNewWithState(new PlayerMockBoardControllerState(*controller, PieceParty::getOpposite(party)));
+        controller->startNewWithState<PlayerMockBoardControllerState>(PieceParty::getOpposite(party));
     }
 }
 
@@ -65,7 +65,7 @@ void GameMenuController::onContinueLocalGame()
 
     if(controller != nullptr)
     {
-        controller->continueWithState(new LocalGameboardControllerState(*controller));
+        controller->continueWithState<LocalGameboardControllerState>();
     }
 }
 
@@ -75,7 +75,7 @@ void GameMenuController::onContinueLocalGameWithMockPlayer(PieceParty::Enum part
 
     if(controller != nullptr)
     {
-        controller->continueWithState(new PlayerMockBoardControllerState(*controller, PieceParty::getOpposite(party)));
+        controller->continueWithState<PlayerMockBoardControllerState>(PieceParty::getOpposite(party));
     }
 }
 
@@ -86,7 +86,7 @@ void GameMenuController::onContinueNetworkGameAsServer(PieceParty::Enum party, i
 
     if(controller != nullptr)
     {
-        controller->continueWithState(new PlayerMockBoardControllerState(*controller, PieceParty::getOpposite(party)));
+        controller->continueWithState<PlayerMockBoardControllerState>(PieceParty::getOpposite(party));
     }
 }
 
@@ -97,7 +97,7 @@ void GameMenuController::onContinueNetworkGameAsClient(PieceParty::Enum party, i
 
     if(controller != nullptr)
     {
-        controller->continueWithState(new PlayerMockBoardControllerState(*controller, PieceParty::getOpposite(party)));
+        controller->continueWithState<PlayerMockBoardControllerState>(PieceParty::getOpposite(party));
     }
 }
 
