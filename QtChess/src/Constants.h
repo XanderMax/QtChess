@@ -13,6 +13,8 @@
 
 #include "_BoardCellIndicies_.h"
 
+#include <QtGlobal>
+
 
 //Piece states
 
@@ -44,6 +46,13 @@ namespace ControllerName
     static const char *BOARD_CONTROLLER = "boardController";
     static const char *MOVE_LIST_CONTROLLER = "moveListController";
     static const char *GAME_MENU_CONTROLLER = "gameMenuController";
+    static const char *ALERT_MESSAGE_CONTROLLER = "alertMessageController";
+}
+
+namespace NetworkMessageType
+{
+    static const quint16 MOVE_LIST = 34534;
+    static const quint16 MOVE = 6342;
 }
 
 

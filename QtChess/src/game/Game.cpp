@@ -9,6 +9,7 @@
 #include "../controllers/BoardController.h"
 #include "../controllers/MoveListController.h"
 #include "../controllers/GameMenuController.h"
+#include "../controllers/AlertMessageController.h"
 
 Game::Game(QQmlApplicationEngine &_engine) : engine(_engine)
 {
@@ -293,4 +294,5 @@ void Game::setUpControllers()
     addController<BoardController>(ControllerName::BOARD_CONTROLLER);
     addController<MoveListController>(ControllerName::MOVE_LIST_CONTROLLER);
     addController<GameMenuController>(ControllerName::GAME_MENU_CONTROLLER);
+    addController<AlertMessageController>(ControllerName::ALERT_MESSAGE_CONTROLLER);
 }

@@ -30,7 +30,8 @@ SOURCES += $$PWD/boards/Board.cpp \
     $$PWD/controllers/board_controller/LocalGameBoardControllerState.cpp \
     $$PWD/controllers/board_controller/NetworkGameBoardControllerState.cpp \
     $$PWD/controllers/board_controller/PlayerMockBoardControllerState.cpp \
-    $$PWD/controllers/board_controller/ServerNetworkGameBoardControllerState.cpp
+    $$PWD/controllers/board_controller/ServerNetworkGameBoardControllerState.cpp \
+    $$PWD/controllers/AlertMessageController.cpp
 
 HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/BoardBase.h \
@@ -65,4 +66,5 @@ HEADERS += $$PWD/boards/Board.h \
     $$PWD/controllers/board_controller/NetworkGameBoardControllerState.h \
     $$PWD/controllers/board_controller/PlayerMockBoardControllerState.h \
     $$PWD/controllers/board_controller/ServerNetworkGameBoardControllerState.h \
-    $$PWD/controllers/board_controller/ClientNetworkGameBoardControllerState.h
+    $$PWD/controllers/board_controller/ClientNetworkGameBoardControllerState.h \
+    $$PWD/controllers/AlertMessageController.h

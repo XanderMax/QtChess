@@ -13,7 +13,7 @@ Rectangle
 
     Row
     {
-        spacing: 39
+        spacing: 65
         anchors.fill: parent
         Text
         {

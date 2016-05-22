@@ -88,5 +88,4 @@ namespace CellOccupyPolicy
 
 Q_DECLARE_METATYPE(CellOccupyPolicy::Enum)
 
-
 #endif //ENUMS_H

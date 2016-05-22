@@ -57,7 +57,7 @@ UTMWindow
                 width: 200
                 height: 50
 
-                text: "" + Math.ceil(Math.random() % 100 + 1024)
+                text: "" + Math.ceil(1000 * Math.random() % 1000 + 1024)
 
                 mouseSelectionMode: TextInput.SelectCharacters
                 selectByMouse: true

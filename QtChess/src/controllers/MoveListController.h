@@ -5,6 +5,8 @@
 
 #include "../boards/Board.h"
 
+#include "../models/MoveModel.h"
+
 class MoveListController : public Controller
 {
     Q_OBJECT
@@ -25,6 +27,10 @@ public:
     Q_INVOKABLE void restoreToMove(int index);
 
     Q_INVOKABLE void startFrom(int index);
+
+    const QList<MoveModel*>& getMoves() const;
+
+    void setMoves(const QList<Move>& moves);
 
 };
 

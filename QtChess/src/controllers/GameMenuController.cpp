@@ -6,6 +6,8 @@
 
 #include "board_controller/LocalGameBoardControllerState.h"
 #include "board_controller/PlayerMockBoardControllerState.h"
+#include "board_controller/ServerNetworkGameBoardControllerState.h"
+#include "board_controller/ClientNetworkGameBoardControllerState.h"
 
 void GameMenuController::_start()
 {
@@ -39,23 +41,21 @@ void GameMenuController::onNewLocalGameWithMockPlayer(PieceParty::Enum party)
 
 void GameMenuController::onNewNetworkGameAsServer(PieceParty::Enum party, int port)
 {
-    //TODO: Add actual implementation once it is available
     std::shared_ptr<BoardController> controller = game.getController<BoardController>(ControllerName::BOARD_CONTROLLER);
 
     if(controller != nullptr)
     {
-        controller->startNewWithState<PlayerMockBoardControllerState>(PieceParty::getOpposite(party));
+        controller->startNewWithState<ServerNetworkGameBoardControllerState>(party, port);
     }
 }
 
 void GameMenuController::onNewNetworkGameAsClient(PieceParty::Enum party, int port, const QString &host)
 {
-    //TODO: Add actual implementation once it is available
     std::shared_ptr<BoardController> controller = game.getController<BoardController>(ControllerName::BOARD_CONTROLLER);
 
     if(controller != nullptr)
     {
-        controller->startNewWithState<PlayerMockBoardControllerState>(PieceParty::getOpposite(party));
+        controller->startNewWithState<ClientNetworkGameBoardControllerState>(party, port, host);
     }
 }
 
@@ -86,7 +86,7 @@ void GameMenuController::onContinueNetworkGameAsServer(PieceParty::Enum party, i
 
     if(controller != nullptr)
     {
-        controller->continueWithState<PlayerMockBoardControllerState>(PieceParty::getOpposite(party));
+        controller->continueWithState<ServerNetworkGameBoardControllerState>(party, port);
     }
 }
 
@@ -97,7 +97,7 @@ void GameMenuController::onContinueNetworkGameAsClient(PieceParty::Enum party, i
 
     if(controller != nullptr)
     {
-        controller->continueWithState<PlayerMockBoardControllerState>(PieceParty::getOpposite(party));
+        controller->continueWithState<ClientNetworkGameBoardControllerState>(party, port, host);
     }
 }
 

@@ -6,6 +6,8 @@
 
 #include "../Utils.h"
 
+#include "BoardController.h"
+
 
 void MoveListController::_start()
 {
@@ -100,4 +102,39 @@ void MoveListController::startFrom(int index)
 
         }
     }
+}
+
+const QList<MoveModel *> &MoveListController::getMoves() const
+{
+    return game.getMoves();
+}
+
+void MoveListController::setMoves(const QList<Move> &moves)
+{
+    std::shared_ptr<BoardController> boardController = game.getController<BoardController>(ControllerName::BOARD_CONTROLLER);
+
+    if(boardController != nullptr)
+    {
+        boardController->resetBoardToNewGame();
+    }
+
+    if(board != nullptr)
+    {
+        for(Move move : moves)
+        {
+            MoveModel* moveModel = game.createMoveModel(move);
+
+            if(!board->movePiece(move))
+            {
+                break;
+            }
+
+            game.switchActiveParty();
+            game.setBoardState(board->getBoardState(game.getActiveParty()));
+
+            game.addMove(moveModel);
+        }
+    }
+
+
 }

@@ -52,7 +52,7 @@ Rectangle
         Row
         {
 
-            spacing: 42
+            spacing: 67
             anchors.fill: parent
 
             Image
