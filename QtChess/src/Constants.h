@@ -49,6 +49,11 @@ namespace ControllerName
     static const char *ALERT_MESSAGE_CONTROLLER = "alertMessageController";
 }
 
+namespace QmlObjectName
+{
+    static const char *STATUS_BAR = "statusBar";
+}
+
 namespace NetworkMessageType
 {
     static const quint16 MOVE_LIST = 34534;

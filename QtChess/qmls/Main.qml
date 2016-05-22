@@ -104,12 +104,6 @@ ApplicationWindow {
                             networkPartySelect.showServer(partySelectToken.continue_network_server)
                         }
                     }
-                    MenuItem {text: "Client";
-                        onTriggered: {
-                            networkPartySelect.showServer(partySelectToken.continue_network_client)
-
-                        }
-                    }
                 }
             }
 
@@ -176,6 +170,15 @@ ApplicationWindow {
         anchors.bottom: board.bottom
 
         moveNavigationDisabled: disableMoveNavigation
+    }
+
+    Text
+    {
+        objectName: "statusBar"
+        anchors.top: board.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
     }
 
     FileDialog {

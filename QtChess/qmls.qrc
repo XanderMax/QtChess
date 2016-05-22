@@ -11,5 +11,6 @@
         <file>qmls/SelectPartyDialog.qml</file>
         <file>qmls/SelectPartyForNetworkGame.qml</file>
         <file>qmls/UTMWindow.qml</file>
+        <file>qmls/AlertMessage.qml</file>
     </qresource>
 </RCC>
