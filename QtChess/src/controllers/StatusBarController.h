@@ -7,11 +7,21 @@
 class StatusBarController : public Controller
 {
 private:
+
+    QObject* statusBar;
+
 protected:
+
+
+
+    void _start();
+    void _stop();
 public:
 
     StatusBarController(Game &game);
     ~StatusBarController();
+
+    void setStatusBarText(const QString& text);
 };
 
 

@@ -163,6 +163,7 @@ void NetworkGameBoardControllerState::onConnectionCreated()
     if(connection != nullptr)
     {
         connect(connection, SIGNAL(readyRead()), SLOT(onNewMessage()));
+
         connect(connection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(onError(QAbstractSocket::SocketError)));
 
         _onConnectionCreated();

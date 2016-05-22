@@ -52,6 +52,9 @@ PlayerMockBoardControllerState::PlayerMockBoardControllerState(BoardController &
     BoardControllerState(controller), party(_party)
 {
     setUpTimer();
+
+    setStatusBarText(QString("Local with dummy player; Party: %1")
+                     .arg(PieceParty::getOpposite(party) == PieceParty::BLACK ? "Black" : "White"));
 }
 
 PlayerMockBoardControllerState::~PlayerMockBoardControllerState()

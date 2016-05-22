@@ -14,6 +14,8 @@ class ServerNetworkGameBoardControllerState : public NetworkGameBoardControllerS
 
 private:
 
+    QString ipAddress;
+
     void initTcpServer();
     void disposeTcpServer();
 

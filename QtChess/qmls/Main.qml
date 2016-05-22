@@ -172,13 +172,30 @@ ApplicationWindow {
         moveNavigationDisabled: disableMoveNavigation
     }
 
-    Text
+    Rectangle
     {
-        objectName: "statusBar"
         anchors.top: board.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+
+        border.color: "black"
+        border.width: 2
+
+        color: "white"
+
+        Text
+        {
+            objectName: "statusBar"
+            anchors.fill: parent
+
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+
+            font.bold: true
+
+            font.pointSize: 16
+        }
     }
 
     FileDialog {

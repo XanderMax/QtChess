@@ -17,7 +17,13 @@ void ClientNetworkGameBoardControllerState::_onDataReady(quint16 dataType, QData
 
     if(dataType == NetworkMessageType::MOVE_LIST)
     {
+        quint8 _party;
+
         quint16 listSize;
+
+        in >> _party;
+
+        party = (PieceParty::Enum) _party;
 
         in >> listSize;
 
@@ -37,6 +43,13 @@ void ClientNetworkGameBoardControllerState::_onDataReady(quint16 dataType, QData
         if(moveListController != nullptr)
         {
             moveListController->setMoves(moves);
+
+            setStatusBarText(QString("Type: Network; Role: Client; To: %1:%2; Status: Playing; Party: %3")
+                             .arg(host).arg(QString::number(getPort())).arg(party == PieceParty::BLACK ? "Black" : "White"));
+        }
+        else
+        {
+            controller.continueWithState<LocalGameboardControllerState>();
         }
     }
     else if(dataType == NetworkMessageType::MOVE)
@@ -66,6 +79,9 @@ ClientNetworkGameBoardControllerState::ClientNetworkGameBoardControllerState(Boa
 
         connection->connectToHost(host, (quint16) getPort());
     }
+
+    setStatusBarText(QString("Type: Network; Role: Client; To: %1:%2; Status: Connecting to server; Party: %3")
+                     .arg(host).arg(QString::number(getPort())).arg(party == PieceParty::BLACK ? "Black" : "White"));
 }
 
 ClientNetworkGameBoardControllerState::~ClientNetworkGameBoardControllerState()

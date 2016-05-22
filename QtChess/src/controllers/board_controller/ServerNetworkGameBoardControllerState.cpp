@@ -34,7 +34,7 @@ void ServerNetworkGameBoardControllerState::initTcpServer()
         return;
     }
 
-    QString ipAddress;
+    ipAddress = "";
     QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
 
     for (int i = 0; i < ipAddressesList.size(); i++)
@@ -57,6 +57,9 @@ void ServerNetworkGameBoardControllerState::initTcpServer()
     }
 
     connect(tcpServer, SIGNAL(newConnection()), this, SLOT(onConnected()));
+
+    setStatusBarText(QString("Type: Network; Role: Server; At: %1; Status: Listening/Waitng client; Party: %2")
+                     .arg(ipAddress).arg(party == PieceParty::BLACK ? "Black" : "White"));
 
 }
 
@@ -96,6 +99,8 @@ void ServerNetworkGameBoardControllerState::onConnected()
         //settings message type
         out << NetworkMessageType::MOVE_LIST;
 
+        out << (quint8) PieceParty::getOpposite(party);
+
         //Reserving for moves' count
         out << (quint16) moves.size();
 
@@ -127,6 +132,9 @@ void ServerNetworkGameBoardControllerState::onConnected()
 
             connection->write(block);
         }
+
+        setStatusBarText(QString("Type: Network; Role: Server; At: %1; Status: Client connected/Playing; Party: %2")
+                         .arg(ipAddress).arg(party == PieceParty::BLACK ? "Black" : "White"));
     }
     else
     {

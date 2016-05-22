@@ -6,7 +6,7 @@
 LocalGameboardControllerState::LocalGameboardControllerState(BoardController &controller) :
     BoardControllerState(controller)
 {
-
+    setStatusBarText("Local multiplayer");
 }
 
 

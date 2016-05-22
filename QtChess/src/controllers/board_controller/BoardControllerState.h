@@ -15,6 +15,8 @@ protected:
 
     virtual bool _makeMove(const Move& move) = 0;
 
+    void setStatusBarText(const QString& text);
+
 public:
 
     BoardControllerState(BoardController& _controller) : controller(_controller) {}
