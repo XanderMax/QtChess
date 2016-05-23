@@ -34,7 +34,8 @@ SOURCES += $$PWD/boards/Board.cpp \
     $$PWD/controllers/AlertMessageController.cpp \
     $$PWD/controllers/alert_states/AlertMesageState.cpp \
     $$PWD/controllers/SaveLoadController.cpp \
-    $$PWD/controllers/StatusBarController.cpp
+    $$PWD/controllers/StatusBarController.cpp \
+    $$PWD/controllers/board_controller/NullBoardControllerState.cpp
 
 HEADERS += $$PWD/boards/Board.h \
     $$PWD/boards/BoardBase.h \
@@ -73,4 +74,5 @@ HEADERS += $$PWD/boards/Board.h \
     $$PWD/controllers/AlertMessageController.h \
     $$PWD/controllers/alert_states/AlertMesageState.h \
     $$PWD/controllers/SaveLoadController.h \
-    $$PWD/controllers/StatusBarController.h
+    $$PWD/controllers/StatusBarController.h \
+    $$PWD/controllers/board_controller/NullBoardControllerState.h

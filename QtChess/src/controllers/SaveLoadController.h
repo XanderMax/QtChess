@@ -8,8 +8,6 @@ class SaveLoadController : public Controller
     Q_OBJECT
 
 private:
-
-    bool readFromFile(std::ifstream& in);
     bool writeToFile(std::ofstream& out);
 protected:
     void _start();
@@ -20,9 +18,9 @@ public:
     SaveLoadController(Game &game);
     ~SaveLoadController();
 
-    Q_INVOKABLE bool readFromFile(const QString& fileName);
+    Q_INVOKABLE bool readFromFile(const QUrl& fileName);
 
-    Q_INVOKABLE bool writeToFile(const QString& fileName);
+    Q_INVOKABLE bool writeToFile(const QUrl& fileName);
 
 
 };

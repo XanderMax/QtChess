@@ -47,7 +47,8 @@ namespace ControllerName
     static const char *MOVE_LIST_CONTROLLER = "moveListController";
     static const char *GAME_MENU_CONTROLLER = "gameMenuController";
     static const char *ALERT_MESSAGE_CONTROLLER = "alertMessageController";
-    static const char * STATUS_BAR_CONTROLLER = "statusBarController";
+    static const char *STATUS_BAR_CONTROLLER = "statusBarController";
+    static const char *SAVE_LOAD_FILE_CONTROLLER = "saveLoadFileController";
 }
 
 namespace QmlObjectName

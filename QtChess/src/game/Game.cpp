@@ -11,6 +11,7 @@
 #include "../controllers/GameMenuController.h"
 #include "../controllers/AlertMessageController.h"
 #include "../controllers/StatusBarController.h"
+#include "../controllers/SaveLoadController.h"
 
 Game::Game(QQmlApplicationEngine &_engine) : engine(_engine)
 {
@@ -297,4 +298,5 @@ void Game::setUpControllers()
     addController<GameMenuController>(ControllerName::GAME_MENU_CONTROLLER);
     addController<AlertMessageController>(ControllerName::ALERT_MESSAGE_CONTROLLER);
     addController<StatusBarController>(ControllerName::STATUS_BAR_CONTROLLER);
+    addController<SaveLoadController>(ControllerName::SAVE_LOAD_FILE_CONTROLLER);
 }

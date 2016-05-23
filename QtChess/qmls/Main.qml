@@ -1,7 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.4
-import QtQuick.Dialogs 1.0
+import QtQuick.Dialogs 1.2
 
 
 ApplicationWindow {
@@ -109,13 +109,18 @@ ApplicationWindow {
 
             MenuItem {
                 text: "Load...";
-                onTriggered: {fileDialog.open()
+                onTriggered: {
+                    fileDialog.mode = 0
+                    fileDialog.open()
+
                 }
             }
 
             MenuItem {
                 text: "Save...";
                 onTriggered: {
+                    fileDialog.mode = 1
+                    fileDialog.open()
 
                 }
             }
@@ -199,12 +204,40 @@ ApplicationWindow {
     }
 
     FileDialog {
+
+//        function openDialog(mode)
+//        {
+//            internal.mode = mode
+//            open()
+//        }
+
+//        QtObject
+//        {
+//            id: internal
+//            property int mode: 0
+//        }
+
+        property int mode: 0
+
         id: fileDialog
-        title: "Please choose a file"
+        title: mode === 0 ? "Please choose a file to load" : "Please chose a file to save"
+        selectExisting: mode === 0
         folder: shortcuts.home
+        selectMultiple: false;
+
+        nameFilters: ["Qt Chess Board (*.qcb)", "All (*)"]
+
 
         onAccepted: {
-
+            console.log(fileUrl)
+            if(mode === 0)
+            {
+                saveLoadFileController.readFromFile(fileUrl)
+            }
+            else
+            {
+                saveLoadFileController.writeToFile(fileUrl)
+            }
         }
 
     }

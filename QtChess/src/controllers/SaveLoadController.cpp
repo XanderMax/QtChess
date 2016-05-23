@@ -4,52 +4,20 @@
 #include <fstream>
 #include <iostream>
 
+#include <QFile>
+#include <QDataStream>
+
 #include "../Constants.h"
 
 #include "../boards/Move.h"
 
 #include "../game/Game.h"
 
-bool SaveLoadController::readFromFile(std::ifstream &in)
-{
-    std::vector<Move*> moves;
+#include "StatusBarController.h"
+#include "MoveListController.h"
+#include "BoardController.h"
 
-    while(!in.eof())
-    {
-        int from = -1, to = -1;
-
-        in >> from >> to;
-
-        std::cout << "MOVE: " << from << " " << to << std::endl;
-
-        if(from >= 0 && from < CELLS && to >=0 && to < CELLS)
-        {
-            Move move(from, to);
-
-            moves.push_back(&move);
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    game.emptyMoves();
-
-    for(Move* move : moves)
-    {
-        if(move != nullptr)
-        {
-            game.addMove(*move);
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    return true;
-}
+#include "board_controller/NullBoardControllerState.h"
 
 bool SaveLoadController::writeToFile(std::ofstream &out)
 {
@@ -76,19 +44,95 @@ SaveLoadController::~SaveLoadController()
 
 }
 
-bool SaveLoadController::readFromFile(const QString &fileName)
+bool SaveLoadController::readFromFile(const QUrl &fileName)
 {
-    std::ifstream in(fileName.toStdString().c_str());
+    std::shared_ptr<StatusBarController> statusBarController
+            = getGame().getController<StatusBarController>(ControllerName::STATUS_BAR_CONTROLLER);
 
-    if(in.is_open())
+    std::shared_ptr<MoveListController> moveListController
+            = getGame().getController<MoveListController>(ControllerName::MOVE_LIST_CONTROLLER);
+
+    std::shared_ptr<BoardController> boardController
+            = getGame().getController<BoardController>(ControllerName::BOARD_CONTROLLER);
+
+    if(moveListController == nullptr || boardController == nullptr)
     {
-        return readFromFile(in);
+        return false;
+    }
+
+    if(statusBarController != nullptr)
+    {
+        statusBarController->setStatusBarText(QString("Loading from file - '%1'").arg(fileName.toLocalFile()));
+    }
+
+    QFile file(fileName.toLocalFile());
+
+    if(file.exists() && file.open(QIODevice::ReadOnly))
+    {
+        boardController->startNewWithState<NullBoardControllerState>();
+
+        QDataStream in(&file);
+
+        QList<Move> moves;
+
+        while(!in.atEnd())
+        {
+            quint8 from, to;
+
+            in >> from >> to;
+
+            Move move(from, to);
+
+            moves << move;
+        }
+
+        moveListController->setMoves(moves);
+
+
+    }
+    else
+    {
+        if(statusBarController != nullptr)
+        {
+            statusBarController->setStatusBarText(QString("File '%1' doesn't exist or couldn't be openned").arg(fileName.toLocalFile()));
+        }
     }
 
     return false;
 }
 
-bool SaveLoadController::writeToFile(const QString &fileName)
+bool SaveLoadController::writeToFile(const QUrl &fileName)
 {
+    std::shared_ptr<MoveListController> moveListController
+            = getGame().getController<MoveListController>(ControllerName::MOVE_LIST_CONTROLLER);
+
+    if(moveListController == nullptr)
+    {
+        return false;
+    }
+
+    QFile file(fileName.toLocalFile());
+
+    if(!file.exists() && file.open(QIODevice::WriteOnly))
+    {
+        QDataStream out(&file);
+
+        const QList<MoveModel*> moves = moveListController->getMoves();
+
+        for(MoveModel* model : moves)
+        {
+            if(model != nullptr)
+            {
+                quint8 from = (quint8)model->getMove().getFrom(), to = (quint8)model->getMove().getTo();
+
+                out << from << to;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
     return false;
 }
