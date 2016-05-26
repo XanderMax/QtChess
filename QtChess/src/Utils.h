@@ -1,6 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <iostream>
+
 #include <QList>
 
 #include "models/CellDataObject.h"
@@ -96,6 +98,27 @@ QList<Type *> getCellsFromString(const QString &string)
     return list;
 }
 
+template <typename TObjectType>
+void qObjectSafeDelete(TObjectType *object)
+{
+    std::cout << "qObjectSafeDelete" << std::endl;
+    if(object != nullptr)
+    {
+        std::cout << typeid(object).name() << std::endl;
+        QObject* qObject = dynamic_cast<QObject*>(object);
+
+        if(qObject != nullptr)
+        {
+            std::cout << "QObject*" << std::endl;
+            qObject->deleteLater();
+        }
+        else
+        {
+            std::cout << "!QObject*" << std::endl;
+            delete object;
+        }
+    }
+}
 
 
 

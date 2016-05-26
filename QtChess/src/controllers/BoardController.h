@@ -3,6 +3,8 @@
 
 #include <memory>
 
+#include <iostream>
+
 #include <QList>
 #include <QObject>
 
@@ -11,6 +13,7 @@
 #include "../game/GameState.h"
 #include "Controller.h"
 #include "board_controller/BoardControllerState.h"
+#include "../Utils.h"
 
 class BoardController : public Controller
 {
@@ -19,7 +22,7 @@ class BoardController : public Controller
 private:
 
     Board* board;
-    std::unique_ptr<BoardControllerState> controllerState;
+    BoardControllerState* controllerState;
 
 protected:
 
@@ -44,14 +47,21 @@ public:
     template <class TBoardControllerState, typename...Args>
     void continueWithState(Args...args)
     {
-        controllerState.reset(new TBoardControllerState(*this, args...));
+        std::cout << "continueWithState" << std::endl;
+
+        qObjectSafeDelete(controllerState);
+        controllerState = new TBoardControllerState(*this, args...);
     }
 
     template <class TBoardControllerState, typename...Args>
     void startNewWithState(Args...args)
     {
+        std::cout << "startNewWithState" << std::endl;
+
+        qObjectSafeDelete(controllerState);
+
         resetBoardToNewGame();
-        controllerState.reset(new TBoardControllerState(*this, args...));
+        controllerState = new TBoardControllerState(*this, args...);
     }
 
     void onMove(const Move& move);

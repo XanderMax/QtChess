@@ -29,7 +29,7 @@ void ServerNetworkGameBoardControllerState::initTcpServer()
             alertMessageController->pushStandardOkAlert("Couldn't start the server.", "Continue local game");
         }
 
-        controller.continueWithState<LocalGameboardControllerState>();
+        //controller.continueWithState<LocalGameboardControllerState>();
 
         return;
     }
@@ -65,10 +65,14 @@ void ServerNetworkGameBoardControllerState::initTcpServer()
 
 void ServerNetworkGameBoardControllerState::disposeTcpServer()
 {
+    std::cout << "disposeServer" << std::endl;
     if(tcpServer != nullptr)
     {
-        tcpServer->close();
+        tcpServer->deleteLater();
+        tcpServer = nullptr;
     }
+
+    std::cout << "after disposeServer" << std::endl;
 }
 
 void ServerNetworkGameBoardControllerState::sessionOpenned()
@@ -140,7 +144,7 @@ void ServerNetworkGameBoardControllerState::onConnected()
     {
         //TODO: show alert here
 
-        controller.continueWithState<LocalGameboardControllerState>();
+        //controller.continueWithState<LocalGameboardControllerState>();
     }
 }
 
@@ -148,12 +152,14 @@ void ServerNetworkGameBoardControllerState::clientDisconnected()
 {
     //TODO: add implementation here
 
+    std::cout << "clientDisconnected" << std::endl;
+
     controller.continueWithState<LocalGameboardControllerState>();
 }
 
 void ServerNetworkGameBoardControllerState::onError(QAbstractSocket::SocketError)
 {
-    controller.continueWithState<LocalGameboardControllerState>();
+    //controller.continueWithState<LocalGameboardControllerState>();
 }
 
 void ServerNetworkGameBoardControllerState::_onDataReady(quint16 dataType, QDataStream &in)

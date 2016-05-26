@@ -19,7 +19,9 @@ void BoardController::_stop()
 
 }
 
-BoardController::BoardController(Game &game)  : Controller(game), controllerState(new PlayerMockBoardControllerState(*this, PieceParty::BLACK))
+BoardController::BoardController(Game &game)
+    : Controller(game)
+    ,controllerState(new PlayerMockBoardControllerState(*this, PieceParty::BLACK))
 {
 
 }

@@ -87,14 +87,4 @@ ClientNetworkGameBoardControllerState::ClientNetworkGameBoardControllerState(Boa
 ClientNetworkGameBoardControllerState::~ClientNetworkGameBoardControllerState()
 {
 
-    if(connection != nullptr)
-    {
-        connection->abort();
-        connection->close();
-
-        delete connection;
-        connection = nullptr;
-    }
-
-
 }

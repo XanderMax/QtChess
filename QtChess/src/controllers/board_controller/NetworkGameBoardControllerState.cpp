@@ -22,6 +22,8 @@ NetworkGameBoardControllerState::~NetworkGameBoardControllerState()
 {
     if(connection != nullptr)
     {
+        connection->abort();
+
         connection->disconnectFromHost();
 
         disconnect(connection, SIGNAL(readyRead()), this, SLOT(onNewMessage()));

@@ -1,6 +1,7 @@
 TEMPLATE = app
 
 QT += qml quick
+QT += network
 
 #CONFIG += c++11
 QMAKE_CXXFLAGS += -std=c++11
