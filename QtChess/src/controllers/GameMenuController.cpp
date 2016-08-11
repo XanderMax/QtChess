@@ -81,7 +81,6 @@ void GameMenuController::onContinueLocalGameWithMockPlayer(PieceParty::Enum part
 
 void GameMenuController::onContinueNetworkGameAsServer(PieceParty::Enum party, int port)
 {
-    //TODO: Add actual implementation once it is available
     std::shared_ptr<BoardController> controller = game.getController<BoardController>(ControllerName::BOARD_CONTROLLER);
 
     if(controller != nullptr)
@@ -92,7 +91,6 @@ void GameMenuController::onContinueNetworkGameAsServer(PieceParty::Enum party, i
 
 void GameMenuController::onContinueNetworkGameAsClient(PieceParty::Enum party, int port, const QString &host)
 {
-    //TODO: Add actual implementation once it is available
     std::shared_ptr<BoardController> controller = game.getController<BoardController>(ControllerName::BOARD_CONTROLLER);
 
     if(controller != nullptr)

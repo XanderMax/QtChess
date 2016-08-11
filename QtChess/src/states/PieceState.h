@@ -55,7 +55,7 @@ public:
 };
 
 template <size_t number>
-void setBit(int index, std::bitset<number> &set)
+void setBit(unsigned int index, std::bitset<number> &set)
 {
     if(index >= 0 && index < set.size())
     {
@@ -64,7 +64,7 @@ void setBit(int index, std::bitset<number> &set)
 }
 
 template <size_t number>
-bool getBit(int index, const std::bitset<number> &set)
+bool getBit(unsigned int index, const std::bitset<number> &set)
 {
     if(index >= 0 && index < set.size())
     {
@@ -79,7 +79,7 @@ QList<int> getCellsFromBits(const std::bitset<number> &set)
 {
     QList<int> list;
 
-    for(int i = 0; i < set.size(); i++)
+    for(unsigned int i = 0; i < set.size(); i++)
     {
         if(set[i])
         {

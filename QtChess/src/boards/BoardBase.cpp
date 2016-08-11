@@ -53,8 +53,6 @@ PartyState::Enum BoardBase::getPartyState(PieceParty::Enum party) const
             {
                 std::bitset<CELLS> cells = state->getCells(i, *this, PieceAction::ATTACK, CellOccupyPolicy::FRIENDLY | CellOccupyPolicy::HOSTILE);
 
-                QList<int> tempList = getCellsFromBits(cells);
-
                 enemyMoves |= cells;
             }
         }

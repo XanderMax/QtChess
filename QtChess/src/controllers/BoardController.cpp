@@ -40,7 +40,8 @@ QList<int> BoardController::getDangerousCells(int index) const
 
         PieceParty::Enum party = board->getPiecePartyAt(index);
 
-        std::bitset<CELLS> cells = (board->getAvailableMoves(index, PieceAction::MOVE, CellOccupyPolicy::EMPTY) | board->getAvailableMoves(index, PieceAction::ATTACK, CellOccupyPolicy::HOSTILE));
+        std::bitset<CELLS> cells = (board->getAvailableMoves(index, PieceAction::MOVE, CellOccupyPolicy::EMPTY)
+                                    | board->getAvailableMoves(index, PieceAction::ATTACK, CellOccupyPolicy::HOSTILE));
 
         std::bitset<CELLS> enemyCells;
 

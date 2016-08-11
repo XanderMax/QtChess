@@ -47,8 +47,6 @@ public:
     template <class TBoardControllerState, typename...Args>
     void continueWithState(Args...args)
     {
-        std::cout << "continueWithState" << std::endl;
-
         qObjectSafeDelete(controllerState);
         controllerState = new TBoardControllerState(*this, args...);
     }
@@ -56,8 +54,6 @@ public:
     template <class TBoardControllerState, typename...Args>
     void startNewWithState(Args...args)
     {
-        std::cout << "startNewWithState" << std::endl;
-
         qObjectSafeDelete(controllerState);
 
         resetBoardToNewGame();
